@@ -382,6 +382,130 @@ const SCENARIOS = {
 let runSeq = 0;
 let citeMap = [];   // [n] → SOURCES key
 
+/* ── 真实后端模式（T040）：直连 POST /v1/chat SSE；网络不通时回退脚本演示 ── */
+const API_BASE = 'http://localhost:8000';
+
+function showCitation(c) {
+  $('srcEmpty').style.display = 'none';
+  $('sourceSheet').style.display = 'block';
+  $('docTitle').textContent = c.title;
+  $('docFiling').textContent = `文档 ${c.doc_id.slice(0, 8)}… · 相似度 ${c.score}`;
+  $('folio').textContent = c.sec_no || '—';
+  const body = $('clauseBody');
+  body.innerHTML = `<h4>回答引用的原句</h4><p><mark class="hl">${c.quote}</mark></p>
+    <p style="color:var(--ink-3);font-size:12px;">以上为检索命中的条款原文片段（FR-007：禁止改写拼接）。</p>`;
+  $('sheetFoot').textContent = `相似度 ${c.score}`;
+  document.querySelectorAll('.cite,.cite-chip').forEach(el =>
+    el.classList.toggle('active', el.dataset.i == c.n));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const m = body.querySelector('.hl'); if (m) m.classList.add('drawn');
+  }));
+  if (innerWidth <= 1060) {
+    $('sourcePane').classList.add('open');
+    $('srcBackdrop').classList.add('show');
+  }
+}
+
+function buildTurnSkeleton(questionText) {
+  const turn = document.createElement('article');
+  turn.className = 'turn';
+  turn.innerHTML =
+    `<div class="q"><span class="glyph">问</span><p></p></div>
+     <div class="a"><span class="glyph">答</span><div class="a-body" aria-live="polite"></div></div>
+     <div class="cites"></div>`;
+  turn.querySelector('.q p').textContent = questionText;
+  $('thread').appendChild(turn);
+  turn.scrollIntoView({ block: 'end' });
+  return turn;
+}
+
+async function runLive(questionText) {
+  const my = ++runSeq;
+  clearRun();
+  $('srcEmpty').style.display = 'block';
+  $('sourceSheet').style.display = 'none';
+  $('srcHint').style.display = 'block';
+
+  let token = localStorage.getItem('atlas_token');
+  if (!token) {
+    token = prompt('输入演示 JWT（由 scripts/issue_token.py 签发）') || '';
+    if (token) localStorage.setItem('atlas_token', token);
+  }
+
+  const turn = buildTurnSkeleton(questionText);
+  const aBody = turn.querySelector('.a-body');
+  turn.querySelector('.a').style.display = 'flex';
+  const cites = turn.querySelector('.cites');
+  cites.style.display = 'flex';
+
+  const resp = await fetch(API_BASE + '/v1/chat', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question: questionText }),
+  });
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({ message: '服务异常' }));
+    addTrace('服务', 'error', err.message || ('HTTP ' + resp.status), null, 'fail');
+    return;
+  }
+
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '', answerText = '', doneData = null;
+  const handle = (ev, data) => {
+    if (ev === 'evidence') {
+      addTrace('证据', 'evidence', `命中 ${data.hits.length} 条 · 最高 ${Math.max(...data.hits.map(h => h.score)).toFixed(2)}`, null, 'done');
+    } else if (ev === 'answer') {
+      answerText += data.delta;
+      aBody.textContent = answerText;
+      turn.scrollIntoView({ block: 'end' });
+    } else if (ev === 'citations') {
+      cites.innerHTML = '';
+      (data.citations || []).forEach(c => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'cite-chip'; b.dataset.i = c.n;
+        b.innerHTML = `<b>[${c.n}]</b>${(c.title || '').split('「')[1] || c.title}<code>${c.sec_no || ''}</code>`;
+        b.addEventListener('click', () => showCitation(c));
+        cites.appendChild(b);
+      });
+      if (!(data.citations || []).length) {
+        cites.innerHTML = '<span style="font-size:11px;color:var(--ink-3)">拒答：无可引用原文</span>';
+      }
+    } else if (ev === 'done') {
+      doneData = data;
+      addTrace('收敛', 'converge',
+        (data.refused ? '拒答' : '已引用归档') + ` · ${data.hit_count} 命中`, null, data.refused ? 'fail' : 'done');
+      const meta = $('runMeta');
+      meta.innerHTML = `<em>单次运行档案</em>${data.trace_id} · ${(data.latency_ms / 1000).toFixed(2)}s · refused=${data.refused}`;
+      meta.style.display = 'block';
+    }
+  };
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    let idx;
+    while ((idx = buffer.indexOf('\n\n')) >= 0) {
+      const block = buffer.slice(0, idx);
+      buffer = buffer.slice(idx + 2);
+      let ev = null, data = null;
+      for (const line of block.split('\n')) {
+        if (line.startsWith('event: ')) ev = line.slice(7).trim();
+        else if (line.startsWith('data: ')) data = JSON.parse(line.slice(6));
+      }
+      if (ev && my === runSeq) handle(ev, data);
+    }
+  }
+  if (my === runSeq) $('btnAsk').disabled = false;
+}
+
+function runLiveOrFallback(questionText) {
+  runLive(questionText).catch(err => {
+    console.info('后端不可达，回退离线演示：', err.message);
+    run(questionText);
+  });
+}
+
 function clearRun() {
   runSeq++;
   $('traceList').innerHTML = '';
@@ -555,12 +679,12 @@ $('composer').addEventListener('submit', e => {
   if (!text) return;
   $('qinput').value = '';
   $('btnAsk').disabled = true;
-  run(text);
+  runLiveOrFallback(text);
 });
 $('sugs').addEventListener('click', e => {
   const b = e.target.closest('.sug'); if (!b) return;
   $('btnAsk').disabled = true;
-  run(b.textContent);
+  runLiveOrFallback(b.textContent);
 });
 $('btnNew').addEventListener('click', () => {
   $('thread').innerHTML = '';

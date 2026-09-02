@@ -1,0 +1,3 @@
+{"id": "MINI-0001", "question": "康护一生重疾险的等待期是多久？", "gold_answer": "90 日", "difficulty": "L0", "category": "等待期", "source": [{"section": "2.3.1", "quote": "90 日内为等待期"}]}
+{"id": "MINI-0002", "question": "这款重疾险保单贷款最多能贷多少？", "gold_answer": "现金价值净值的 80%", "difficulty": "L3", "category": "现金价值", "source": [{"section": "6.2", "quote": "现金价值净值的 80%"}]}
+{"id": "MINI-0003", "question": "股票基金能保吗？", "gold_answer": "", "difficulty": "L4", "category": "拒答", "source": []}

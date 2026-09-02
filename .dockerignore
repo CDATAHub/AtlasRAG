@@ -1,0 +1,15 @@
+.git
+.venv
+.env
+__pycache__
+*.pyc
+.pytest_cache
+data
+docs
+specs
+prototype
+scripts/build_combined_doc.py
+.claude
+.specify
+.idea
+node_modules
