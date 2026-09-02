@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasRAG · 保险知识问答台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F3EF;
+    --sheet:#FFFFFF;
+    --ink:#22262C;
+    --ink-2:#5C6168;
+    --ink-3:#9599A0;
+    --line:#DEDCD4;
+    --line-soft:#E9E7E0;
+    --pen:#33507A;
+    --pen-wash:#EBEFF5;
+    --seal:#B5382A;
+    --seal-wash:#F8E9E5;
+    --sans:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+    --serif:'Noto Serif SC','Songti SC','STSong','SimSun',serif;
+    --mono:ui-monospace,'SF Mono','JetBrains Mono','Cascadia Mono',Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--sans);font-size:14px;color:var(--ink);
+    background:var(--paper);display:flex;flex-direction:column;
+  }
+  button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
+  :focus-visible{outline:2px solid var(--pen);outline-offset:2px;border-radius:2px}
+
+  /* ── 红头：顶栏 ─────────────────────────── */
+  .topbar{
+    height:52px;flex:none;display:flex;align-items:center;gap:16px;
+    padding:0 20px;background:var(--sheet);position:relative;
+  }
+  .topbar::after{ /* 红头双线：公文信头的语汇 */
+    content:"";position:absolute;left:0;right:0;bottom:0;height:4px;
+    border-top:1px solid var(--seal);border-bottom:1px solid var(--seal);
+  }
+  .brand{display:flex;align-items:baseline;gap:10px}
+  .brand b{font-family:var(--serif);font-weight:900;font-size:17px;letter-spacing:.02em}
+  .brand span{font-size:12px;color:var(--ink-2);letter-spacing:.14em}
+  .topmeta{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .btn-new{
+    font-size:12.5px;padding:6px 14px;border:1px solid var(--line);border-radius:2px;
+    background:var(--sheet);color:var(--ink);transition:border-color .15s;
+  }
+  .btn-new:hover{border-color:var(--ink)}
+
+  /* ── 三栏台面 ─────────────────────────── */
+  .stage{flex:1;min-height:0;display:grid;grid-template-columns:238px minmax(0,1fr) 384px}
+  .rail{background:var(--paper);overflow-y:auto}
+  .rail-trace{border-right:1px solid var(--line)}
+  .rail-source{border-left:1px solid var(--line);padding:18px 18px 24px}
+  .rail-head{padding:18px 16px 10px;position:sticky;top:0;background:var(--paper);z-index:1}
+  .rail-head em{
+    display:block;font-style:normal;font-family:var(--mono);font-size:10px;
+    letter-spacing:.14em;color:var(--pen);margin-bottom:2px;
+  }
+  .rail-head h2{font-size:13px;font-weight:700;letter-spacing:.06em}
+  .rail-hint{padding:0 16px 14px;font-size:12px;color:var(--ink-3);line-height:1.7}
+
+  /* ── 运行记录（AgentLoop 时间线） ────────── */
+  .trace{list-style:none;padding:2px 16px 20px;position:relative}
+  .trace::before{
+    content:"";position:absolute;left:21px;top:10px;bottom:26px;width:1px;background:var(--line);
+  }
+  .tr{position:relative;display:flex;gap:10px;padding:9px 0;opacity:0;transform:translateY(4px);
+      transition:opacity .3s ease,transform .3s ease}
+  .tr.show{opacity:1;transform:none}
+  .tr-dot{
+    flex:none;width:11px;height:11px;border-radius:50%;margin-top:3px;
+    background:var(--paper);border:2px solid var(--ink-3);z-index:1;
+  }
+  .tr.is-run .tr-dot{border-color:var(--pen);animation:pulse 1.1s ease-in-out infinite}
+  .tr.is-done .tr-dot{border-color:var(--pen);background:var(--pen)}
+  .tr.is-fail .tr-dot{border-color:var(--seal);background:var(--seal)}
+  @keyframes pulse{50%{box-shadow:0 0 0 4px var(--pen-wash)}}
+  .tr-body{flex:1;min-width:0}
+  .tr-name{font-size:12.5px;font-weight:500}
+  .tr-name i{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-left:5px}
+  .tr-detail{font-size:11.5px;color:var(--ink-2);line-height:1.65;margin-top:2px;word-break:break-all}
+  .tr-t{flex:none;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-top:3px}
+  .runmeta{
+    margin:8px 16px 20px;padding:10px 12px;border:1px solid var(--line);border-radius:2px;
+    background:var(--sheet);font-family:var(--mono);font-size:10.5px;color:var(--ink-2);
+    line-height:1.8;display:none;
+  }
+  .runmeta em{font-style:normal;display:block;color:var(--ink-3);font-size:10px;letter-spacing:.12em;margin-bottom:2px}
+
+  /* ── 中栏：问答 ─────────────────────────── */
+  .convo{display:flex;flex-direction:column;min-width:0;background:var(--sheet)}
+  .thread{flex:1;overflow-y:auto;padding:30px 48px 20px;scroll-behavior:smooth}
+  .turn{max-width:640px;margin:0 auto 26px}
+  .q{display:flex;gap:14px;margin-bottom:16px}
+  .glyph{
+    flex:none;width:30px;height:30px;display:grid;place-items:center;margin-top:1px;
+    font-family:var(--serif);font-weight:900;font-size:15px;
+    border:1px solid var(--line);border-radius:2px;color:var(--ink-2);background:var(--paper);
+  }
+  .q p{font-size:15px;font-weight:500;line-height:1.75;padding-top:4px}
+  .planline{
+    margin:0 0 14px 44px;font-size:12px;color:var(--ink-2);
+    display:none;align-items:center;gap:8px;
+  }
+  .planline code{
+    font-family:var(--mono);font-size:11px;color:var(--pen);
+    background:var(--pen-wash);padding:2px 7px;border-radius:2px;
+  }
+  .toolchip{
+    display:none;margin:0 0 18px 44px;max-width:420px;
+    font-size:11.5px;color:var(--ink-2);border:1px solid var(--line);
+    border-left:2px solid var(--ink-3);border-radius:2px;padding:8px 12px;
+  }
+  .toolchip.is-run{border-left-color:var(--pen)}
+  .toolchip code{font-family:var(--mono);font-size:10.5px;color:var(--ink)}
+  .toolchip .spin{display:inline-block;width:9px;height:9px;margin-right:7px;vertical-align:-1px;
+    border:1.5px solid var(--line);border-top-color:var(--pen);border-radius:50%;animation:rot .8s linear infinite}
+  @keyframes rot{to{transform:rotate(360deg)}}
+  .a{display:none;gap:14px}
+  .a-body{font-family:var(--serif);font-size:17px;line-height:1.95;padding-top:2px;min-height:1.95em}
+  .a-body .caret{
+    display:inline-block;width:2px;height:1em;background:var(--seal);
+    vertical-align:-2px;margin-left:2px;animation:blink 1s steps(2) infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+  .cite{
+    font-family:var(--mono);font-size:11px;color:var(--seal);cursor:pointer;
+    border:1px solid var(--seal);border-radius:2px;padding:0 4px;margin:0 3px;
+    vertical-align:2px;background:var(--sheet);transition:background .15s;
+  }
+  .cite:hover,.cite.active{background:var(--seal-wash)}
+  .cites{display:none;flex-wrap:wrap;gap:8px;margin:18px 0 0 44px}
+  .cite-chip{
+    font-size:11.5px;color:var(--ink-2);border:1px solid var(--line);border-radius:2px;
+    padding:6px 10px;background:var(--paper);text-align:left;transition:border-color .15s,color .15s;
+  }
+  .cite-chip:hover,.cite-chip.active{border-color:var(--seal);color:var(--ink)}
+  .cite-chip b{font-family:var(--mono);font-weight:400;font-size:10.5px;color:var(--seal);margin-right:7px}
+  .cite-chip code{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-left:7px}
+  .refuse{
+    display:none;margin:0 0 0 44px;padding:14px 16px;border:1px solid var(--line);
+    border-left:2px solid var(--seal);border-radius:2px;background:var(--paper);
+    font-family:var(--serif);font-size:15px;line-height:1.9;color:var(--ink);
+  }
+
+  /* ── 提问区 ─────────────────────────────── */
+  .composer{flex:none;border-top:1px solid var(--line);background:var(--sheet);padding:16px 48px 20px}
+  .composer-in{max-width:640px;margin:0 auto}
+  .sugs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .sug{
+    font-size:12px;color:var(--ink-2);border:1px solid var(--line);border-radius:2px;
+    padding:5px 11px;background:var(--paper);transition:color .15s,border-color .15s;
+  }
+  .sug:hover{color:var(--ink);border-color:var(--ink-3)}
+  .composer-row{display:flex;gap:10px}
+  .composer input{
+    flex:1;font:inherit;font-size:14px;padding:11px 14px;color:var(--ink);
+    border:1px solid var(--line);border-radius:2px;background:var(--sheet);
+  }
+  .composer input::placeholder{color:var(--ink-3)}
+  .composer input:focus{outline:2px solid var(--pen);outline-offset:-1px}
+  .btn-ask{
+    flex:none;padding:11px 26px;border-radius:2px;color:#fff;
+    background:var(--ink);font-size:13.5px;letter-spacing:.08em;transition:opacity .15s;
+  }
+  .btn-ask:disabled{opacity:.45;cursor:default}
+
+  /* ── 溯源：条款原文纸 ────────────────────── */
+  .sheet{
+    display:none;border:1px solid var(--line);border-radius:2px;background:var(--sheet);
+    box-shadow:0 1px 3px rgba(34,38,44,.06);
+  }
+  .sheet-head{padding:13px 15px 11px;border-bottom:1px solid var(--line-soft)}
+  .sheet-head h3{font-family:var(--serif);font-weight:600;font-size:13.5px;line-height:1.6}
+  .sheet-head p{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:4px;letter-spacing:.04em}
+  .clause-wrap{display:grid;grid-template-columns:52px minmax(0,1fr)}
+  .folio{
+    border-right:1px solid var(--line-soft);padding:14px 0 14px 14px;
+    font-family:var(--mono);font-size:10.5px;color:var(--ink-3);line-height:2.6;white-space:pre;
+  }
+  .clause-body{padding:14px 15px 16px;font-family:var(--serif);font-size:14.5px;line-height:2.15;color:var(--ink)}
+  .clause-body h4{font-family:var(--serif);font-size:14.5px;font-weight:600;margin-bottom:6px}
+  .clause-body p{margin-bottom:8px}
+  .hl{
+    background:linear-gradient(var(--seal-wash),var(--seal-wash)) no-repeat 0 62%/0% 46%;
+    transition:background-size .9s ease .15s;padding:0 1px;
+  }
+  .hl.drawn{background-size:100% 46%}
+  .sheet-foot{
+    padding:9px 15px;border-top:1px solid var(--line-soft);
+    font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.03em;
+  }
+  .src-empty{
+    border:1px dashed var(--line);border-radius:2px;padding:26px 18px;
+    font-size:12.5px;color:var(--ink-3);line-height:2;text-align:center;
+  }
+  .src-empty b{color:var(--seal);font-weight:400;font-family:var(--mono)}
+
+  /* ── 响应式 ─────────────────────────────── */
+  .src-close{display:none}
+  @media (max-width:1060px){
+    .stage{grid-template-columns:200px minmax(0,1fr)}
+    .rail-source{
+      position:fixed;inset:0;z-index:10;display:none;overflow-y:auto;
+      padding:18px 16px;border-left:none;background:var(--paper);
+    }
+    .rail-source.open{display:block}
+    .src-backdrop{position:fixed;inset:0;z-index:9;background:rgba(34,38,44,.32);display:none}
+    .src-backdrop.show{display:block}
+    .src-close{
+      display:inline-block;margin:0 16px 12px;font-size:12.5px;color:var(--pen);
+      border:1px solid var(--line);border-radius:2px;padding:6px 12px;background:var(--sheet);
+    }
+    .thread,.composer{padding-left:22px;padding-right:22px}
+  }
+  @media (max-width:720px){
+    .stage{grid-template-columns:minmax(0,1fr)}
+    .rail-trace{display:none}
+    .brand span{display:none}
+    .topmeta{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><b>AtlasRAG</b><span>保险知识问答台</span></div>
+  <div class="topmeta">qwen3.7-max · hybrid_search · 条款库 102 份</div>
+  <button class="btn-new" id="btnNew" type="button">新会话</button>
+</header>
+
+<main class="stage">
+
+  <aside class="rail rail-trace">
+    <div class="rail-head"><em>AGENTLOOP · PLAN → CONVERGE</em><h2>运行记录</h2></div>
+    <ol class="trace" id="traceList"></ol>
+    <div class="runmeta" id="runMeta"></div>
+  </aside>
+
+  <section class="convo">
+    <div class="thread" id="thread"></div>
+    <form class="composer" id="composer">
+      <div class="composer-in">
+        <div class="sugs" id="sugs">
+          <button class="sug" type="button">等待期是多久？</button>
+          <button class="sug" type="button">保单贷款最多能贷多少？</button>
+          <button class="sug" type="button">宽限期内出险，赔吗？</button>
+          <button class="sug" type="button">股票基金能保吗？</button>
+        </div>
+        <div class="composer-row">
+          <input id="qinput" type="text" autocomplete="off"
+                 placeholder="问一个条款问题，例如：保单贷款最多能贷多少？"
+                 aria-label="输入问题">
+          <button class="btn-ask" id="btnAsk" type="submit">提问</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <aside class="rail rail-source" id="sourcePane" aria-label="溯源原文">
+    <div class="rail-head"><em>RETRIEVAL · EVIDENCE</em><h2>溯源原文</h2></div>
+    <button class="src-close" id="srcClose" type="button">← 返回对话</button>
+    <p class="rail-hint" id="srcHint">回答中的 <b>[n]</b> 标记对应检索命中的条款原文，点击即可在此展开；回答只依据下列原文生成。</p>
+    <div class="src-empty" id="srcEmpty">暂无溯源<br>回答出现引用标记 <b>[1]</b> 后，条款原文在此展开。</div>
+    <div class="sheet" id="sourceSheet">
+      <div class="sheet-head"><h3 id="docTitle"></h3><p id="docFiling"></p></div>
+      <div class="clause-wrap">
+        <div class="folio" id="folio"></div>
+        <div class="clause-body" id="clauseBody"></div>
+      </div>
+      <div class="sheet-foot" id="sheetFoot"></div>
+    </div>
+  </aside>
+</main>
+<div class="src-backdrop" id="srcBackdrop"></div>
+
+<script>
+/* ─────────────────────────────────────────────
+ * 模拟 docs/08 §8.2 的 SSE 事件流：
+ * plan → tool_call → evidence → answer → citations → done
+ * 后端落地后，将 runScenario 换为 EventSource 即可。
+ * ───────────────────────────────────────────── */
+const $ = id => document.getElementById(id);
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
+
+/* 引用 [n] → 条款原文数据（模拟 evidence 事件载荷） */
+const SOURCES = {
+  wait: [{
+    doc: '泰康人寿「康护一生」重大疾病保险条款', filing: '备案文号 TK-2023-0417 · 第 2 版',
+    no: '2.3.1', chunk: 'c-9', lines: '行 41–47', score: '0.92',
+    heading: '2.3.1　等待期',
+    paras: [
+      '自本合同生效（或最后复效）之日起 90 日内为等待期。',
+      '被保险人在等待期内发生保险事故的，本公司不承担给付保险金的责任，本合同效力终止，本公司无息返还所交保费。',
+    ],
+    hl: 0,
+  }, {
+    doc: '泰康人寿「康护一生」重大疾病保险条款', filing: '备案文号 TK-2023-0417 · 第 2 版',
+    no: '2.3.2', chunk: 'c-10', lines: '行 48–52', score: '0.87',
+    heading: '2.3.2　等待期除外',
+    paras: [
+      '投保人为被保险人投保时已如实告知既往病史，且经本公司核准同意承保的，等待期内因该既往病史发生的保险事故，本公司仍按约定承担保险责任。',
+    ],
+    hl: -1,
+  }],
+  loan: [{
+    doc: '中国人寿「鑫享一生」年金保险条款', filing: '备案文号 RS-2022-1103 · 第 3 版',
+    no: '6.2', chunk: 'c-31', lines: '行 118–126', score: '0.94',
+    heading: '6.2　保单贷款',
+    paras: [
+      '在本合同有效期内，经被保险人书面同意，投保人可以凭本合同向本公司申请贷款。',
+      '贷款金额不超过本合同当时现金价值净值的 80%，每次贷款期限最长为 6 个月，到期应归还贷款本息。',
+    ],
+    hl: 1,
+  }, {
+    doc: '中国人寿「鑫享一生」年金保险条款', filing: '备案文号 RS-2022-1103 · 第 3 版',
+    no: '6.3', chunk: 'c-32', lines: '行 127–131', score: '0.85',
+    heading: '6.3　贷款利息',
+    paras: [
+      '保单贷款利息按贷款时本公司公布的贷款利率计算，逾期未归还的，贷款本息达到本合同现金价值净值的，本合同效力中止。',
+    ],
+    hl: -1,
+  }],
+  grace: [{
+    doc: '太平洋「鑫相守」终身寿险条款', filing: '备案文号 CP-2024-0233 · 第 1 版',
+    no: '4.1', chunk: 'c-17', lines: '行 72–79', score: '0.93',
+    heading: '4.1　宽限期',
+    paras: [
+      '分期支付保险费的，本合同宽限期为 60 日，自约定缴费日的次日零时起算。',
+      '被保险人在宽限期内发生保险事故的，本公司仍承担保险责任，但将从给付保险金的金额中扣除投保人欠交的保险费。',
+    ],
+    hl: 1,
+  }],
+};
+
+/* 场景脚本：按 §8.2 事件顺序驱动界面 */
+const SCENARIOS = {
+  wait: {
+    q: '这款重疾险等待期多久？', query: '重疾险 等待期',
+    tool: 'hybrid_search · 向量 + BM25 融合 → 重排 top-5',
+    evid: '命中 2 条 · 最高相似度 0.92',
+    answer: ['等待期为 90 日，自本合同生效（或最后复效）之日起算', {c:1}, '。若被保险人在等待期内发生保险事故，保险公司不承担给付责任，仅无息返还所交保费，合同效力终止', {c:2}, '。'],
+    reflect: '证据覆盖问题 · 收敛', planMs: 812, toolMs: 1240, genMs: 1900,
+    meta: 'trace-tr-0001 · 1.82s · 1,240 tok · ¥0.0031', keys: ['等待期', '重疾'],
+  },
+  loan: {
+    q: '我急需用钱，想用保单贷款，最多能贷多少？', query: '保单贷款 现金价值 比例 期限',
+    tool: 'hybrid_search · 向量 + BM25 融合 → 重排 top-5',
+    evid: '命中 2 条 · 最高相似度 0.94',
+    answer: ['保单贷款额度最高不超过保单当时现金价值净值的 80%', {c:1}, '，每次贷款期限最长 6 个月，到期应归还贷款本息', {c:2}, '。可贷的具体金额以保险公司核算的现金价值净值为准。'],
+    reflect: '证据覆盖问题 · 收敛', planMs: 745, toolMs: 1180, genMs: 2100,
+    meta: 'trace-tr-0002 · 2.06s · 1,372 tok · ¥0.0036', keys: ['贷款', '现金价值', '用钱'],
+  },
+  grace: {
+    q: '宽限期内出险，保险公司赔吗？', query: '宽限期 保险事故 扣除保费',
+    tool: 'hybrid_search · 向量 + BM25 融合 → 重排 top-5',
+    evid: '命中 1 条 · 相似度 0.93',
+    answer: ['赔。分期缴费的保单宽限期为 60 日，宽限期内发生保险事故的，保险公司仍承担保险责任', {c:1}, '，但会从给付金额中扣除欠交的保险费。'],
+    reflect: '证据覆盖问题 · 收敛', planMs: 690, toolMs: 1090, genMs: 1700,
+    meta: 'trace-tr-0003 · 1.66s · 1,058 tok · ¥0.0029', keys: ['宽限'],
+  },
+  miss: {
+    q: '', query: '', failed: true,
+    tool: 'hybrid_search · 向量 + BM25 融合 → 重排 top-5',
+    evid: '0 条相关 · 最高相似度 0.31（低于阈值）',
+    answer: ['未在当前条款库中找到与该问题直接相关的条款。为避免误导，不作推测。建议补充险种名称或条款术语——例如「等待期」「宽限期」「现金价值」——再试一次。'],
+    reflect: '改写重检 1 次仍不足 · 按「资料不足」输出', planMs: 702, toolMs: 940, genMs: 800,
+    meta: 'trace-tr-0004 · 1.31s · 742 tok · ¥0.0018', keys: [],
+  },
+};
+
+let runSeq = 0;
+let citeMap = [];   // [n] → SOURCES key
+
+function clearRun() {
+  runSeq++;
+  $('traceList').innerHTML = '';
+  $('runMeta').style.display = 'none';
+}
+
+function addTrace(name, en, detail, ms, state) {
+  const li = document.createElement('li');
+  li.className = 'tr' + (state ? ' is-' + state : '');
+  li.innerHTML =
+    `<span class="tr-dot"></span>
+     <div class="tr-body"><div class="tr-name">${name}<i>${en}</i></div>
+     <div class="tr-detail"></div></div>` +
+    (ms ? `<span class="tr-t">${ms}</span>` : '');
+  li.querySelector('.tr-detail').textContent = detail || '';
+  $('traceList').appendChild(li);
+  requestAnimationFrame(() => li.classList.add('show'));
+  return li;
+}
+
+function showSource(key, n) {
+  const s = SOURCES[key] && SOURCES[key][0] ? SOURCES[key][n - 1] : null;
+  if (!s) return;
+  $('srcEmpty').style.display = 'none';
+  $('sourceSheet').style.display = 'block';
+  $('docTitle').textContent = s.doc;
+  $('docFiling').textContent = s.filing;
+  $('folio').textContent = s.no;
+  const body = $('clauseBody');
+  body.innerHTML = `<h4>${s.heading}</h4>` + s.paras.map((p, i) =>
+    (i === s.hl ? `<p><mark class="hl">${p}</mark></p>` : `<p>${p}</p>`)).join('');
+  $('sheetFoot').textContent = `chunk ${s.chunk} · ${s.lines} · 相似度 ${s.score}`;
+  document.querySelectorAll('.cite,.cite-chip').forEach(el =>
+    el.classList.toggle('active', el.dataset.i == n));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const m = body.querySelector('.hl'); if (m) m.classList.add('drawn');
+  }));
+  if (innerWidth <= 1060) {
+    $('sourcePane').classList.add('open');
+    $('srcBackdrop').classList.add('show');
+  }
+}
+
+function closeSource() {
+  $('sourcePane').classList.remove('open');
+  $('srcBackdrop').classList.remove('show');
+}
+
+async function run(questionText) {
+  const my = ++runSeq;
+  clearRun();
+  $('srcEmpty').style.display = 'block';
+  $('sourceSheet').style.display = 'none';
+  $('srcHint').style.display = 'block';
+
+  const key = Object.keys(SCENARIOS).find(k =>
+    SCENARIOS[k].keys.some(w => questionText.includes(w))) || 'miss';
+  const sc = SCENARIOS[key];
+  const failed = !!sc.failed;
+  citeMap = key === 'miss' ? [] : SOURCES[key].map((_, i) => ({ n: i + 1, key }));
+
+  /* 对话流 */
+  const turn = document.createElement('article');
+  turn.className = 'turn';
+  turn.innerHTML =
+    `<div class="q"><span class="glyph">问</span><p></p></div>
+     <div class="planline">改写检索式 <code></code></div>
+     <div class="toolchip"><span class="spin"></span><code>${sc.tool}</code></div>
+     <div class="a"><span class="glyph">答</span><div class="a-body" aria-live="polite"></div></div>` +
+    (failed
+      ? `<div class="refuse"></div>`
+      : `<div class="cites"></div>`);
+  turn.querySelector('.q p').textContent = questionText || sc.q;
+  $('thread').appendChild(turn);
+  turn.scrollIntoView({ block: 'end' });
+
+  /* plan 事件 */
+  addTrace('规划', 'plan', `route=retrieve · 检索式「${sc.query || questionText.slice(0, 14)}」`, sc.planMs + 'ms', 'run');
+  await sleep(sc.planMs);
+  if (my !== runSeq) return;
+  const planLine = turn.querySelector('.planline');
+  planLine.style.display = 'flex';
+  planLine.querySelector('code').textContent = sc.query || '—';
+  $('traceList').lastElementChild.classList.replace('is-run', 'is-done');
+
+  /* tool_call 事件 */
+  const tLi = addTrace('检索', 'tool_call', '租户过滤 → 混合召回 → 精排', null, 'run');
+  const chip = turn.querySelector('.toolchip');
+  chip.style.display = 'block'; chip.classList.add('is-run');
+  await sleep(sc.toolMs);
+  if (my !== runSeq) return;
+  chip.querySelector('.spin').remove();
+  chip.style.borderLeftColor = 'var(--pen)';
+  tLi.querySelector('.tr-detail').textContent = sc.evid;
+  tLi.querySelector('.tr-t').textContent = sc.toolMs + 'ms';
+  tLi.classList.replace('is-run', 'is-done');
+  addTrace('证据', 'evidence', sc.evid, null, 'done');
+
+  /* evidence → citations chips */
+  if (!failed) {
+    const cites = turn.querySelector('.cites');
+    cites.style.display = 'flex';
+    citeMap.forEach(({ n, key }) => {
+      const s = SOURCES[key][n - 1];
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'cite-chip'; b.dataset.i = n;
+      b.innerHTML = `<b>[${n}]</b>${s.doc.split('「')[1] || s.doc}<code>${s.no}</code>`;
+      b.addEventListener('click', () => showSource(key, n));
+      cites.appendChild(b);
+    });
+  }
+
+  /* answer 事件：流式输出 */
+  const aBox = turn.querySelector('.a');
+  aBox.style.display = 'flex';
+  const body = aBox.querySelector('.a-body');
+  const segs = failed ? [] : sc.answer;
+  if (failed) {
+    const rf = turn.querySelector('.refuse');
+    rf.style.display = 'block';
+    rf.textContent = sc.answer[0];
+  } else if (REDUCED) {
+    segs.forEach(seg => body.appendChild(makeSeg(seg)));
+  } else {
+    const caret = document.createElement('span'); caret.className = 'caret';
+    body.appendChild(caret);
+    for (const seg of segs) {
+      if (typeof seg === 'string') {
+        for (let i = 0; i < seg.length; i += 2) {
+          if (my !== runSeq) return;
+          caret.before(document.createTextNode(seg.slice(i, i + 2)));
+          await sleep(26);
+        }
+      } else {
+        if (my !== runSeq) return;
+        caret.before(makeSeg(seg));
+        await sleep(140);
+      }
+    }
+    caret.remove();
+  }
+  const gLi = addTrace('生成', 'generate', failed ? '按「资料不足」口径输出' : '带引用输出 · 仿宋正文', sc.genMs + 'ms', 'done');
+
+  /* reflect 事件 */
+  await sleep(320);
+  if (my !== runSeq) return;
+  addTrace('反思', 'reflect', sc.reflect, null, failed ? 'fail' : 'done');
+
+  /* done 事件 */
+  addTrace('收敛', 'converge', failed ? '输出拒答与建议' : '答案 + 引用归档', null, 'done');
+  const meta = $('runMeta');
+  meta.innerHTML = `<em>单次运行档案</em>${sc.meta}`;
+  meta.style.display = 'block';
+  $('btnAsk').disabled = false;
+}
+
+function makeSeg(seg) {
+  if (typeof seg === 'string') return document.createTextNode(seg);
+  const n = seg.c, s = citeMap[n - 1];
+  const sup = document.createElement('button');
+  sup.type = 'button'; sup.className = 'cite'; sup.dataset.i = n;
+  sup.textContent = `[${n}]`;
+  sup.addEventListener('click', () => s && showSource(s.key, n));
+  return sup;
+}
+
+/* ── 交互绑定 ─────────────────────────── */
+$('composer').addEventListener('submit', e => {
+  e.preventDefault();
+  const text = $('qinput').value.trim();
+  if (!text) return;
+  $('qinput').value = '';
+  $('btnAsk').disabled = true;
+  run(text);
+});
+$('sugs').addEventListener('click', e => {
+  const b = e.target.closest('.sug'); if (!b) return;
+  $('btnAsk').disabled = true;
+  run(b.textContent);
+});
+$('btnNew').addEventListener('click', () => {
+  $('thread').innerHTML = '';
+  clearRun();
+  $('srcEmpty').style.display = 'block';
+  $('sourceSheet').style.display = 'none';
+  $('srcHint').style.display = 'block';
+  $('qinput').focus();
+});
+$('srcClose').addEventListener('click', closeSource);
+$('srcBackdrop').addEventListener('click', closeSource);
+
+/* 首屏：直接演示一次完整 AgentLoop */
+setTimeout(() => run(SCENARIOS.wait.q), 600);
+</script>
+</body>
+</html>

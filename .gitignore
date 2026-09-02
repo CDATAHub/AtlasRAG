@@ -1,0 +1,17 @@
+# 密钥与本地配置，禁止提交
+.env
+*.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 数据产物（原始数据 / 生成中间产物较大，按需决定是否入库）
+data/evals/generate_progress.json
+
+# IDE
+.idea/
+.vscode/

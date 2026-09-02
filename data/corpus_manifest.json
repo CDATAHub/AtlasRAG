@@ -1,0 +1,3034 @@
+{
+  "dataset": "InsQABench (https://github.com/jingjingjing-ding/InsQABench)",
+  "license": "Apache-2.0",
+  "paper": "arXiv:2501.10943",
+  "authors": "华中科技大学 VLR Lab",
+  "doc_count": 378,
+  "total_qa": 1060,
+  "docs": [
+    {
+      "doc_id": "doc-00265f64",
+      "title": "充电桩综合保险条款2020-01-18条款",
+      "chunk_count": 2,
+      "char_count": 421,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-00e09891",
+      "title": "PICC人保寿险医健保团体补充医疗保险_产品条款",
+      "chunk_count": 6,
+      "char_count": 2349,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0160c42c",
+      "title": "TaiPing个人人身意外伤害保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 421,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-03041d3d",
+      "title": "中美联泰大都会人寿保险有限公司附加健康随心Ⅲ提前给付疾病保险-产品说明书",
+      "chunk_count": 1,
+      "char_count": 140,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-03516e89",
+      "title": "TaiPing太平财产保险有限公司个人重大疾病医疗费用保险（互联网专属）",
+      "chunk_count": 3,
+      "char_count": 642,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-04e4b64f",
+      "title": "中华联合财产保险股份有限公司财产一切险附加公共当局扩展保险（B款）2023-04-10条款",
+      "chunk_count": 1,
+      "char_count": 306,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-067f8501",
+      "title": "中华财险住房出租财产保险附加盗抢保险条款2020-01-19条款",
+      "chunk_count": 7,
+      "char_count": 1470,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-06d26a96",
+      "title": "《泰康尊享一生养老年金保险I款（万能型）》产品条款",
+      "chunk_count": 6,
+      "char_count": 2897,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-07ffb83f",
+      "title": "《泰康宁波医保账户指定重大疾病保险B款》产品条款",
+      "chunk_count": 10,
+      "char_count": 3569,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-090a58a3",
+      "title": "安联附加超级随心养老年金保险（分红型）条款",
+      "chunk_count": 2,
+      "char_count": 1018,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-09551630",
+      "title": "安联寰球臻享（2021）境外医疗保险条款",
+      "chunk_count": 2,
+      "char_count": 1859,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-09fad327",
+      "title": "《泰康幸福赢家年金保险（分红型）》产品条款",
+      "chunk_count": 2,
+      "char_count": 1108,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0a2e90fa",
+      "title": "安联超级随心年金保险（投资连结型）条款",
+      "chunk_count": 2,
+      "char_count": 554,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0a963cb4",
+      "title": "安联附加超级随心（II）重大疾病保险条款",
+      "chunk_count": 5,
+      "char_count": 1287,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0b51fd58",
+      "title": "《泰康北京市医保补充团体医疗保险》产品条款",
+      "chunk_count": 5,
+      "char_count": 1858,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0b691c2b",
+      "title": "onsale 2鼎诚畅行安心交通意外伤害保险（互联网）条款",
+      "chunk_count": 4,
+      "char_count": 1936,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0b9cda0a",
+      "title": "安联附加安康守护意外伤害医疗保险条款",
+      "chunk_count": 1,
+      "char_count": 253,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0bb759b2",
+      "title": "《泰康出国务工人员团体意外伤害保险》泰康养发[2022]130号产品条款",
+      "chunk_count": 2,
+      "char_count": 798,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0c1d906d",
+      "title": "安联安顺宝贝少儿意外伤害保险条款",
+      "chunk_count": 1,
+      "char_count": 157,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0c33701a",
+      "title": "《泰康健康关爱团体护理保险》条款产品条款",
+      "chunk_count": 3,
+      "char_count": 726,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0c56ff72",
+      "title": "《泰康汇享有约养老年金保险（分红型）》（停用）产品条款",
+      "chunk_count": 3,
+      "char_count": 2675,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0ccec001",
+      "title": "《泰康上海医保账户意外伤害医疗保险》产品条款",
+      "chunk_count": 1,
+      "char_count": 355,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0d975c0b",
+      "title": "onsale 11.鼎诚团体综合医疗保险条款",
+      "chunk_count": 5,
+      "char_count": 1757,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0da45192",
+      "title": "《泰康团体长期补充医疗保险C款（2023版）》产品条款",
+      "chunk_count": 2,
+      "char_count": 662,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0de7784a",
+      "title": "TaiPing个人银行账户资金安全保险（2022款）",
+      "chunk_count": 1,
+      "char_count": 175,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0edada19",
+      "title": "TaiPing太平财产保险有限公司物流责任保险条款",
+      "chunk_count": 6,
+      "char_count": 1794,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0f0f19df",
+      "title": "《泰康好牙一生齿科长期医疗保险》产品条款",
+      "chunk_count": 4,
+      "char_count": 1351,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0f49a5a3",
+      "title": "《泰康境外旅行救援B款医疗保险》产品条款",
+      "chunk_count": 1,
+      "char_count": 346,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-0ffaf968",
+      "title": "《泰康上海医保账户医疗保险》产品条款",
+      "chunk_count": 4,
+      "char_count": 565,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-10e37dbd",
+      "title": "安联安裕悠然年金保险（分红型）条款",
+      "chunk_count": 2,
+      "char_count": 244,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-11f145a7",
+      "title": "中美联泰大都会人寿保险有限公司短期住院津贴医疗保险（2010版）-产品条款",
+      "chunk_count": 5,
+      "char_count": 694,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-12be7348",
+      "title": "《泰康C款团体定期寿险》条款产品条款",
+      "chunk_count": 1,
+      "char_count": 150,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-133f4bc1",
+      "title": "中华财险退役军人团体家庭财产保险附加管道破裂及水渍保险2020-01-19条款",
+      "chunk_count": 4,
+      "char_count": 635,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-137f6d43",
+      "title": "中华联合财产保险股份有限公司水利工程运营期机器设备损坏保险（2023版）2023-12-25条款",
+      "chunk_count": 4,
+      "char_count": 744,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-143e52a9",
+      "title": "TaiPing借款人重大疾病保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 404,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-14419a2d",
+      "title": "TaiPing太平财产保险有限公司意外伤害保险附加猝死保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 393,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-14590df7",
+      "title": "中华联合财产保险股份有限公司工程机械设备保险（2015版）附加操作人员责任扩展条款（B款）2024-01-09条款",
+      "chunk_count": 1,
+      "char_count": 239,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-156270c7",
+      "title": "TaiPing太平财产保险有限公司家庭财产损失保险（2022版）",
+      "chunk_count": 3,
+      "char_count": 1460,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-164219af",
+      "title": "stopsale 2-1",
+      "chunk_count": 3,
+      "char_count": 1163,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1649d84f",
+      "title": "中华财险起重机械财产保险附加自燃损失保险2022-09-29条款",
+      "chunk_count": 2,
+      "char_count": 223,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-17065c19",
+      "title": "安联安享鑫生终身年金保险（分红型）条款",
+      "chunk_count": 6,
+      "char_count": 3706,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-178f0ece",
+      "title": "中华联合财产保险股份有限公司企业财产类保险附加建造临时栅墙费用保险条款2021-12-07条款",
+      "chunk_count": 1,
+      "char_count": 143,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-199a9cf8",
+      "title": "PICC人保寿险一带一路团体定期寿险_产品条款",
+      "chunk_count": 1,
+      "char_count": 464,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1ab19252",
+      "title": "中华财险退役军人团体家庭财产保险附加盗抢保险条款2020-01-19条款",
+      "chunk_count": 4,
+      "char_count": 974,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1b6cece8",
+      "title": "TaiPing公共交通工具乘客意外伤害保险（互联网专属）条款",
+      "chunk_count": 3,
+      "char_count": 1009,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1b8b873c",
+      "title": "TaiPing个人医疗费用保险（互联网专属2021-A版）条款",
+      "chunk_count": 2,
+      "char_count": 629,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1c1bcddf",
+      "title": "《泰康惠选长安团体长期意外伤害保险B款》产品条款",
+      "chunk_count": 7,
+      "char_count": 3027,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1ca54338",
+      "title": "中华财险商业燃气用户财产保险（2020版）2021-01-29条款",
+      "chunk_count": 2,
+      "char_count": 394,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1d37593e",
+      "title": "安联附加安裕吉祥年金保险（分红型）条款",
+      "chunk_count": 2,
+      "char_count": 735,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1ee7003a",
+      "title": "中美联泰大都会人寿保险有限公司意外伤害医疗保险-产品条款",
+      "chunk_count": 2,
+      "char_count": 261,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1ef6e804",
+      "title": "安联逸升汇赢（2018）终身年金保险（分红型）条款",
+      "chunk_count": 2,
+      "char_count": 686,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-1f3a71ad",
+      "title": "安联安盈恒利两全保险（万能型）条款",
+      "chunk_count": 3,
+      "char_count": 1317,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-207df505",
+      "title": "中美联泰大都会人寿保险有限公司安享健康重大疾病保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 1334,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-21158b94",
+      "title": "TaiPing住院医疗费用保险（互联网专属2021-Y版)",
+      "chunk_count": 1,
+      "char_count": 127,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2345a44b",
+      "title": "《泰康境外旅行团体意外伤害保险》泰康养发[2022]106号产品条款",
+      "chunk_count": 3,
+      "char_count": 615,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-23c0b7c2",
+      "title": "TaiPing财产综合险",
+      "chunk_count": 6,
+      "char_count": 1353,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-23c34973",
+      "title": "PICC人保寿险关爱百万团体补充医疗保险_产品条款",
+      "chunk_count": 5,
+      "char_count": 1277,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-23e2177e",
+      "title": "TaiPing全国职业院校学生实习责任保险统保示范项目校方责任保险",
+      "chunk_count": 4,
+      "char_count": 1566,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-24e72a40",
+      "title": "《泰康健康有约终身重大疾病保险J款》产品条款",
+      "chunk_count": 1,
+      "char_count": 349,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-252cb9b4",
+      "title": "中华财险退役军人自主创业企业财产保险条款2020-01-19条款",
+      "chunk_count": 1,
+      "char_count": 317,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-25fa7ab4",
+      "title": "《泰康关爱肝疾病保险B款》产品条款",
+      "chunk_count": 3,
+      "char_count": 888,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2669f4d1",
+      "title": "公路货物运输定期定额保险条款（适用于广西壮族自治区）2020-01-18条款",
+      "chunk_count": 3,
+      "char_count": 925,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-26abb1f0",
+      "title": "安联安裕如意（III）年金保险（分红型）条款",
+      "chunk_count": 2,
+      "char_count": 535,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-26e8d1fd",
+      "title": "《泰康意外烧伤医疗保险》产品条款",
+      "chunk_count": 1,
+      "char_count": 106,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2899072d",
+      "title": "《泰康e保有约住院医疗保险B款》（停用）产品条款",
+      "chunk_count": 2,
+      "char_count": 1050,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-28dfa060",
+      "title": "中美联泰大都会人寿保险有限公司水陆公共交通（C款）意外伤害保险（互联网专属）-产品条款",
+      "chunk_count": 2,
+      "char_count": 2349,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-29064582",
+      "title": "TaiPing太平财产保险有限公司财产一切险条款",
+      "chunk_count": 8,
+      "char_count": 1650,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-29d066ce",
+      "title": "TaiPing借款人意外伤害保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 856,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2a6e1663",
+      "title": "stopsale 2",
+      "chunk_count": 3,
+      "char_count": 521,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2aa82314",
+      "title": "《泰康团体意外伤害保险》泰康养发[2022]102号产品条款",
+      "chunk_count": 1,
+      "char_count": 385,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2b98c5e8",
+      "title": "《泰康医养宝社保补充团体医疗保险B款》产品条款",
+      "chunk_count": 3,
+      "char_count": 886,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2c3b803c",
+      "title": "安联安康孝欣（2",
+      "chunk_count": 8,
+      "char_count": 3082,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2c58349d",
+      "title": "安联安行无忧团体境外旅行意外伤害保险条款",
+      "chunk_count": 3,
+      "char_count": 893,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2cb4ba12",
+      "title": "《泰康团体意外伤害保险》泰康养发[2022]130号产品条款",
+      "chunk_count": 2,
+      "char_count": 1040,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2cbb09ba",
+      "title": "中美联泰大都会人寿保险有限公司烟花爆竹意外伤害保险（互联网专属）-产品条款",
+      "chunk_count": 1,
+      "char_count": 117,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2d14ac6b",
+      "title": "中华财险民用燃气财产保险2021-01-29条款",
+      "chunk_count": 2,
+      "char_count": 345,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2da7cffd",
+      "title": "TaiPing个人住院医疗费用保险（互联网专属2021-E版）条款",
+      "chunk_count": 2,
+      "char_count": 608,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-2fe5e698",
+      "title": "中美联泰大都会人寿保险有限公司健康随心Ⅲ终身寿险-产品条款",
+      "chunk_count": 5,
+      "char_count": 2057,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-30ea2c84",
+      "title": "TaiPing公众责任保险条款（2019版）",
+      "chunk_count": 1,
+      "char_count": 287,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-319393b8",
+      "title": "中华联合财产保险股份有限公司附加旅游出行人员随身财产保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 244,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-324cfdc2",
+      "title": "PICC人保寿险i无忧2",
+      "chunk_count": 12,
+      "char_count": 2973,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3250c933",
+      "title": "中美联泰大都会人寿保险有限公司附加团体住院津贴医疗保险（B款）-产品条款",
+      "chunk_count": 1,
+      "char_count": 140,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-33156baf",
+      "title": "《泰康建筑工程人员团体意外伤害保险》产品条款",
+      "chunk_count": 2,
+      "char_count": 529,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-33728568",
+      "title": "中华财险湖南省安监重点行业（领域）安全生产责任保险附加企业自有资产财产保险2022-09-29条款",
+      "chunk_count": 2,
+      "char_count": 852,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-34128bda",
+      "title": "安联附加安康和硕团体女性生育医疗保险条款",
+      "chunk_count": 1,
+      "char_count": 1097,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-34bcc0db",
+      "title": "安联臻爱优选（成人版）重大疾病保险条款",
+      "chunk_count": 1,
+      "char_count": 353,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-34c3fd0b",
+      "title": "PICC人保寿险团体长期补充医疗保险（A款）_产品条款",
+      "chunk_count": 1,
+      "char_count": 157,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3535ee47",
+      "title": "安联安顺汇福（II）终身寿险（分红型）条款",
+      "chunk_count": 4,
+      "char_count": 1684,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-35edc2b9",
+      "title": "TaiPing太平财产保险有限公司个人住院医疗费用保险（互联网专属2021-D版）",
+      "chunk_count": 7,
+      "char_count": 1543,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-373b7b8b",
+      "title": "《泰康团体长期补充医疗保险B款（2023版）》产品条款",
+      "chunk_count": 4,
+      "char_count": 1246,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-378bb1a4",
+      "title": "PICC人保寿险境外紧急救援团体医疗保险_产品条款",
+      "chunk_count": 2,
+      "char_count": 1524,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-37987632",
+      "title": "TaiPing太平财产保险有限公司公共交通工具乘客意外伤害保险（互联网专属2022版）",
+      "chunk_count": 1,
+      "char_count": 207,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-37ae25e3",
+      "title": "《泰康为i保医疗保险》条款产品条款",
+      "chunk_count": 6,
+      "char_count": 1233,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-37b7a958",
+      "title": "中美联泰大都会人寿保险有限公司附加健康随心Ⅲ多次给付疾病保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 224,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3877749c",
+      "title": "中美联泰大都会人寿保险有限公司都会畅行意外伤害保险-产品条款",
+      "chunk_count": 2,
+      "char_count": 373,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-38940f1c",
+      "title": "TaiPing太平财产保险有限公司学生人身意外伤害保险（互联网专属）条款",
+      "chunk_count": 3,
+      "char_count": 834,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-39bb0610",
+      "title": "安联安享至尊养老年金保险（分红型）条款",
+      "chunk_count": 3,
+      "char_count": 1893,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3ab4b2b3",
+      "title": "中华联合财产保险股份有限公司民用燃气财产保险（2022版）条款2022-08-03条款",
+      "chunk_count": 2,
+      "char_count": 562,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3af9242f",
+      "title": "PICC人保寿险关爱男性特定疾病保险_产品条款",
+      "chunk_count": 1,
+      "char_count": 235,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3bd90150",
+      "title": "中美联泰大都会人寿保险有限公司都会恒盈年金保险（分红型）-产品说明书",
+      "chunk_count": 2,
+      "char_count": 258,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3ca30387",
+      "title": "中美联泰大都会人寿保险有限公司都会颐享两全保险（分红型）-产品条款",
+      "chunk_count": 2,
+      "char_count": 1044,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3e5c75d5",
+      "title": "TaiPing太平财产保险有限公司燃气意外伤害保险（互联网专属2022-A版）",
+      "chunk_count": 4,
+      "char_count": 1203,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3e6594bb",
+      "title": "安联安心守护少儿高端医疗保险条款",
+      "chunk_count": 7,
+      "char_count": 9547,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3f14535b",
+      "title": "《泰康医护卫士特定意外伤害保险》产品条款",
+      "chunk_count": 2,
+      "char_count": 516,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-3f8b21e3",
+      "title": "安联安享稳盈终身寿险条款",
+      "chunk_count": 1,
+      "char_count": 103,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-401b72af",
+      "title": "TaiPing公共交通工具乘客意外伤害保险（互联网专属2022版）",
+      "chunk_count": 1,
+      "char_count": 200,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-404a58ea",
+      "title": "《泰康团体重大疾病补充医疗保险》产品条款",
+      "chunk_count": 6,
+      "char_count": 1778,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-40bfccdc",
+      "title": "《泰康团体重疾补充医疗保险R款（2023版）》产品条款",
+      "chunk_count": 8,
+      "char_count": 3036,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-41f52c5f",
+      "title": "PICC人保寿险一带一路团体意外伤害保险_产品条款",
+      "chunk_count": 2,
+      "char_count": 644,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4274d23d",
+      "title": "中美联泰大都会人寿保险有限公司附加都会无忧交通意外伤害保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 661,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-43f56f9f",
+      "title": "中华财险住房出租财产保险附加管道破裂及水渍保险条款2020-01-19条款",
+      "chunk_count": 1,
+      "char_count": 101,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-46e22bbe",
+      "title": "安联逸升尊享（III）年金保险（分红型）条款",
+      "chunk_count": 3,
+      "char_count": 428,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-47336eb5",
+      "title": "中华联合财产保险股份有限公司高标准农田设施灾毁保险（2021版）条款2022-08-03条款",
+      "chunk_count": 2,
+      "char_count": 467,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-477cbdc7",
+      "title": "中华联合财产保险股份有限公司山东省治安综合保险（2021版）附加管道破裂及水渍保险条款2022-08-03条款",
+      "chunk_count": 1,
+      "char_count": 136,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-48907051",
+      "title": "《泰康团体医疗保险B款》产品条款",
+      "chunk_count": 2,
+      "char_count": 601,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4a44e669",
+      "title": "《泰康健康有约团体终身重大疾病保险H款（2023版）》产品条款",
+      "chunk_count": 5,
+      "char_count": 1642,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4a4d0d8b",
+      "title": "安联安盈添利终身寿险（万能型）条款",
+      "chunk_count": 4,
+      "char_count": 1223,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4b009888",
+      "title": "TaiPing太平财产保险有限公司安全生产责任保险（2022版）",
+      "chunk_count": 3,
+      "char_count": 1017,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4c0fa756",
+      "title": "安联附加团体（2018）住院补贴医疗保险条款",
+      "chunk_count": 1,
+      "char_count": 433,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4d333901",
+      "title": "《泰康团体补充医疗保险》条款产品条款",
+      "chunk_count": 4,
+      "char_count": 2237,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4d6d5458",
+      "title": "TaiPing太平财产保险有限公司航班延误保险B款",
+      "chunk_count": 3,
+      "char_count": 1268,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4dce3b2a",
+      "title": "PICC人保寿险健康相伴团体重大疾病保险（C款）_产品条款",
+      "chunk_count": 4,
+      "char_count": 966,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4e2f1f37",
+      "title": "安联安赢添福（2",
+      "chunk_count": 5,
+      "char_count": 1831,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-4fd7fcf9",
+      "title": "PICC人保寿险关爱女性特定疾病保险_产品条款",
+      "chunk_count": 3,
+      "char_count": 1007,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5027366f",
+      "title": "中华联合财产保险股份有限公司财产一切险附加临时移动条款（2023版）2023-10-16条款",
+      "chunk_count": 1,
+      "char_count": 147,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5046eb25",
+      "title": "《泰康尊享一生养老年金保险H款（万能型）》产品条款",
+      "chunk_count": 4,
+      "char_count": 930,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-50d6bcc9",
+      "title": "《泰康学生平安意外伤害保险》泰康养发[2022]106号产品条款",
+      "chunk_count": 1,
+      "char_count": 746,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-51457667",
+      "title": "《泰康惠选长安长期意外伤害保险B款》产品条款",
+      "chunk_count": 3,
+      "char_count": 1109,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-517d158b",
+      "title": "中华联合财产保险股份有限公司个人贷款抵押房屋保险（2020版）2021-04-28条款",
+      "chunk_count": 2,
+      "char_count": 593,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-51e4d44f",
+      "title": "安联安赢添福年金保险（分红型）条款",
+      "chunk_count": 5,
+      "char_count": 3086,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-520ed03e",
+      "title": "TaiPing个人住院医疗费用保险（互联网专属2022-A版）",
+      "chunk_count": 1,
+      "char_count": 222,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-527fbf14",
+      "title": "《泰康B款团体定期寿险》条款产品条款",
+      "chunk_count": 3,
+      "char_count": 1047,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-52dc599c",
+      "title": "《泰康人生赢家年金保险B款（分红型）》产品条款",
+      "chunk_count": 3,
+      "char_count": 798,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-533c210f",
+      "title": "中美联泰大都会人寿保险有限公司倍佑一生（优享版）重大疾病保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 157,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-541d927c",
+      "title": "《泰康境外旅行救援B款医疗保险》（停用）产品条款",
+      "chunk_count": 1,
+      "char_count": 103,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5487c1ab",
+      "title": "《泰康汇享有约(G)团体养老年金保险（分红型）》产品条款",
+      "chunk_count": 2,
+      "char_count": 891,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-54cf18d6",
+      "title": "TaiPing个人住院医疗费用保险（互联网专属2021-E版）",
+      "chunk_count": 2,
+      "char_count": 545,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-576fe133",
+      "title": "安联附加安顺年年定期寿险条款",
+      "chunk_count": 2,
+      "char_count": 1129,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-58373cb7",
+      "title": "中华财险卫星发射及初始运行保险2021-01-29条款",
+      "chunk_count": 1,
+      "char_count": 393,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-58519593",
+      "title": "《泰康境内旅行团体意外伤害保险》泰康养发[2022]130号产品条款",
+      "chunk_count": 2,
+      "char_count": 535,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-587d11c1",
+      "title": "安联安享福瑞年金保险（分红型）条款",
+      "chunk_count": 4,
+      "char_count": 1433,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5897f0cc",
+      "title": "安联悦动锦鲤两全保险条款",
+      "chunk_count": 2,
+      "char_count": 453,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-58ed922e",
+      "title": "安联安行万里境外旅行互联网意外伤害保险条款",
+      "chunk_count": 6,
+      "char_count": 2137,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-59764675",
+      "title": "《泰康健康关爱团体护理保险B款》产品条款",
+      "chunk_count": 2,
+      "char_count": 615,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-598db719",
+      "title": "《泰康团体特定疾病医疗保险》产品条款",
+      "chunk_count": 4,
+      "char_count": 755,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5a7fdb31",
+      "title": "TaiPing太平财产保险有限公司关爱女性重大疾病保险（互联网专属）",
+      "chunk_count": 2,
+      "char_count": 1198,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5b1c1f4f",
+      "title": "《泰康宁波医保账户指定重大疾病保险B款》（停用)产品条款",
+      "chunk_count": 2,
+      "char_count": 297,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5b6c5dab",
+      "title": "中美联泰大都会人寿保险有限公司附加豁免保险费长期重大疾病保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 334,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5b82800f",
+      "title": "PICC人保寿险团体长期重大疾病保险（G款）产品条款",
+      "chunk_count": 3,
+      "char_count": 643,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5b8e6c3d",
+      "title": "中华联合财产保险股份有限公司财产一切险附加利于被保险人解释条款2022-11-29条款",
+      "chunk_count": 1,
+      "char_count": 237,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5bc93430",
+      "title": "安联安享丰财年金保险（分红型）条款",
+      "chunk_count": 3,
+      "char_count": 1058,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5ca271ee",
+      "title": "TaiPing太平盛世家庭财产保险D款条款",
+      "chunk_count": 3,
+      "char_count": 776,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5d08dab3",
+      "title": "PICC人保寿险品质金账户养老年金保险（万能型）（荣耀版）_产品条款",
+      "chunk_count": 2,
+      "char_count": 217,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5e0e1def",
+      "title": "中华财险工程机械设备保险（2015版）附加转运期间财产损失保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 280,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5ebe7ac3",
+      "title": "《泰康团体重疾补充医疗保险F款（2023版）》产品条款",
+      "chunk_count": 3,
+      "char_count": 882,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5eda39a1",
+      "title": "TaiPing个人账户盗刷损失保险条款",
+      "chunk_count": 1,
+      "char_count": 321,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-5faa9b50",
+      "title": "中华联合财产保险股份有限公司城乡居民综合保障保险（社会综合治理专用）附加农机盗抢保险2023-07-14条款",
+      "chunk_count": 1,
+      "char_count": 129,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-60213e98",
+      "title": "中华财险卫星在轨寿命财产保险2021-01-29条款",
+      "chunk_count": 2,
+      "char_count": 301,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-60cf011c",
+      "title": "安联安享汇盈终身寿险（分红型）条款",
+      "chunk_count": 9,
+      "char_count": 4279,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-61a67d19",
+      "title": "《泰康健康有约团体终身重大疾病保险F款（2023版）》产品条款",
+      "chunk_count": 3,
+      "char_count": 871,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-61ee4300",
+      "title": "TaiPing太平财产保险有限公司交通出行意外伤害保险（互联网专属）",
+      "chunk_count": 3,
+      "char_count": 1907,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6319288a",
+      "title": "中华联合财产保险股份有限公司山东省治安综合保险（2021版）条款2022-08-03条款",
+      "chunk_count": 2,
+      "char_count": 429,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-63f6915d",
+      "title": "TaiPing住院医疗费用保险（互联网专属2021-C版）条款",
+      "chunk_count": 1,
+      "char_count": 970,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6438807b",
+      "title": "PICC人保寿险境外团体意外伤害保险_产品条款",
+      "chunk_count": 1,
+      "char_count": 211,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-66423590",
+      "title": "onsale 1.鼎诚团体意外伤害保险条款",
+      "chunk_count": 5,
+      "char_count": 2091,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-66c0808f",
+      "title": "《泰康团体养老年金保险（万能型）》产品条款",
+      "chunk_count": 3,
+      "char_count": 1862,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-66f6924d",
+      "title": "《泰康团体重疾补充医疗保险N款（2023版）》产品条款",
+      "chunk_count": 5,
+      "char_count": 891,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6831a94d",
+      "title": "TaiPing医务人员住院医疗费用保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 717,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-69f67725",
+      "title": "中美联泰大都会人寿保险有限公司自驾车（C款）意外伤害保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 185,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6a0073c9",
+      "title": "PICC人保寿险关爱少儿特定疾病保险_产品条款",
+      "chunk_count": 2,
+      "char_count": 630,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6ae7595c",
+      "title": "PICC人保寿险团体长期补充医疗保险（B款）_产品条款",
+      "chunk_count": 4,
+      "char_count": 1210,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6aeb9e40",
+      "title": "PICC人保寿险团体女性特定疾病保险_产品条款",
+      "chunk_count": 2,
+      "char_count": 839,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6af0e5b8",
+      "title": "《泰康团体医护职业暴露津贴医疗保险》产品条款",
+      "chunk_count": 3,
+      "char_count": 893,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6b3567a3",
+      "title": "TaiPing太平财产保险有限公司个人住院医疗保险（互联网专属2023版）",
+      "chunk_count": 1,
+      "char_count": 1166,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6cebc3be",
+      "title": "专利申请费用补偿保险条款2020-01-19条款",
+      "chunk_count": 1,
+      "char_count": 496,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6d0d2f32",
+      "title": "中美联泰大都会人寿保险有限公司都会至臻（优享版）终身寿险（分红型）-产品条款",
+      "chunk_count": 1,
+      "char_count": 533,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6e27e965",
+      "title": "TaiPing太平财产保险有限公司恶性肿瘤住院医疗费用保险（互联网专属2021-B版）条款",
+      "chunk_count": 1,
+      "char_count": 596,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6eb9f70e",
+      "title": "《泰康尊享一生养老年金保险G款（万能型）》产品条款",
+      "chunk_count": 4,
+      "char_count": 2129,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6fdb4890",
+      "title": "安联附加安赢锦绣教育金年金保险（分红型）条款",
+      "chunk_count": 1,
+      "char_count": 536,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-6ff980ca",
+      "title": "TaiPing太平财产保险有限公司四川省惠民团体医疗保险（互联网专属）条款",
+      "chunk_count": 2,
+      "char_count": 1735,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-70689434",
+      "title": "TaiPing太平财产保险有限公司个人住院医疗费用保险（互联网专属2021-D版）条款",
+      "chunk_count": 3,
+      "char_count": 711,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7118e9e0",
+      "title": "中美联泰大都会人寿保险有限公司都会臻传（优享版）终身寿险（分红型）-产品条款",
+      "chunk_count": 1,
+      "char_count": 170,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7215566e",
+      "title": "安联团体（2014）交通工具意外伤害保险条款",
+      "chunk_count": 1,
+      "char_count": 1134,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-72ecbcae",
+      "title": "TaiPing太平财产保险有限公司个人住院医疗费用保险（互联网专属2021-E版）",
+      "chunk_count": 4,
+      "char_count": 1363,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-73235a62",
+      "title": "TaiPing“家无忧”家庭综合保障保险-太平财险(备-家财)[2014]主2号-条款",
+      "chunk_count": 5,
+      "char_count": 2190,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-741ca666",
+      "title": "安联盛世臻传（II）终身寿险（分红型）条款",
+      "chunk_count": 1,
+      "char_count": 219,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7425253a",
+      "title": "《泰康团体重大疾病保险H款》产品条款",
+      "chunk_count": 2,
+      "char_count": 401,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-745c0587",
+      "title": "中华财险燃气用户财产保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 489,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-74df68c5",
+      "title": "onsale 5",
+      "chunk_count": 1,
+      "char_count": 199,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-75643698",
+      "title": "TaiPing太平财产保险有限公司安心家庭财产保险（2021版）",
+      "chunk_count": 4,
+      "char_count": 2225,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-756f98ee",
+      "title": "TaiPing住院医疗费用保险（互联网专属2021-P版）条款",
+      "chunk_count": 3,
+      "char_count": 856,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7597e038",
+      "title": "中美联泰大都会人寿保险有限公司健康随心Ⅲ两全保险-产品说明书",
+      "chunk_count": 1,
+      "char_count": 103,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-75ca8e28",
+      "title": "安联盛世百年（B款）两全保险（分红型）条款",
+      "chunk_count": 3,
+      "char_count": 561,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-764fbb2a",
+      "title": "TaiPing太平财产保险有限公司个人医疗保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 163,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-77c27641",
+      "title": "中美联泰大都会人寿保险有限公司都会爱护医疗保险-产品条款",
+      "chunk_count": 2,
+      "char_count": 1104,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-78120d6b",
+      "title": "安联安康至臻（II）全球团体医疗保险条款",
+      "chunk_count": 2,
+      "char_count": 546,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-78874c43",
+      "title": "安联安赢未来教育金年金保险（分红型）条款",
+      "chunk_count": 5,
+      "char_count": 2111,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-78f0d9cd",
+      "title": "中美联泰大都会人寿保险有限公司都会尊悦（优享版）年金保险（分红型）-产品条款",
+      "chunk_count": 2,
+      "char_count": 751,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-795d7683",
+      "title": "PICC人保寿险健康相伴重大疾病保险（C款）_产品条款",
+      "chunk_count": 6,
+      "char_count": 1085,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7a83bd0e",
+      "title": "中华财险住房出租财产保险条款2020-01-19条款",
+      "chunk_count": 1,
+      "char_count": 130,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7af0cc7a",
+      "title": "TaiPing太平财产保险有限公司河北省社保补充医疗保险（互联网专属）",
+      "chunk_count": 5,
+      "char_count": 1924,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7b1d3bef",
+      "title": "PICC人保寿险i无忧青春版重大疾病保险（互联网专属）_产品说明书",
+      "chunk_count": 3,
+      "char_count": 391,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7bebdc18",
+      "title": "中华财险起重机械财产保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 264,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7cd64120",
+      "title": "TaiPing太平财产保险有限公司恶性肿瘤住院医疗费用保险（互联网专属2021-A版）",
+      "chunk_count": 2,
+      "char_count": 566,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7d1defc8",
+      "title": "PICC人保寿险关爱百万（特需版）医疗保险_产品条款",
+      "chunk_count": 2,
+      "char_count": 458,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7d29ffbe",
+      "title": "中华财险工程机械设备保险（2015版）附加高压电路碰触保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 408,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7d8d1bf2",
+      "title": "TaiPing“家无忧”家庭综合保障保险条款",
+      "chunk_count": 3,
+      "char_count": 2767,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-7f6586af",
+      "title": "TaiPing乐悠悠旅行人身意外伤害保险（互联网专属2021-A款）",
+      "chunk_count": 1,
+      "char_count": 542,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-801167c0",
+      "title": "安联逸升丰赢终身年金保险（分红型）条款",
+      "chunk_count": 4,
+      "char_count": 1166,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-80153cb2",
+      "title": "中美联泰大都会人寿保险有限公司法定节假日意外伤害保险（互联网专属）-产品条款",
+      "chunk_count": 1,
+      "char_count": 108,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-80f69cab",
+      "title": "中华联合财产保险股份有限公司山西省城乡居民住房巨灾保险2023-07-14条款",
+      "chunk_count": 2,
+      "char_count": 492,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-815d0ce9",
+      "title": "安联至臻互联网医疗保险条款",
+      "chunk_count": 3,
+      "char_count": 1070,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-81ca8b59",
+      "title": "中美联泰大都会人寿保险有限公司水陆公共交通（B款）意外伤害保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 123,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-81f3d0b9",
+      "title": "中美联泰大都会人寿保险有限公司都会至臻（优享版）终身寿险（分红型）-产品说明书",
+      "chunk_count": 1,
+      "char_count": 105,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-830074e9",
+      "title": "TaiPing太平财产保险有限公司境外旅行意外伤害保险（互联网专属）",
+      "chunk_count": 2,
+      "char_count": 971,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-832fee96",
+      "title": "安联安赢添彩年金保险（分红型）条款",
+      "chunk_count": 2,
+      "char_count": 295,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-83b76a1d",
+      "title": "中华联合财产保险股份有限公司治安装备损失保险（社会综合治理专用）条款2021-08-06条款",
+      "chunk_count": 3,
+      "char_count": 515,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-842aaae4",
+      "title": "安联附加豁免保险费（III）疾病保险条款",
+      "chunk_count": 1,
+      "char_count": 411,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8485126d",
+      "title": "《泰康尊享守护意外伤害医疗保险》产品条款",
+      "chunk_count": 3,
+      "char_count": 1768,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-84b41343",
+      "title": "《泰康汇享有约养老年金保险（分红型）》产品条款",
+      "chunk_count": 1,
+      "char_count": 931,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-85153e88",
+      "title": "TaiPing公共交通工具乘客意外伤害保险（互联网专属2021-A款）条款",
+      "chunk_count": 1,
+      "char_count": 495,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8582fdc3",
+      "title": "TaiPing公众责任保险（2019版）",
+      "chunk_count": 2,
+      "char_count": 986,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8590ab58",
+      "title": "PICC人保寿险团体定期寿险_产品条款",
+      "chunk_count": 2,
+      "char_count": 1152,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-87e12c98",
+      "title": "TaiPing太平财产保险有限公司社会活动公众责任保险（2023版）条款",
+      "chunk_count": 3,
+      "char_count": 2203,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-88161847",
+      "title": "中美联泰大都会人寿保险有限公司附加都会随行两全保险-产品说明书",
+      "chunk_count": 1,
+      "char_count": 103,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-882dbc1d",
+      "title": "PICC人保寿险如意保两全保险（分红型）_产品条款",
+      "chunk_count": 3,
+      "char_count": 946,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8911cae7",
+      "title": "中华联合财产保险股份有限公司财产一切险附加自动恢复保险金额保险（B款）2022-11-29条款",
+      "chunk_count": 1,
+      "char_count": 109,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8915f3fb",
+      "title": "onsale 鼎诚团体定期寿险条款",
+      "chunk_count": 2,
+      "char_count": 616,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-89f09b8a",
+      "title": "安联安裕丰财（VI）两全保险（分红型）条款",
+      "chunk_count": 1,
+      "char_count": 203,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8a6dcec4",
+      "title": "中华财险工程机械设备保险（2015版）附加涉水发动机损坏保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 124,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8b595143",
+      "title": "onsale 6-1",
+      "chunk_count": 1,
+      "char_count": 1030,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8d966ef1",
+      "title": "TaiPing太平财产保险有限公司交通出行意外伤害保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 440,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-8e1da9f6",
+      "title": "《泰康交通工具乘客团体意外伤害保险》泰康养发[2022]130号产品条款",
+      "chunk_count": 5,
+      "char_count": 1749,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-90d2b1a7",
+      "title": "中美联泰大都会人寿保险有限公司都会臻鑫（优享版）年金保险-产品条款",
+      "chunk_count": 2,
+      "char_count": 771,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-90fa1b18",
+      "title": "《泰康世纪泰康住院团体医疗保险》条款产品条款",
+      "chunk_count": 2,
+      "char_count": 460,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-912d5ef6",
+      "title": "TaiPing太平财产保险有限公司公路货运承运人责任保险条款",
+      "chunk_count": 2,
+      "char_count": 327,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-91a82f65",
+      "title": "中华联合财产保险股份有限公司附加出行行李和随身物品损失保险2023-10-16条款",
+      "chunk_count": 2,
+      "char_count": 596,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-931ebc98",
+      "title": "《泰康汇享有约（青少版）年金保险（分红型）》条款产品条款",
+      "chunk_count": 6,
+      "char_count": 1385,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-93249a0f",
+      "title": "中华财险卫星发射前财产保险2021-01-29条款",
+      "chunk_count": 2,
+      "char_count": 724,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-93c88455",
+      "title": "安联境外旅行（畅游版）互联网意外伤害保险条款",
+      "chunk_count": 2,
+      "char_count": 468,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-94b8d1b8",
+      "title": "PICC人保寿险农村小额团体意外伤害保险（B款）_产品条款",
+      "chunk_count": 2,
+      "char_count": 616,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-953f5141",
+      "title": "TaiPing个人住院医疗费用保险（互联网专属2021-D版）",
+      "chunk_count": 4,
+      "char_count": 1470,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-985d8e18",
+      "title": "TaiPing太平财产保险有限公司少儿医疗费用保险（互联网专属）",
+      "chunk_count": 1,
+      "char_count": 1438,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9869c64f",
+      "title": "中美联泰大都会人寿保险有限公司团体意外伤害保险（G款）-产品条款",
+      "chunk_count": 1,
+      "char_count": 221,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9983701c",
+      "title": "公路货物运输定额保险条款2020-01-18条款",
+      "chunk_count": 1,
+      "char_count": 291,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-99b53277",
+      "title": "TaiPing太平财产保险有限公司个人住院医疗费用保险（互联网专属2021-A版）条款",
+      "chunk_count": 2,
+      "char_count": 406,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9aff33d5",
+      "title": "安联安赢添富年金保险（分红型）条款",
+      "chunk_count": 3,
+      "char_count": 2593,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9b2e2c51",
+      "title": "中美联泰大都会人寿保险有限公司都会无忧意外伤害保险-产品条款",
+      "chunk_count": 6,
+      "char_count": 4929,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9c06433b",
+      "title": "《泰康团体住院补充医疗保险》条款产品条款",
+      "chunk_count": 3,
+      "char_count": 386,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9de60295",
+      "title": "安联附加安康和美团体医疗保险条款",
+      "chunk_count": 1,
+      "char_count": 281,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9e45ca6a",
+      "title": "安联臻爱一世（成人版）重大疾病保险条款",
+      "chunk_count": 5,
+      "char_count": 1201,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-9fb4e405",
+      "title": "onsale",
+      "chunk_count": 2,
+      "char_count": 630,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a0dcf044",
+      "title": "《泰康健康有约终身重大疾病保险J1款》产品条款",
+      "chunk_count": 4,
+      "char_count": 991,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a1c7d35d",
+      "title": "《泰康健康有约团体终身重大疾病保险D款（2024版）》产品条款",
+      "chunk_count": 2,
+      "char_count": 508,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a25aa377",
+      "title": "PICC人保寿险优享生活年金保险（分红型）_产品条款",
+      "chunk_count": 1,
+      "char_count": 210,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a2a23b10",
+      "title": "中华财险家庭用电安全财产保险（2020版）2021-01-29条款",
+      "chunk_count": 2,
+      "char_count": 693,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a2c40f8a",
+      "title": "onsale 2",
+      "chunk_count": 5,
+      "char_count": 1179,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a48d37e4",
+      "title": "安联附加恶性肿瘤（重度）疾病保险条款",
+      "chunk_count": 4,
+      "char_count": 1272,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a4f81b8e",
+      "title": "TaiPing太平财产保险有限公司境内旅游意外伤害保险（互联网专属）",
+      "chunk_count": 2,
+      "char_count": 978,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a61289b3",
+      "title": "中华联合财产保险股份有限公司财产一切险附加简易建筑以及露天简易建筑内存放财产保险2023-04-10条款",
+      "chunk_count": 1,
+      "char_count": 111,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a67a56e8",
+      "title": "安联安康孝欣（2.0版）老年医疗保险",
+      "chunk_count": 5,
+      "char_count": 3651,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a778d75d",
+      "title": "PICC人保寿险团体定期寿险（B款）_产品条款",
+      "chunk_count": 1,
+      "char_count": 114,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a7e3abd7",
+      "title": "中美联泰大都会人寿保险有限公司团体优享高端医疗保险-产品条款",
+      "chunk_count": 2,
+      "char_count": 217,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a7e56deb",
+      "title": "安联团体（2023）意外伤害保险条款",
+      "chunk_count": 4,
+      "char_count": 1482,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a8fc2337",
+      "title": "中华财险火箭发射前财产保险2021-01-29条款",
+      "chunk_count": 3,
+      "char_count": 684,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a9338eb8",
+      "title": "《泰康e保有约住院医疗保险》（停用)产品条款",
+      "chunk_count": 3,
+      "char_count": 885,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-a9b8722b",
+      "title": "《泰康D款团体重大疾病保险》条款产品条款",
+      "chunk_count": 4,
+      "char_count": 830,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-aa6e0ec1",
+      "title": "PICC人保寿险农村小额意外伤害保险（B款）_产品条款",
+      "chunk_count": 1,
+      "char_count": 477,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-ac424cd3",
+      "title": "中美联泰大都会人寿保险有限公司都会传家（2018）终身寿险（分红型）-产品条款",
+      "chunk_count": 1,
+      "char_count": 202,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-ad5da277",
+      "title": "PICC人保寿险一般意外伤害保险（互联网专属）_产品条款",
+      "chunk_count": 1,
+      "char_count": 167,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-af19abe2",
+      "title": "PICC人保寿险关爱百万（孝心版）医疗保险保险_产品条款",
+      "chunk_count": 4,
+      "char_count": 1273,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-af73ae7c",
+      "title": "《泰康医养宝社保补充团体医疗保险A款》产品条款",
+      "chunk_count": 4,
+      "char_count": 969,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-af8c00ee",
+      "title": "onsale 1",
+      "chunk_count": 2,
+      "char_count": 505,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b1fb9da7",
+      "title": "PICC人保寿险中老年意外伤害保险_产品条款",
+      "chunk_count": 1,
+      "char_count": 121,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b26e08ba",
+      "title": "《泰康团体住院补充医疗保险》产品条款",
+      "chunk_count": 5,
+      "char_count": 2548,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b2b56a9d",
+      "title": "《泰康新生活境内旅行救援医疗保险》（停用）产品条款",
+      "chunk_count": 1,
+      "char_count": 311,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b2e5c0f4",
+      "title": "中美联泰大都会人寿保险有限公司都会安鑫年金保险（万能型）-产品条款",
+      "chunk_count": 1,
+      "char_count": 212,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b4911d55",
+      "title": "PICC人保寿险关爱百万2019医疗保险_产品条款",
+      "chunk_count": 3,
+      "char_count": 643,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b5598dbf",
+      "title": "《泰康法定节假日交通工具意外伤害保险》产品条款",
+      "chunk_count": 1,
+      "char_count": 613,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b6a44732",
+      "title": "中美联泰大都会人寿保险有限公司附加健康随心Ⅲ提前给付疾病保险-产品条款",
+      "chunk_count": 2,
+      "char_count": 1114,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-b72bfcde",
+      "title": "《泰康心安无忧特定传染病疾病保险A款》产品条款",
+      "chunk_count": 2,
+      "char_count": 1152,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-baaf2923",
+      "title": "《泰康意外伤害团体医疗保险》产品条款",
+      "chunk_count": 1,
+      "char_count": 581,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-bd111147",
+      "title": "中美联泰大都会人寿保险有限公司都会臻承（优享版）终身寿险-产品条款",
+      "chunk_count": 2,
+      "char_count": 1315,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-bd3a6815",
+      "title": "安联安顺意外伤害保险条款",
+      "chunk_count": 1,
+      "char_count": 124,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-bda9a42c",
+      "title": "《泰康E款团体重大疾病保险》条款产品条款",
+      "chunk_count": 6,
+      "char_count": 2459,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-becfe990",
+      "title": "PICC人保寿险关爱康健医疗保险_产品条款",
+      "chunk_count": 2,
+      "char_count": 435,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-bf81e6b4",
+      "title": "TaiPing公共交通工具乘客意外伤害保险（互联网专属2021-A款）",
+      "chunk_count": 2,
+      "char_count": 476,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-bffbe2ab",
+      "title": "TaiPing住院医疗费用保险（互联网专属2021-N版）条款",
+      "chunk_count": 2,
+      "char_count": 623,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c000f400",
+      "title": "TaiPing全国职业院校学生实习责任保险统保示范项目职业院校学生实习责任保险附加实习无过失责任保险条款（A款）",
+      "chunk_count": 1,
+      "char_count": 618,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c087901e",
+      "title": "TaiPing太平财产保险有限公司少儿重大疾病保险（互联网专属）条款",
+      "chunk_count": 3,
+      "char_count": 654,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c10bb2e7",
+      "title": "中华联合财产保险股份有限公司城乡居民财产损失保险(社会综合治理专用)条款2022-04-15条款",
+      "chunk_count": 3,
+      "char_count": 869,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c1138d95",
+      "title": "安联臻爱优选（少儿版）重大疾病保险条款",
+      "chunk_count": 6,
+      "char_count": 2860,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c41dd182",
+      "title": "安联团体（B款）（2006）定期寿险条款",
+      "chunk_count": 6,
+      "char_count": 5492,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c49ba88c",
+      "title": "TaiPing太平财产保险有限公司国内水路、陆路货物运输保险条款",
+      "chunk_count": 3,
+      "char_count": 520,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c4a05d46",
+      "title": "TaiPing全国职业院校学生实习责任保险统保示范项目职业院校学生实习责任保险",
+      "chunk_count": 2,
+      "char_count": 465,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c59c4795",
+      "title": "《泰康心安无忧意外伤害保险B款》产品条款",
+      "chunk_count": 3,
+      "char_count": 1656,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c5e72e4f",
+      "title": "《泰康团体医疗保险》产品条款",
+      "chunk_count": 4,
+      "char_count": 1061,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c7286fed",
+      "title": "中华财险退役军人团体家庭财产保险附加地震保险条款2020-01-19条款",
+      "chunk_count": 2,
+      "char_count": 550,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c854c190",
+      "title": "《泰康建筑工程人员团体意外伤害保险》泰康养发[2022]194号产品条款",
+      "chunk_count": 1,
+      "char_count": 1118,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-c90d5c93",
+      "title": "《泰康健康有约团体终身重大疾病保险D款（2023版）》产品条款",
+      "chunk_count": 1,
+      "char_count": 155,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cb0599b3",
+      "title": "TaiPing太平财产保险有限公司个人人身意外伤害保险（互联网专属2022版）条款",
+      "chunk_count": 1,
+      "char_count": 778,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cbcf3064",
+      "title": "安联安心守护少儿惠选医疗保险条款",
+      "chunk_count": 3,
+      "char_count": 651,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cbd64cdc",
+      "title": "《泰康新生活境内旅行意外伤害保险》泰康养发[2022]106号产品条款",
+      "chunk_count": 6,
+      "char_count": 2325,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cc1c5e3b",
+      "title": "安联安顺畅游（龙行版）互联网意外伤害保险条款",
+      "chunk_count": 4,
+      "char_count": 2145,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cc6a4056",
+      "title": "中华联合财产保险股份有限公司工程机械设备保险附加设备自身损失扩展保险条款2021-12-07条款",
+      "chunk_count": 1,
+      "char_count": 138,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cc8a19cc",
+      "title": "中美联泰大都会人寿保险有限公司附加都会宝贝特定疾病保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 497,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cea6f9b6",
+      "title": "中华联合财产保险股份有限公司附加第三者责任保险（2022版）2023-07-14条款",
+      "chunk_count": 1,
+      "char_count": 123,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cf31871c",
+      "title": "《泰康为i保医疗保险》（停用）产品条款",
+      "chunk_count": 3,
+      "char_count": 576,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cf53612e",
+      "title": "TaiPing个人住院医疗费用保险（互联网专属2021-D版）条款",
+      "chunk_count": 1,
+      "char_count": 309,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-cf8e59d2",
+      "title": "中华财险退役军人团体家庭财产保险附加现金、首饰盗抢保险条款2020-01-19条款",
+      "chunk_count": 2,
+      "char_count": 381,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d14d5fc2",
+      "title": "安联臻爱一世（少儿版）重大疾病保险条款",
+      "chunk_count": 7,
+      "char_count": 1623,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d218263d",
+      "title": "中美联泰大都会人寿保险有限公司都会医好医疗保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 184,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d2ad6a3f",
+      "title": "安联附加特种药品费用互联网医疗保险条款",
+      "chunk_count": 3,
+      "char_count": 1719,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d386fca6",
+      "title": "PICC人保寿险团体重大疾病补充医疗保险（E款）条款_产品条款",
+      "chunk_count": 4,
+      "char_count": 797,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d3b75d26",
+      "title": "《泰康北京市医保补充团体医疗保险》（停用）产品条款",
+      "chunk_count": 5,
+      "char_count": 2134,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d3ffd5fc",
+      "title": "安联安康欣悦（2",
+      "chunk_count": 7,
+      "char_count": 2572,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d403bb88",
+      "title": "《泰康境内旅行团体意外伤害保险》泰康养发[2022]106号产品条款",
+      "chunk_count": 2,
+      "char_count": 1059,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d5d94f42",
+      "title": "中华联合财产保险股份有限公司水利工程运营期财产综合保险（2023版）2023-11-22条款",
+      "chunk_count": 1,
+      "char_count": 213,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d6141a26",
+      "title": "《泰康e保有约住院医疗保险》（停用）产品条款",
+      "chunk_count": 5,
+      "char_count": 1853,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-d99600f8",
+      "title": "中华联合财产保险股份有限公司家庭财产综合保险（2015 版）附加宁波市水位线特约保险条款2022-02-08条款",
+      "chunk_count": 1,
+      "char_count": 218,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-db1d97d0",
+      "title": "中华财险火箭、卫星发射第三者责任保险2021-01-29条款",
+      "chunk_count": 1,
+      "char_count": 119,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-dc138968",
+      "title": "TaiPing太平财产保险有限公司建筑施工行业安全生产责任保险（2021 版）条款",
+      "chunk_count": 1,
+      "char_count": 129,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-dc71d539",
+      "title": "中美联泰大都会人寿保险有限公司都会臻传（优享版）终身寿险（分红型）-产品说明书",
+      "chunk_count": 1,
+      "char_count": 211,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-dcd2a0bf",
+      "title": "TaiPing太平财产保险有限公司手术意外伤害保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 1228,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-dcf54f7f",
+      "title": "《泰康团体岁月有约养老年金保险（分红型）》产品条款",
+      "chunk_count": 1,
+      "char_count": 266,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-dee62ec3",
+      "title": "《泰康幸福延年年金保险（分红型）》产品条款",
+      "chunk_count": 1,
+      "char_count": 235,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-df838a14",
+      "title": "《泰康心安无忧意外住院津贴医疗保险》（停用）产品条款",
+      "chunk_count": 2,
+      "char_count": 1138,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-dfa97764",
+      "title": "中华联合财产保险股份有限公司宁波市城镇住房保险（团体客户适用）2023-12-25条款",
+      "chunk_count": 1,
+      "char_count": 158,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e02e0432",
+      "title": "《泰康团体长期补充医疗保险A款（2023版）》产品条款",
+      "chunk_count": 5,
+      "char_count": 2436,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e0dca43a",
+      "title": "PICC人保寿险团体长期重大疾病保险（G款）_产品条款",
+      "chunk_count": 2,
+      "char_count": 492,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e14519a7",
+      "title": "PICC人保寿险关爱百万医疗保险_产品条款",
+      "chunk_count": 3,
+      "char_count": 663,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e2ad986f",
+      "title": "中美联泰大都会人寿保险有限公司短期（I款）意外伤害保险-产品条款",
+      "chunk_count": 1,
+      "char_count": 223,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e3522889",
+      "title": "中华财险工程机械设备保险（2015版）附加扩展拖运期间保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 124,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e589d268",
+      "title": "TaiPing关爱女性重大疾病保险（互联网专属）条款",
+      "chunk_count": 1,
+      "char_count": 400,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e6a1d07d",
+      "title": "TaiPing国内公路运输随车行李物品定额保险条款",
+      "chunk_count": 6,
+      "char_count": 1495,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e6ccba1c",
+      "title": "安联盛世汇金年金保险（分红型）条款",
+      "chunk_count": 5,
+      "char_count": 1696,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e7313fee",
+      "title": "《泰康团体关爱心脏医疗保险》产品条款",
+      "chunk_count": 5,
+      "char_count": 2424,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e86db5be",
+      "title": "安联吉祥相伴两全保险（分红型）条款",
+      "chunk_count": 7,
+      "char_count": 2624,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e94c7cbf",
+      "title": "《泰康医养宝社保补充团体医疗保险A款》（停用）产品条款",
+      "chunk_count": 4,
+      "char_count": 1638,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e99f02c7",
+      "title": "TaiPing太平财产保险有限公司个人住院医疗费用保险（互联网专属2022版）",
+      "chunk_count": 2,
+      "char_count": 1673,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e9bf3093",
+      "title": "中美联泰大都会人寿保险有限公司恶性肿瘤（重度）短期疾病保险（互联网专属）-产品条款",
+      "chunk_count": 1,
+      "char_count": 173,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-e9dfa2c4",
+      "title": "TaiPing个人人身意外伤害保险（互联网专属2022版）",
+      "chunk_count": 3,
+      "char_count": 820,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-eaf59891",
+      "title": "中美联泰大都会人寿保险有限公司附加团体意外伤害医疗保险（C款）-产品条款",
+      "chunk_count": 3,
+      "char_count": 388,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-eaf7488e",
+      "title": "《泰康团体重大疾病保险F款》产品条款",
+      "chunk_count": 7,
+      "char_count": 2671,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-eb8512d7",
+      "title": "PICC人保寿险团体意外伤害保险（B款）_产品条款",
+      "chunk_count": 1,
+      "char_count": 853,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-ebde9569",
+      "title": "《泰康上海医保账户意外伤害医疗保险（2019）》（停用）产品条款",
+      "chunk_count": 4,
+      "char_count": 1358,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-eda05f8e",
+      "title": "《泰康新生活境内旅行救援医疗保险》产品条款",
+      "chunk_count": 1,
+      "char_count": 294,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-edff7ccc",
+      "title": "安联附加安顺随心意外伤害保险条款",
+      "chunk_count": 1,
+      "char_count": 290,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-ee2180e9",
+      "title": "TaiPing“家无忧”家庭综合保障保险[2014]主2号-条款",
+      "chunk_count": 5,
+      "char_count": 3109,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f08b930c",
+      "title": "中华财险起重机械财产保险附加转运、移动期间财产损失保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 107,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f09b1bbd",
+      "title": "《泰康出国务工人员团体意外伤害保险》泰康养发[2022]106号产品条款",
+      "chunk_count": 2,
+      "char_count": 898,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f0c77a96",
+      "title": "安联安心常伴（II）少儿重大疾病保险条款",
+      "chunk_count": 6,
+      "char_count": 1548,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f1514cd5",
+      "title": "PICC人保寿险乡村振兴亲民保两全保险_产品条款",
+      "chunk_count": 2,
+      "char_count": 320,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f16b287e",
+      "title": "PICC人保寿险兴福人生年金保险（分红型）_产品条款",
+      "chunk_count": 2,
+      "char_count": 556,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f1bae107",
+      "title": "《泰康岁月有约养老年金保险（分红型）》产品条款",
+      "chunk_count": 2,
+      "char_count": 540,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f3bafa0b",
+      "title": "《泰康团体医疗保险A款》产品条款",
+      "chunk_count": 2,
+      "char_count": 552,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f3cbe0a6",
+      "title": "《泰康e保有约住院医疗保险》产品条款",
+      "chunk_count": 7,
+      "char_count": 2215,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f4c9fc10",
+      "title": "中美联泰大都会人寿保险有限公司自驾车（B款）意外伤害保险（互联网专属）-产品条款",
+      "chunk_count": 1,
+      "char_count": 964,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f4d38c7c",
+      "title": "TaiPing太平财产保险有限公司银行卡盗刷保险（2022版",
+      "chunk_count": 1,
+      "char_count": 137,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f4df63a1",
+      "title": "农业机械综合保险（适用于江苏省）-（苏）地（中华联合）（备-企财）[2016]（主）4号2022-09-29条款",
+      "chunk_count": 2,
+      "char_count": 568,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f5eb5971",
+      "title": "TaiPing“家无忧”家庭综合保障保险",
+      "chunk_count": 3,
+      "char_count": 1641,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f688f5e5",
+      "title": "安联盛世百年（A款）两全保险（分红型）条款",
+      "chunk_count": 3,
+      "char_count": 960,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f6d1aa9d",
+      "title": "《泰康成长相伴年金保险（分红型）》产品条款",
+      "chunk_count": 4,
+      "char_count": 1341,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f6d7d373",
+      "title": "《泰康境外旅行团体意外伤害保险》泰康养发[2022]130号产品条款",
+      "chunk_count": 3,
+      "char_count": 1085,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f71301f4",
+      "title": "中华联合财产保险股份有限公司宠物医疗保险条款2021-12-07条款",
+      "chunk_count": 5,
+      "char_count": 1603,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f760f743",
+      "title": "中美联泰大都会人寿保险有限公司健康随心Ⅲ两全保险-产品条款",
+      "chunk_count": 2,
+      "char_count": 730,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f8d47a2c",
+      "title": "TaiPing个人住院医疗费用保险（互联网专属2021-A版）条款",
+      "chunk_count": 2,
+      "char_count": 510,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f91f5354",
+      "title": "onsale 7.鼎诚附加住院(20)费用补偿医疗保险条款",
+      "chunk_count": 5,
+      "char_count": 1209,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-f98cb2b9",
+      "title": "安联逸升嘉年年金保险（分红型）条款",
+      "chunk_count": 3,
+      "char_count": 752,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-fa6882ff",
+      "title": "TaiPing太平财产保险有限公司个人住院医疗费用保险（互联网专属2021-E版）条款",
+      "chunk_count": 1,
+      "char_count": 224,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-fa7b327f",
+      "title": "安联附加团体（2009）意外伤害医疗保险条款",
+      "chunk_count": 2,
+      "char_count": 735,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-fc01ad0c",
+      "title": "PICC人保寿险人人保2",
+      "chunk_count": 9,
+      "char_count": 1938,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-fc9799c6",
+      "title": "《泰康幸福赢家年金保险（分红型）》（停用）产品条款",
+      "chunk_count": 4,
+      "char_count": 1011,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-fcdc7581",
+      "title": "中华财险工程机械设备保险（2015版）附加新增加设备损失保险2022-09-29条款",
+      "chunk_count": 1,
+      "char_count": 256,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-fcf9909b",
+      "title": "安联附加安康和顺（II）团体医疗保险条款",
+      "chunk_count": 2,
+      "char_count": 536,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-fd06bad9",
+      "title": "安联附加团体（2021）重大疾病保险条款",
+      "chunk_count": 6,
+      "char_count": 2615,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-ff9c890c",
+      "title": "《泰康e保有约住院医疗保险B款》产品条款",
+      "chunk_count": 4,
+      "char_count": 1273,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    },
+    {
+      "doc_id": "doc-ffc72d5f",
+      "title": "TaiPing太平财产保险有限公司个人人身意外伤害保险（互联网专属2022版）",
+      "chunk_count": 1,
+      "char_count": 202,
+      "source": "InsQABench clause QA (evidence 片段聚合)",
+      "note": "片段级语料(路线A); 完整合同 PDF 待路线B补充"
+    }
+  ]
+}
