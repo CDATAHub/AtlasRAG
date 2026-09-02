@@ -1,17 +1,20 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-版本变更: （模板，无版本） → 1.0.0（首次批准）
-修改的原则: 无（初始制定，全部新增；模板含 5 个原则槽位，按项目实际定为 6 项，新增第 VI 项）
-新增章节: Core Principles（六项）、技术栈与事实源约束、开发与评测工作流、Governance
+版本变更: 1.0.0 → 1.1.0（MINOR：新增原则 VII「测试纪律」+ 开发工作流新增 PR 测试门禁）
+修改的原则: 无改名、无删除
+新增章节: Core Principles · VII. 测试纪律（Test Discipline, NON-NEGOTIABLE）
 删除章节: 无
 模板同步状态:
-  - .specify/templates/plan-template.md  ✅ 无需更新（Constitution Check 为通用占位，按章程文件运行时填充）
-  - .specify/templates/spec-template.md  ✅ 无需更新（无章程专属小节）
-  - .specify/templates/tasks-template.md ✅ 无需更新（任务分阶段结构已覆盖章程工作流）
-  - .claude/skills/speckit-*.md（10 个）  ✅ 已核对，均为通用引用（.specify/memory/constitution.md 路径未变）
+  - .specify/templates/tasks-template.md ✅ 已更新（测试任务由 OPTIONAL 改为 REQUIRED
+    （mock 化），对齐原则 VII）
+  - .specify/templates/plan-template.md  ✅ 无需更新（Constitution Check 为通用占位）
+  - .specify/templates/spec-template.md  ✅ 无需更新（测试纪律属 plan/tasks 层关注点）
+  - .claude/skills/speckit-*.md（10 个）  ✅ 通用引用，无需更新
 遗留 TODO: 无
+依据: 用户指令「增加测试用例，在开发阶段引入 mock」（2026-09-02）
 -->
+
 
 # AtlasRAG Constitution
 
@@ -64,6 +67,18 @@ SYNC IMPACT REPORT
   模型、向量库、LLM 的替换 MUST NOT 破坏上层接口。
 - 每个难以逆转且存在真实取舍的选型 MUST 记录为 ADR（现 ADR-001 ~ ADR-009）。
 
+### VII. 测试纪律（Test Discipline, NON-NEGOTIABLE）
+
+- 每项功能 MUST 附带测试任务：单元测试覆盖核心逻辑（切分、融合、收敛规则、权限过滤），
+  集成测试覆盖用户故事验收路径；每项 Core Principle MUST 有至少一条可执行的测试用例
+  与之对应。
+- 开发与 CI 环境的测试 MUST NOT 依赖真实外部服务（LLM、Embedding、重排、对象存储）：
+  MUST 使用 mock 或录制夹具（fixture）；真实外部调用仅允许出现在离线评测与人工验收中。
+- 外部服务客户端 MUST 通过依赖注入接入，使替换为 mock 不需要修改业务代码。
+- Mock MUST 以双方契约（Contract）为基准：mock 行为与真实服务契约保持一致，
+  契约变更时 mock MUST 同步更新，防止「mock 通过、真实失败」。
+- 评测失败案例的每次修复 MUST 附带回归测试用例，防止同因复发。
+
 ## 技术栈与事实源约束（Additional Constraints）
 
 - **技术栈**：Python 3.12 · LangGraph · FastAPI；PostgreSQL（pgvector +
@@ -89,6 +104,8 @@ SYNC IMPACT REPORT
   （grep 断言 + mermaid 结构检查，见 docs 修订流程）。
 - 每个 PR MUST 填写 plan 模板的 Constitution Check 门禁；
   违反原则的项必须在 Complexity Tracking 中给出理由与更简替代的否证。
+- 每个 PR MUST 通过 mock 化的单元/集成测试（原则 VII）：测试路径中 MUST NOT 出现
+  真实外部服务调用。
 
 ## Governance
 
@@ -98,4 +115,4 @@ SYNC IMPACT REPORT
 - 合规审查：所有 PR / 评审 MUST 验证与章程一致；复杂度 MUST 给出正当理由；
   运行时开发指引见 `CONTEXT.md` 与 `docs/`。
 
-**Version**: 1.0.0 | **Ratified**: 2026-09-02 | **Last Amended**: 2026-09-02
+**Version**: 1.1.0 | **Ratified**: 2026-09-02 | **Last Amended**: 2026-09-02
