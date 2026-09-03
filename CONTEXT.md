@@ -45,3 +45,12 @@ _Avoid_: 把熔断线当 P95 目标
 
 **文档版本（version）**:
 DOCUMENT 的版本号，与 doc_id 组成索引幂等键，并纳入缓存键。
+
+**InsQABench 字段约定（raw 数据）**:
+`clause_subjective.json` 中 `p` = 题目所依据的证据段落原文（passage，含条款编号），
+`answer` = 结构化参考答案（`[答案]`/`[证据]`/`[解释说明]` 三段）。
+
+**kaihe 字段约定（raw 数据）**:
+`kaihe_clauses.jsonl` 是「PDF 文本清洗」任务数据：`input` = 脏的 PDF 原样提取，
+`output` = 清洗重排版（首行公司名、次行产品名）。入库与 QA 生成一律以
+`output` 为底料（import_corpus.py 与 generate_kaihe_qa.py 同源）。

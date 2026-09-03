@@ -37,10 +37,13 @@ async def main(tenant: str, limit: int | None) -> None:
         if limit and count >= limit:
             break
         record = json.loads(line)
-        text = (record.get("input") or "").strip()
+        # 优先 output（清洗重排版，QA 生成同源底料）；input 是脏的 PDF 原样提取
+        text = (record.get("output") or record.get("input") or "").strip()
         if not text:
             continue
-        title = text.splitlines()[0].strip()[:120]
+        lines = text.splitlines()
+        # output 格式：首行公司名、次行产品名；input 无此结构 → 回退首行
+        title = (lines[1] if len(lines) > 1 and record.get("output") else lines[0]).strip()[:120]
         content_hash = __import__("hashlib").sha256(text.encode()).hexdigest()
 
         async with session_factory() as session:
