@@ -25,10 +25,25 @@ REFUSAL_TEXT = (
 )
 
 _SYSTEM_PROMPT = (
-    "你是保险条款问答助手。只依据提供的资料回答，资料不足时明确说「资料不足」，"
-    "禁止编造。回答简洁：先给直接结论，再附条款依据；不要复述问题、不要展开无关内容。"
+    "你是保险条款问答助手。只依据提供的资料回答，禁止编造。"
+    "若证据与问题相关（哪怕只覆盖一部分），必须基于证据回答相关部分；"
+    "只有证据与问题完全无关时才回答「资料不足」。"
+    "不要在引用了某条证据后又声称资料未涉及该内容。"
+    "回答简洁：先给直接结论，再附条款依据；不要复述问题、不要展开无关内容。"
     "每个结论后标注引用编号，格式如 [1]、[2]。"
 )
+
+
+def _clip_on_sentence(text: str, limit: int) -> str:
+    """按句边界截断：避免硬切把答案关键句砍掉（假拒答根因）。"""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    for sep in ("。", "；", "！", "？", "\n"):
+        pos = cut.rfind(sep)
+        if pos > limit * 0.5:
+            return cut[: pos + 1]
+    return cut
 
 TIMEOUT_REASON = "timeout"
 
@@ -110,10 +125,11 @@ async def answer_stream(
                 ],
             }
 
-            # 生成上下文裁剪：top-3 父块、各截 1200 字——控制 prompt 规模保住首 token 时延
-            # （citations 的 quote 截取仍用完整 parent_text，溯源不受影响）
+            # 生成上下文裁剪：top-3 父块、按句边界各截 1600 字——控制 prompt 规模保住
+            # 首 token 时延，同时不砍断关键句（citations 的 quote 仍取自完整 parent_text）
             evidence_text = "\n\n".join(
-                f"[{hit['n']}] {hit['title']} {hit.get('sec_no') or ''}\n{hit['parent_text'][:1200]}"
+                f"[{hit['n']}] {hit['title']} {hit.get('sec_no') or ''}\n"
+                f"{_clip_on_sentence(hit['parent_text'], 1600)}"
                 for hit in ranked[:3]
             )
             messages = [
@@ -136,6 +152,10 @@ async def answer_stream(
     except TimeoutError:
         refused = True
         reason = TIMEOUT_REASON
+        if not answer_parts:  # 首 token 前超时：给出提示而非空白（优雅降级）
+            yield "answer", {
+                "delta": "本次回答耗时较长，已为您中止。请稍后重试，或换个更具体的问法。"
+            }
         yield "done", _done(trace_id, started, refused, hit_count, top_score, reason)
     finally:
         await write_log(
