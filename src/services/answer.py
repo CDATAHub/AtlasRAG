@@ -85,20 +85,20 @@ async def answer_stream(
             try:
                 query_vec = (await embedding.embed([question]))[0]
                 hits = await hybrid_search(session, ctx_tenant_id, question, query_vec, hybrid_top_k)
+                if use_rerank:
+                    ranked = await rerank_hits(reranker, question, hits, rerank_top_k)
+                    threshold = refusal_threshold  # 语义：重排相关性分（0~1）
+                else:
+                    # 跳过重排：按 RRF 原始分排序；RRF 分无相关性语义 → 仅零命中拒答
+                    ranked = hits[:rerank_top_k]
+                    for hit in ranked:
+                        hit["score"] = float(hit.get("rrf_score", 0.0))
+                    threshold = 0.0
             except RetrievalUnavailable:
                 raise
-            except Exception as exc:  # noqa: BLE001 —— 检索层故障统一 503（FR-010）
+            except Exception as exc:  # noqa: BLE001 —— 检索/重排层故障统一 503（FR-010）
                 raise RetrievalUnavailable(str(exc)) from exc
 
-            if use_rerank:
-                ranked = await rerank_hits(reranker, question, hits, rerank_top_k)
-                threshold = refusal_threshold  # 语义：重排相关性分（0~1）
-            else:
-                # 跳过重排：按 RRF 原始分排序；RRF 分无相关性语义 → 仅零命中拒答
-                ranked = hits[:rerank_top_k]
-                for hit in ranked:
-                    hit["score"] = float(hit.get("rrf_score", 0.0))
-                threshold = 0.0
             for n, hit in enumerate(ranked, start=1):
                 hit["n"] = n
             hit_count = len(ranked)

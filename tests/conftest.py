@@ -13,12 +13,17 @@ OTHER_TENANT = "tenant-other"
 
 
 def make_app(session_factory, *, rerank=None, llm=None, embedding=None):
-    """构建注入 fake 的应用（不触碰真实外部服务）。"""
+    """构建注入 fake 的应用（不触碰真实外部服务）。
+
+    use_rerank 固定为 True：测试结果不随 .env 开关漂移（章程 VII 环境隔离）。
+    """
     from src.api.main import create_app
     from tests.unit.fakes import FakeEmbedding, FakeLLM, FakeRerank
 
+    settings = get_settings().model_copy()
+    settings.use_rerank = True
     return create_app(
-        get_settings(),
+        settings,
         embedding=embedding or FakeEmbedding(),
         rerank=rerank or FakeRerank(),
         llm=llm or FakeLLM(),
