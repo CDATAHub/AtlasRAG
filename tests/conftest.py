@@ -12,11 +12,20 @@ TENANT = "tenant-test"
 OTHER_TENANT = "tenant-other"
 
 
-def make_app(session_factory, *, rerank=None, llm=None, embedding=None, checkpointer=None):
+def make_app(
+    session_factory,
+    *,
+    rerank=None,
+    llm=None,
+    embedding=None,
+    checkpointer=None,
+    settings_overrides: dict | None = None,
+):
     """构建注入 fake 的应用（不触碰真实外部服务）。
 
     use_rerank 固定为 True：测试结果不随 .env 开关漂移（章程 VII 环境隔离）。
     checkpointer 缺省用 MemorySaver；检查点恢复用例传测试 PG saver。
+    settings_overrides：单用例覆盖配置（如 chain_timeout_s）。
     """
     from langgraph.checkpoint.memory import MemorySaver
 
@@ -25,6 +34,8 @@ def make_app(session_factory, *, rerank=None, llm=None, embedding=None, checkpoi
 
     settings = get_settings().model_copy()
     settings.use_rerank = True
+    for key, value in (settings_overrides or {}).items():
+        setattr(settings, key, value)
     return create_app(
         settings,
         embedding=embedding or FakeEmbedding(),
@@ -152,7 +163,7 @@ async def seeded_lib(db):
 
 
 def build_client(session_factory, **kwargs):
-    """带 app_state 句柄的 ASGI 测试客户端（供用例定制 rerank/llm/checkpointer）。"""
+    """带 app_state 句柄的 ASGI 测试客户端（供用例定制 rerank/llm/checkpointer/settings）。"""
     import httpx
 
     app = make_app(session_factory, **kwargs)

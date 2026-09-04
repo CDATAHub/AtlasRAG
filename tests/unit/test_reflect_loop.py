@@ -82,7 +82,7 @@ async def test_plan_replan_keeps_executed_prefix():
             )
         ]
     )
-    node = make_plan_node(llm, Registry())
+    node = make_plan_node(llm, SETTINGS, Registry())
     events: list[dict] = []
     with patch("src.agent.nodes.plan.get_stream_writer", return_value=events.append):
         state = await node(

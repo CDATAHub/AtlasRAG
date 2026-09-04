@@ -12,7 +12,9 @@ from typing_extensions import Literal
 
 from langgraph.config import get_stream_writer
 
+from src.agent.guards import budget_exhausted
 from src.agent.prompts import SYSTEM_PLANNER
+from src.config import Settings
 from src.tools.base import Registry
 
 logger = logging.getLogger(__name__)
@@ -31,7 +33,7 @@ class PlanResult(BaseModel):
     plan: list[PlanStep] = []
 
 
-def make_plan_node(llm, registry: Registry):
+def make_plan_node(llm, settings: Settings, registry: Registry):
     tools_desc = json.dumps(registry.visible_tools(["retrieval:read"]), ensure_ascii=False)
 
     async def plan(state, config):  # noqa: ARG001 —— config 为 LangGraph 节点签名
@@ -47,6 +49,9 @@ def make_plan_node(llm, registry: Registry):
 
         system = SYSTEM_PLANNER.replace("{tools}", tools_desc)
         user = f"近期对话：\n{history}\n\n当前问题：{question}" if history else f"当前问题：{question}"
+        if budget_exhausted(state, settings) and rounds > 1:
+            # 预算保险（FR-007）：不再规划，直接进入生成收敛
+            return {"route": "answer", "plan_rounds": rounds}
         if rounds > 1:
             user += (
                 f"\n\n这是第 {rounds} 轮规划。此前计划已执行但证据不足"

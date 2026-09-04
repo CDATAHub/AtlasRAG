@@ -111,14 +111,14 @@
 
 ### Tests for User Story 3 (REQUIRED by Constitution VII - mock-based)
 
-- [ ] T026 [P] [US3] 单元测试 `tests/unit/test_guards.py`：步数硬停（steps≥6）、预算记账（usage 累加≥8000 拒发下一次 LLM 调用）、超时熔断（asyncio.timeout 触发降级）、convergence_reason 枚举完备性
-- [ ] T027 [P] [US3] 契约测试 `tests/contract/test_chat_convergence.py`：诱导循环输入→done(max_steps)；FakeLLM 超大 usage→done(budget)；慢速 fake→done(timeout) 且连接不断、refused=false 语义与降级提示（FR-007）
+- [x] T026 [P] [US3] 单元测试 `tests/unit/test_guards.py`：步数硬停（steps≥6）、预算记账（usage 累加≥8000 拒发下一次 LLM 调用）、超时熔断（asyncio.timeout 触发降级）、convergence_reason 枚举完备性
+- [x] T027 [P] [US3] 契约测试 `tests/contract/test_chat_convergence.py`：诱导循环输入→done(max_steps)；FakeLLM 超大 usage→done(budget)；慢速 fake→done(timeout) 且连接不断、refused=false 语义与降级提示（FR-007）
 
 ### Implementation for User Story 3
 
-- [ ] T028 [US3] 实现 `src/agent/guards.py`：token 记账器（usage 逐次累加 + 预算判定，research D9）、max_steps 判定、供 route/reflect 调用的「硬规则先行」检查函数；接线进图执行路径
-- [ ] T029 [US3] 贯通收敛原因：`src/agent/nodes/converge.py` 与 `src/services/answer.py` 熔断降级路径（asyncio.timeout 包裹图执行，超时发降级 done 不断连）→ done 事件与 runtime_log.convergence_reason 一致落库（FR-015/016）
-- [ ] T030 [US3] 集成测试 `tests/integration/test_adversarial_flow.py`：对抗用例集（内联 fixtures：诱导循环/持续无命中/超预算/慢响应）逐条断言确定性停止（steps≤6、tokens_used≤8000、latency<熔断上限）、零半截答案、档案可证（SC-003 的 mock 化子集；100 条全量实测留 T045）
+- [x] T028 [US3] 实现 `src/agent/guards.py`：token 记账器（usage 逐次累加 + 预算判定，research D9）、max_steps 判定、供 route/reflect 调用的「硬规则先行」检查函数；接线进图执行路径
+- [x] T029 [US3] 贯通收敛原因：`src/agent/nodes/converge.py` 与 `src/services/answer.py` 熔断降级路径（asyncio.timeout 包裹图执行，超时发降级 done 不断连）→ done 事件与 runtime_log.convergence_reason 一致落库（FR-015/016）
+- [x] T030 [US3] 集成测试 `tests/integration/test_adversarial_flow.py`：对抗用例集（内联 fixtures：诱导循环/持续无命中/超预算/慢响应）逐条断言确定性停止（steps≤6、tokens_used≤8000、latency<熔断上限）、零半截答案、档案可证（SC-003 的 mock 化子集；100 条全量实测留 T045）
 
 **Checkpoint**: US1+US2+US3 可用——任何输入确定性停止，收敛原因可审计
 

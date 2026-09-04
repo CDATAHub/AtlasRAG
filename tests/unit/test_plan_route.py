@@ -63,7 +63,7 @@ async def test_plan_retry_then_fallback_single_step():
 async def test_plan_node_emits_event_and_state():
     llm = FakeLLM(chat_responses=[json.dumps(TWO_STEP_PLAN, ensure_ascii=False)])
     registry = Registry()
-    node = make_plan_node(llm, registry)
+    node = make_plan_node(llm, SETTINGS, registry)
     events: list[dict] = []
 
     from unittest.mock import patch

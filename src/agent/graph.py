@@ -37,7 +37,7 @@ def build_graph(
     from src.agent.nodes.route import make_route_node
     from src.agent.nodes.tool_node import make_tool_node
 
-    plan = make_plan_node(llm, registry)
+    plan = make_plan_node(llm, settings, registry)
     tool_node = make_tool_node(registry)
     generate = make_generate_node(llm, settings)
     reflect = make_reflect_node(llm, settings)

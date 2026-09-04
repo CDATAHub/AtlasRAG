@@ -6,6 +6,7 @@ done 事件由本层基于图终态统一构造，保证任何终止路径（自
 """
 
 import asyncio
+import contextlib
 import logging
 import re
 import time
@@ -115,32 +116,61 @@ async def chat_stream(
     refused = False
     reason = "natural"
 
+    # 熔断实现：图执行放在独立生产者任务，消费端按截止时间取事件（research D9）。
+    # 不用 asyncio.timeout 包住当前任务——任务级 cancel 会穿透 ASGI 层的 anyio 任务组。
+    queue: asyncio.Queue = asyncio.Queue()
+
+    async def _drain() -> None:
+        last: dict = {}
+        async for mode, chunk in graph.astream(
+            graph_input, config, stream_mode=["custom", "values"]
+        ):
+            if mode == "custom":
+                await queue.put((chunk.get("type"), {k: v for k, v in chunk.items() if k != "type"}))
+            else:
+                last = chunk  # values：每节点后的最新状态，最后一次为终态
+        await queue.put(("__final__", last))
+
+    task = asyncio.create_task(_drain())
+    deadline = time.monotonic() + settings.chain_timeout_s
     try:
-        async with asyncio.timeout(settings.chain_timeout_s):
-            async for mode, chunk in graph.astream(
-                graph_input, config, stream_mode=["custom", "values"]
-            ):
-                if mode == "custom":
-                    ev_type = chunk.get("type")
-                    payload = {k: v for k, v in chunk.items() if k != "type"}
-                    if ev_type == "answer":
-                        answer_parts.append(payload.get("delta") or "")
-                    name = EVENT_NAME.get(ev_type or "", None)
-                    if name:
-                        yield name, payload
-                else:
-                    final = chunk  # values 模式：每节点后的最新状态，最后一次为终态
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError
+            try:
+                ev_type, payload = await asyncio.wait_for(queue.get(), remaining)
+            except TimeoutError:
+                task.cancel()
+                with contextlib.suppress(asyncio.CancelledError, Exception):
+                    await task
+                raise
+            if ev_type == "__final__":
+                final = payload
+                break
+            if ev_type == "answer":
+                answer_parts.append(payload.get("delta") or "")
+            name = EVENT_NAME.get(ev_type)
+            if name:
+                yield name, payload
     except TimeoutError:
         refused = True
         reason = "timeout"
         if not answer_parts:
             yield "answer", {"delta": DEGRADED_TEXT}
+        await _rollback(session)
     except Exception:  # noqa: BLE001 —— 图内未预期故障必须收敛（章程 IV）
         logger.exception("AgentLoop 执行异常")
         refused = True
         reason = "generate_failed"
         if not answer_parts:
             yield "answer", {"delta": "回答生成暂时失败，请稍后重试。"}
+        await _rollback(session)
+    finally:
+        if not task.done():
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError, Exception):
+                await task
 
     done = _build_done(
         trace_id, started, session_id, message_id, client_msg_id, final, refused, reason
@@ -208,6 +238,14 @@ async def _chitchat_events(
     )
 
 
+async def _rollback(session) -> None:
+    """被取消的图执行可能打断进行中的 DB 操作，先复位会话再持久化。"""
+    try:
+        await session.rollback()
+    except Exception:  # noqa: BLE001
+        logger.debug("取消后会话复位失败", exc_info=True)
+
+
 def _build_done(
     trace_id: str,
     started: float,
@@ -254,7 +292,7 @@ async def _persist(
         )
         await dao.set_session_status(session, tenant_id, session_id, "idle")
         await session.commit()
-    except Exception:  # noqa: BLE001 —— 会话持久化失败不影响响应（档案兜底）
+    except (Exception, asyncio.CancelledError):  # noqa: BLE001 —— 持久化失败不影响响应（档案兜底）
         logger.exception("会话消息持久化失败")
     await write_log(
         session_factory,

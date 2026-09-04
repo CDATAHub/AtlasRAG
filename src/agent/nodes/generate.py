@@ -7,6 +7,7 @@
 
 from langgraph.config import get_stream_writer
 
+from src.agent.guards import budget_exhausted, budget_stop
 from src.agent.prompts import (
     REFUSAL_TEXT,
     SYSTEM_DIRECT,
@@ -25,6 +26,12 @@ def make_generate_node(llm, settings: Settings):
         hits = _flatten_evidence(state.get("evidence") or [])
         threshold = settings.refusal_threshold if settings.use_rerank else 0.0
         ranked = _as_ranked(hits)
+
+        # 预算保险（FR-007）：token 预算耗尽 → 拒发 LLM 调用，降级收敛
+        if budget_exhausted(state, settings):
+            stop = budget_stop(state)
+            writer({"type": "answer", "delta": stop["draft"]})
+            return stop
 
         # 直答路径（US1 场景 4）：plan 判定常识/无需检索 → 无证据门槛，LLM 直答
         if state.get("route") == "answer" and not (state.get("evidence") or []):
