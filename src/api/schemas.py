@@ -7,6 +7,8 @@ from pydantic import BaseModel, Field
 
 class ChatRequest(BaseModel):
     question: str = Field(min_length=1, max_length=500)
+    session_id: str | None = None  # 可选，缺省新建会话（FR-009）
+    client_msg_id: str | None = None  # 幂等键，缺省服务端生成（FR-013）
 
 
 def error_body(code: str, message: str) -> dict:

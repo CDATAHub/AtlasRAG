@@ -1,4 +1,4 @@
-"""ORM 三表：document / chunk / runtime_log（specs/001-single-chain-rag/data-model.md）。
+"""ORM：阶段 1 三表 + 阶段 2 会话/消息（specs/001 + specs/002 data-model.md）。
 
 合规三字段 visibility/region/expire_at 与 version/tenant_id 从第一版即预留（章程 V）。
 raw_text 为本阶段对 data-model 的一处补充：对象存储属阶段 5，重试（reprocess）
@@ -19,6 +19,7 @@ from sqlalchemy import (
     Integer,
     Text,
     func,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB, TSVECTOR, UUID
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -95,6 +96,13 @@ class Chunk(Base):
 
 class RuntimeLog(Base):
     __tablename__ = "runtime_log"
+    __table_args__ = (
+        CheckConstraint(
+            "convergence_reason in "
+            "('natural','max_steps','timeout','budget','refused','generate_failed')",
+            name="ck_log_reason",
+        ),
+    )
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     trace_id: Mapped[str] = mapped_column(Text, index=True)
@@ -105,6 +113,83 @@ class RuntimeLog(Base):
     latency_ms: Mapped[int] = mapped_column(Integer, default=0)
     refused: Mapped[bool] = mapped_column(Boolean, default=False)
     answer: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # —— 阶段 2 扩展（specs/002 data-model.md / FR-016） ——
+    session_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
+    message_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
+    client_msg_id: Mapped[str | None] = mapped_column(Text, nullable=True)
+    plan_rounds: Mapped[int] = mapped_column(Integer, default=1)
+    steps: Mapped[int] = mapped_column(Integer, default=0)
+    tokens_used: Mapped[int] = mapped_column(Integer, default=0)
+    convergence_reason: Mapped[str] = mapped_column(Text, default="natural")
+
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+
+class Session(Base):
+    """会话（specs/002 data-model.md）：多轮对话容器，租户隔离 + 软删。
+
+    status：idle=空闲 / running=有进行中请求 / interrupted=进程重启时遗留
+    （启动复位 running→interrupted，作为续跑判定依据，research D6）。
+    expire_at 仅预留字段，自动清理属阶段 5（clarify Q5）。
+    """
+
+    __tablename__ = "session"
+    __table_args__ = (
+        CheckConstraint("status in ('idle','running','interrupted')", name="ck_session_status"),
+        Index("ix_session_tenant", "tenant_id", "created_at"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    tenant_id: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(Text, default="idle")
+    title: Mapped[str | None] = mapped_column(Text, nullable=True)
+    expire_at: Mapped[datetime.datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    deleted_at: Mapped[datetime.datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
+
+
+class Message(Base):
+    """会话消息（specs/002 data-model.md）：一问一答成对，append-only。
+
+    幂等键唯一约束只作用于 user 行（部分唯一索引）：client_msg_id 标识一次请求，
+    assistant 行与提问行共享键、不受约束（FR-013）。
+    """
+
+    __tablename__ = "message"
+    __table_args__ = (
+        CheckConstraint("role in ('user','assistant')", name="ck_message_role"),
+        Index(
+            "uq_message_idem",
+            "tenant_id",
+            "session_id",
+            "client_msg_id",
+            unique=True,
+            postgresql_where=text("role = 'user'"),
+        ),
+        Index("ix_message_session", "session_id", "created_at"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    session_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("session.id", ondelete="CASCADE"), nullable=False
+    )
+    tenant_id: Mapped[str] = mapped_column(Text)
+    client_msg_id: Mapped[str] = mapped_column(Text)
+    role: Mapped[str] = mapped_column(Text)
+    content: Mapped[str] = mapped_column(Text)
+    citations: Mapped[list] = mapped_column(JSONB, default=list)
+    trace_id: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

@@ -1,11 +1,12 @@
 """租户过滤数据访问层（章程 V）：所有查询强制 tenant_id，业务代码不得绕过。"""
 
+import datetime
 import uuid
 
-from sqlalchemy import delete, func, select
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.data.models import Chunk, Document, RuntimeLog
+from src.data.models import Chunk, Document, Message, RuntimeLog, Session
 
 
 async def find_by_hash(session: AsyncSession, tenant_id: str, content_hash: str) -> Document | None:
@@ -70,3 +71,71 @@ async def count_children(session: AsyncSession, tenant_id: str) -> int:
 
 async def add_runtime_log(session: AsyncSession, log: RuntimeLog) -> None:
     session.add(log)
+
+
+# —— 会话与消息（specs/002 data-model.md；全部租户过滤，章程 V） ——
+
+
+async def create_session(session: AsyncSession, tenant_id: str, title: str | None = None) -> Session:
+    row = Session(tenant_id=tenant_id, title=title)
+    session.add(row)
+    await session.flush()
+    return row
+
+
+async def get_session(session: AsyncSession, tenant_id: str, session_id: uuid.UUID) -> Session | None:
+    """他租户 / 已删除的会话一律视为不存在（不泄露存在性，FR-017）。"""
+    stmt = select(Session).where(
+        Session.id == session_id,
+        Session.tenant_id == tenant_id,
+        Session.deleted_at.is_(None),
+    )
+    return (await session.scalars(stmt)).first()
+
+
+async def set_session_status(session: AsyncSession, tenant_id: str, session_id: uuid.UUID, status: str) -> None:
+    await session.execute(
+        update(Session)
+        .where(Session.id == session_id, Session.tenant_id == tenant_id)
+        .values(status=status)
+    )
+
+
+async def find_message(
+    session: AsyncSession, tenant_id: str, session_id: uuid.UUID, client_msg_id: str
+) -> Message | None:
+    """幂等判定（FR-013）：同租户同会话同 client_msg_id 的既有消息。"""
+    stmt = select(Message).where(
+        Message.tenant_id == tenant_id,
+        Message.session_id == session_id,
+        Message.client_msg_id == client_msg_id,
+    )
+    return (await session.scalars(stmt)).first()
+
+
+async def append_message(session: AsyncSession, message: Message) -> Message:
+    session.add(message)
+    await session.flush()
+    return message
+
+
+async def get_messages(session: AsyncSession, tenant_id: str, session_id: uuid.UUID) -> list[Message]:
+    stmt = (
+        select(Message)
+        .where(Message.tenant_id == tenant_id, Message.session_id == session_id)
+        .order_by(Message.created_at.asc())
+    )
+    return list((await session.scalars(stmt)).all())
+
+
+async def soft_delete_session(session: AsyncSession, tenant_id: str, session_id: uuid.UUID) -> None:
+    """软删（FR-010 / clarify Q5）；物理删与审计留阶段 5。"""
+    await session.execute(
+        update(Session)
+        .where(
+            Session.id == session_id,
+            Session.tenant_id == tenant_id,
+            Session.deleted_at.is_(None),
+        )
+        .values(deleted_at=datetime.datetime.now(datetime.UTC))
+    )

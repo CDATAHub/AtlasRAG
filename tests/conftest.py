@@ -12,11 +12,14 @@ TENANT = "tenant-test"
 OTHER_TENANT = "tenant-other"
 
 
-def make_app(session_factory, *, rerank=None, llm=None, embedding=None):
+def make_app(session_factory, *, rerank=None, llm=None, embedding=None, checkpointer=None):
     """构建注入 fake 的应用（不触碰真实外部服务）。
 
     use_rerank 固定为 True：测试结果不随 .env 开关漂移（章程 VII 环境隔离）。
+    checkpointer 缺省用 MemorySaver；检查点恢复用例传测试 PG saver。
     """
+    from langgraph.checkpoint.memory import MemorySaver
+
     from src.api.main import create_app
     from tests.unit.fakes import FakeEmbedding, FakeLLM, FakeRerank
 
@@ -28,6 +31,7 @@ def make_app(session_factory, *, rerank=None, llm=None, embedding=None):
         rerank=rerank or FakeRerank(),
         llm=llm or FakeLLM(),
         session_factory=session_factory,
+        checkpointer=checkpointer or MemorySaver(),
     )
 
 
@@ -90,7 +94,7 @@ async def db():
 
     async def cleanup():
         async with engine.begin() as conn:
-            for table in ("runtime_log", "chunk", "document"):
+            for table in ("runtime_log", "message", "session", "chunk", "document"):
                 await conn.execute(text(f"DELETE FROM {table}"))
 
     await cleanup()
@@ -100,11 +104,8 @@ async def db():
 
 
 @pytest.fixture
-async def seed_waiting_clause(db, request):
-    """播种：等待期条款 + 干扰条款（保单贷款），返回注入 fake 的测试客户端。"""
-
-    import httpx
-
+async def seeded_lib(db):
+    """播种：等待期条款 + 干扰条款（保单贷款），返回与索引一致的 FakeEmbedding。"""
     from src.data import dao
     from src.data.models import Document
     from src.rag.chunker import split_sections
@@ -147,9 +148,22 @@ async def seed_waiting_clause(db, request):
             parents, children = split_sections(sections)
             await index_document(session, embedding, TENANT, doc.id, parents, children)
         await session.commit()
+    return embedding
 
-    app = make_app(db, embedding=embedding)
+
+def build_client(session_factory, **kwargs):
+    """带 app_state 句柄的 ASGI 测试客户端（供用例定制 rerank/llm/checkpointer）。"""
+    import httpx
+
+    app = make_app(session_factory, **kwargs)
     client = httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test")
     client.app_state = app.state
+    return client
+
+
+@pytest.fixture
+async def seed_waiting_clause(seeded_lib, db):
+    """播种 + 默认 fake 客户端。"""
+    client = build_client(db, embedding=seeded_lib)
     yield client
     await client.aclose()

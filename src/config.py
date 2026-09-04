@@ -32,6 +32,18 @@ class Settings(BaseSettings):
     chain_timeout_s: float = 20.0
     llm_max_tokens: int = 400  # 生成上限：控时延与成本（答案简洁是 NFR 的一部分）
 
+    # AgentLoop 收敛保险（章程 IV / research D9；docs/03 §3.5 默认值）
+    max_steps: int = 6
+    plan_rounds_max: int = 3  # 回环上限（含首轮）
+    token_budget: int = 8000  # 含推理 token，usage 回执累加
+
+    # 多轮上下文（research D7；docs/03 §3.6）
+    sliding_window_rounds: int = 6
+    compress_threshold_tokens: int = 3000
+
+    # 寒暄快路径（research D8；docs/02 §2.5 NFR：规则直答不进 LLM）
+    chitchat_max_chars: int = 30
+
     # JWT（章程 V / ADR-009）
     jwt_secret: str = "dev-secret-change-me"
     jwt_exp_hours: int = 24

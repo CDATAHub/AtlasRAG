@@ -18,7 +18,8 @@ async def test_ask_returns_cited_answer(seed_waiting_clause, token):
     events = parse_sse(resp.text)
     names = [name for name, _ in events]
 
-    assert names[0] == "evidence"  # 事件序：evidence → answer* → citations → done
+    # 002 事件序：plan → tool_call → evidence → answer* → citations → done
+    assert names[0] == "plan"
     assert names.count("answer") >= 1
     assert names[-2:] == ["citations", "done"]
 
@@ -52,8 +53,8 @@ async def test_colloquial_question_hits_waiting_period(seed_waiting_clause, toke
     done = events[-1][1]
     if done["refused"]:
         pytest.fail("口语化提问被拒答，语义/关键词召回未覆盖（FR-005）")
-    evidence = events[0][1]["hits"]
-    titles = " ".join(h["title"] for h in evidence)
+    evidence = next(p for n, p in events if n == "evidence")
+    titles = " ".join(h["title"] for h in evidence["hits"])
     assert "康护一生" in titles or "等待期" in titles
 
 
