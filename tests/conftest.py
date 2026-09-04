@@ -99,6 +99,7 @@ async def db():
         pytest.skip(f"测试 PG 不可达（{url}）：{exc}")
 
     async with engine.begin() as conn:
+        await conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))  # CI 空库需自建
         await conn.run_sync(Base.metadata.create_all)
 
     factory = build_sessionmaker(url)

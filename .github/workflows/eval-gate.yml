@@ -29,11 +29,7 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.12"
-      - name: Enable pgvector
-        run: |
-          PGPASSWORD=atlas psql -h localhost -U atlas -d atlas_test -c "CREATE EXTENSION IF NOT EXISTS vector;" || true
-        env:
-          PGPASSWORD: atlas
+      # pgvector 扩展由 tests/conftest.py 的 db fixture 创建（单一事实源，勿在此处用 psql）
       - run: uv sync --dev
       - name: Unit + integration + contract tests（mock 化，无真实外部服务）
         run: uv run pytest -q
