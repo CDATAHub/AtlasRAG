@@ -41,6 +41,9 @@ jobs:
   eval-gate:
     # 闭卷集检索评测：仅 Embedding + Rerank 真实调用（无 LLM 生成），
     # Recall@5 < 0.8 → 非零退出码 → 阻断合并（ADR-007）
+    # 分层口径（章程 II / 阶段 2 T044）：PR 门禁维持「首轮确定性指标」（无 LLM）；
+    # `--loop` 回环评测（plan/reflect 真调 LLM，SC-002 repair_rate ≥ 0.3）
+    # 属 nightly / 发布前分层，不在 PR 门禁执行——成本与稳定性考虑。
     runs-on: ubuntu-latest
     needs: tests
     if: github.event_name == 'pull_request'

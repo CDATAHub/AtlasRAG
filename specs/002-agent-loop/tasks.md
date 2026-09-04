@@ -170,10 +170,10 @@
 
 **Purpose**: 前端对接、文档同步、CI 与全量验收
 
-- [ ] T041 [P] 增量对接 `prototype/index.html`：渲染 plan/tool_call 事件与 session_id/client_msg_id 透传（仅数据对接，UI 不动）
-- [ ] T042 [P] 文档同步：docs/09 阶段 2 验收清单勾选更新 + `python scripts/build_combined_doc.py` 重建合并文件
-- [ ] T043 [P] 一致性检查：grep 断言（事件序与 contracts/api.md §1 一致、无请求体 tenant_id、测试路径无真实外部服务调用）并记录输出
-- [ ] T044 [P] 更新 `.github/workflows/eval-gate.yml`：PR 门禁维持首轮确定性指标（无 LLM）；新增注释说明 `--loop` 回环评测属 nightly/发布前分层（含 LLM 调用），不在 PR 门禁跑（章程 II 分层口径）
+- [x] T041 [P] 增量对接 `prototype/index.html`：渲染 plan/tool_call 事件与 session_id/client_msg_id 透传（仅数据对接，UI 不动）
+- [x] T042 [P] 文档同步：docs/09 阶段 2 验收清单勾选更新 + `python scripts/build_combined_doc.py` 重建合并文件
+- [x] T043 [P] 一致性检查：grep 断言（事件序与 contracts/api.md §1 一致、无请求体 tenant_id、测试路径无真实外部服务调用）并记录输出
+- [x] T044 [P] 更新 `.github/workflows/eval-gate.yml`：PR 门禁维持首轮确定性指标（无 LLM）；新增注释说明 `--loop` 回环评测属 nightly/发布前分层（含 LLM 调用），不在 PR 门禁跑（章程 II 分层口径）
 - [ ] T045 全量回归：`uv run pytest -q` 全绿 + 按 `specs/002-agent-loop/quickstart.md` 逐项通过 + SC-003 对抗 100 条实测（≤上限、零半截）+ SC-006 50 条双轮真实跑 ≥90% + SC-004/005/009 延迟抽样实测记录
 
 ---

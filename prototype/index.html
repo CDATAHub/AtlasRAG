@@ -441,7 +441,11 @@ async function runLive(questionText) {
   const resp = await fetch(API_BASE + '/v1/chat', {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question: questionText }),
+    body: JSON.stringify({
+      question: questionText,
+      session_id: localStorage.getItem('atlas_session') || undefined,
+      client_msg_id: 'c-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+    }),
   });
   if (!resp.ok) {
     const err = await resp.json().catch(() => ({ message: '服务异常' }));
@@ -453,7 +457,13 @@ async function runLive(questionText) {
   const decoder = new TextDecoder();
   let buffer = '', answerText = '', doneData = null;
   const handle = (ev, data) => {
-    if (ev === 'evidence') {
+    if (ev === 'plan') {
+      localStorage.setItem('atlas_session', data.session_id || '');
+      addTrace('规划', 'plan', `第 ${data.round} 轮 · ${data.steps.length} 步 · ` +
+        data.steps.map(s => s.query).join(' / '), null, 'done');
+    } else if (ev === 'tool_call') {
+      addTrace('检索', 'tool_call', `${data.tool} · 「${data.query}」`, null, 'done');
+    } else if (ev === 'evidence') {
       addTrace('证据', 'evidence', `命中 ${data.hits.length} 条 · 最高 ${Math.max(...data.hits.map(h => h.score)).toFixed(2)}`, null, 'done');
     } else if (ev === 'answer') {
       answerText += data.delta;
@@ -473,10 +483,12 @@ async function runLive(questionText) {
       }
     } else if (ev === 'done') {
       doneData = data;
+      if (data.session_id) localStorage.setItem('atlas_session', data.session_id);
       addTrace('收敛', 'converge',
-        (data.refused ? '拒答' : '已引用归档') + ` · ${data.hit_count} 命中`, null, data.refused ? 'fail' : 'done');
+        (data.refused ? '拒答' : '已引用归档') + ` · ${data.convergence_reason || 'natural'} · ${data.rounds ?? 1} 轮 ${data.steps ?? 0} 步`,
+        null, data.refused ? 'fail' : 'done');
       const meta = $('runMeta');
-      meta.innerHTML = `<em>单次运行档案</em>${data.trace_id} · ${(data.latency_ms / 1000).toFixed(2)}s · refused=${data.refused}`;
+      meta.innerHTML = `<em>单次运行档案</em>${data.trace_id} · ${(data.latency_ms / 1000).toFixed(2)}s · refused=${data.refused} · tokens=${data.tokens_used ?? 0}`;
       meta.style.display = 'block';
     }
   };

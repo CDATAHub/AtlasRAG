@@ -1389,13 +1389,14 @@ flowchart LR
 - [ ] SC-003 延迟调优：实测 P95 = 14.03s（LLM 生成时延为主），需压缩生成上限或提速模型；
 - [ ] 补采 PDF 10~20 份接入 Docling 表格链路，表格单元格召回抽查通过。
 
-### 阶段 2 — AgentLoop
+### 阶段 2 — AgentLoop（实现完成，验收进行中）
 
-- [ ] LangGraph 状态机（plan → route → tool → generate → reflect → converge，tool 执行完回 route）；
-- [ ] 支持多轮对话 + 上下文压缩；
-- [ ] 支持「信息不足 → 重规划（只替换未执行步骤）」的反思回环；
-- [ ] 收敛保证：max_steps/熔断超时/预算三重保险，任何输入都能确定性停下（延迟承诺见 02 NFR 分级口径）；
-- [ ] 检查点恢复（进程重启后能续跑，LangGraph 原生 interrupt/checkpointer）。
+- [x] LangGraph 状态机（plan → route → tool → generate → reflect → converge，tool 执行完回 route）；
+- [x] 支持多轮对话 + 上下文压缩（滑窗 + 阈值摘要，证据链不压缩）；
+- [x] 支持「信息不足 → 重规划（只替换未执行步骤）」的反思回环（≤3 轮强制收敛）；
+- [x] 收敛保证：max_steps/熔断超时/预算三重保险，任何输入都能确定性停下（延迟承诺见 02 NFR 分级口径）；
+- [x] 检查点恢复（进程重启后带相同幂等键重发可续跑，AsyncPostgresSaver 落库）；
+- [ ] 待跑（依赖真实 API）：回环评测 repair_rate ≥ 0.3（SC-002）、延迟抽样（SC-004/005/009）、100 条对抗全量实测（SC-003）、50 条双轮真实跑（SC-006）——与阶段 1 遗留 T041/T044/T045 合并执行。
 
 ### 阶段 3 — Tool 层生产化
 
