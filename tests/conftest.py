@@ -162,6 +162,23 @@ async def seeded_lib(db):
     return embedding
 
 
+@pytest.fixture
+async def pg_checkpointer(db):
+    """指向测试 PG 的真实检查点器（US5 续跑用；PG 是测试基座，非外部服务）。"""
+    from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+
+    conn = get_settings().test_database_url.replace("+asyncpg", "")
+    cm = AsyncPostgresSaver.from_conn_string(conn)
+    saver = await cm.__aenter__()
+    await saver.setup()
+    yield saver
+    async with saver.conn.transaction():
+        await saver.conn.execute("DELETE FROM checkpoint_writes")
+        await saver.conn.execute("DELETE FROM checkpoint_blobs")
+        await saver.conn.execute("DELETE FROM checkpoints")
+    await cm.__aexit__(None, None, None)
+
+
 def build_client(session_factory, **kwargs):
     """带 app_state 句柄的 ASGI 测试客户端（供用例定制 rerank/llm/checkpointer/settings）。"""
     import httpx

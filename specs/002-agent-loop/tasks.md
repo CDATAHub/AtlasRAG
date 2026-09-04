@@ -155,12 +155,12 @@
 
 ### Tests for User Story 5 (REQUIRED by Constitution VII - mock-based)
 
-- [ ] T038 [P] [US5] 集成测试 `tests/integration/test_checkpoint_resume.py`：图执行中取消任务模拟崩溃→以新 app 实例（同测试 PG checkpointer）重发相同幂等键→续跑至 done 且 tool_results 不重复（FakeLLM 断言调用次数）；检查点行删除→明确错误与重试指引、无半截输出（clarify Q2 语义）
+- [x] T038 [P] [US5] 集成测试 `tests/integration/test_checkpoint_resume.py`：图执行中取消任务模拟崩溃→以新 app 实例（同测试 PG checkpointer）重发相同幂等键→续跑至 done 且 tool_results 不重复（FakeLLM 断言调用次数）；检查点行删除→明确错误与重试指引、无半截输出（clarify Q2 语义）
 
 ### Implementation for User Story 5
 
-- [ ] T039 [US5] 改造 `src/services/answer.py`：中断检测（session status=interrupted 或检查点存在）→ `graph.astream(None, config)` 续跑（research D2）；`src/services/sessions.py`/`src/api/main.py` 启动时遗留 running→interrupted 复位（FR-018）
-- [ ] T040 [US5] 检查点不可用错误路径：明确错误码/消息与重新开始指引（US5 场景 2），MUST NOT 输出半截答案
+- [x] T039 [US5] 改造 `src/services/answer.py`：中断检测（session status=interrupted 或检查点存在）→ `graph.astream(None, config)` 续跑（research D2）；`src/services/sessions.py`/`src/api/main.py` 启动时遗留 running→interrupted 复位（FR-018）
+- [x] T040 [US5] 检查点不可用错误路径：明确错误码/消息与重新开始指引（US5 场景 2），MUST NOT 输出半截答案
 
 **Checkpoint**: 全部用户故事独立可用——任何中断路径可恢复或明确降级
 

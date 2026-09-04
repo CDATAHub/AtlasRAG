@@ -75,8 +75,10 @@ async def chat_stream(
     await dao.set_session_status(session, ctx_tenant_id, session_id, "running")
     message_id = uuid.uuid4()
     client_msg_id = client_msg_id or f"srv-{uuid.uuid4().hex[:12]}"
-    if await dao.find_message(session, ctx_tenant_id, session_id, client_msg_id) is None:
-        # 中断重跑（US5）时提问行已存在：跳过插入，避免违反幂等唯一约束
+    is_resume = (
+        await dao.find_message(session, ctx_tenant_id, session_id, client_msg_id)
+    ) is not None  # 提问行已存在 = 上次执行中断 → 检查点续跑（clarify Q2 / FR-018）
+    if not is_resume:
         await dao.append_message(
             session,
             Message(
@@ -107,7 +109,7 @@ async def chat_stream(
         history, settings, _summarizer(llm)
     )
 
-    graph_input = {
+    graph_input: dict | None = {
         "question": question,
         "tenant_id": ctx_tenant_id,
         "trace_id": trace_id,
@@ -118,6 +120,40 @@ async def chat_stream(
         "tokens_used": summary_tokens,
         "messages": [{"role": "user", "content": question}],
     }
+
+    if is_resume:  # 续跑：已完成步骤在检查点里，不重做（FR-018）
+        saved = None
+        try:
+            saved = await graph.checkpointer.aget_tuple(
+                {"configurable": {"thread_id": f"{session_id}:{client_msg_id}"}}
+            )
+        except Exception:  # noqa: BLE001
+            logger.debug("检查点查询失败", exc_info=True)
+        if saved is None:  # 检查点不可用（US5 场景 2）：明确指引，不输出半截答案
+            text = "该会话的执行状态已不可用，请重新开始本次提问。"
+            yield "answer", {"delta": text}
+            yield "citations", {"citations": []}
+            done = {
+                "trace_id": trace_id,
+                "session_id": str(session_id),
+                "message_id": str(message_id),
+                "client_msg_id": client_msg_id,
+                "latency_ms": int((time.monotonic() - started) * 1000),
+                "refused": True,
+                "hit_count": 0,
+                "top_score": None,
+                "convergence_reason": "refused",
+                "rounds": 0,
+                "steps": 0,
+                "tokens_used": 0,
+            }
+            yield "done", done
+            await _persist(
+                session, session_factory, ctx_tenant_id, question, trace_id, session_id,
+                message_id, client_msg_id, done, [text], {}, True,
+            )
+            return
+        graph_input = None  # 以 None 输入从检查点恢复（research D2）
     config = {
         "configurable": {
             "thread_id": f"{session_id}:{client_msg_id}",  # 每条消息一次图执行（research D2）
