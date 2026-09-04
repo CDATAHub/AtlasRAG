@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""闭卷集检索评测（US4 / SC-001/002，research D9）。
+"""闭卷集检索评测（US4 / SC-001/002，research D9/D11）。
 
-无 LLM 调用（章程 II 确定性门禁）：对每题做检索（可配 --no-rerank 跳过重排），
+首轮无 LLM 调用（章程 II 确定性门禁）：对每题做检索（可配 --no-rerank 跳过重排），
 命中判定 = 标准原文 quote（规范化空白）出现在 top-5 结果之一的父块原文中。
 L4 子集统计拒答率；--calibrate 用 L4 扫拒答阈值（仅 rerank 模式有意义）。
+
+--loop（SC-002 / clarify Q4）：首轮结束后仅对失败集开启反思回环（plan/reflect 真调
+LLM，成本 = 失败集规模），报告产出 repair_rate = 回环修复数 ÷ 同配置首轮失败数。
 
 用法：
   python scripts/run_retrieval_eval.py \
     --dataset data/evals/golden_qa_kaihe.clean.jsonl --output report.json
   python scripts/run_retrieval_eval.py --limit 200 --no-rerank   # 抽样 + 跳过重排
+  python scripts/run_retrieval_eval.py --loop --output report_loop.json
 """
 
 import argparse
@@ -25,6 +29,7 @@ from src.eval.matching import is_fact_hit, is_quote_hit  # noqa: E402
 from src.rag.hybrid import hybrid_search  # noqa: E402
 from src.rag.rerank import rerank_hits  # noqa: E402
 from src.services.clients.embedding import DashscopeEmbedding  # noqa: E402
+from src.services.clients.llm import DashscopeLlm  # noqa: E402
 from src.services.clients.rerank import DashscopeRerank  # noqa: E402
 
 
@@ -55,6 +60,54 @@ async def evaluate_one(session, embedding, reranker, tenant, item, settings, thr
     ]
 
 
+async def loop_repair(
+    session, items: list[dict], settings, tenant: str, embedding, reranker
+) -> list[dict]:
+    """对失败集跑 AgentLoop 回环（research D11）：plan/reflect 真调 LLM，判据同首轮。"""
+    from langgraph.checkpoint.memory import MemorySaver
+
+    from src.agent.graph import build_graph, build_tool_registry
+
+    llm = DashscopeLlm(
+        settings.llm_base_url, settings.llm_api_key, settings.llm_model, settings.llm_max_tokens
+    )
+    graph = build_graph(
+        llm=llm,
+        registry=build_tool_registry(embedding, reranker, settings),
+        settings=settings,
+        checkpointer=MemorySaver(),
+    )
+    cases = []
+    for item in items:
+        quotes = [s.get("quote", "") for s in item.get("source", []) if s.get("quote")]
+        try:
+            final = await graph.ainvoke(
+                {
+                    "question": item["question"],
+                    "tenant_id": tenant,
+                    "trace_id": "eval-loop",
+                    "session_id": "eval",
+                    "message_id": str(item.get("id") or ""),
+                    "client_msg_id": str(item.get("id") or ""),
+                    "messages": [{"role": "user", "content": item["question"]}],
+                },
+                {"configurable": {"thread_id": f"eval:{item.get('id')}", "db": session}},
+            )
+            hits = [h for e in final.get("evidence") or [] for h in e.get("hits") or []]
+            parent_texts = [h["parent_text"] for h in hits]
+            repaired = bool(quotes) and any(is_quote_hit(q, parent_texts) for q in quotes)
+            rounds = int(final.get("plan_rounds") or 1)
+            queries = [t.get("query") for t in final.get("tool_results") or []]
+        except Exception as exc:  # noqa: BLE001 —— 单题失败不影响整体
+            repaired, rounds, queries = False, 0, [f"error: {exc}"[:120]]
+        cases.append(
+            {"id": item.get("id"), "question": item["question"], "repaired": repaired,
+             "rounds": rounds, "queries": queries}
+        )
+        await asyncio.sleep(0.25)
+    return cases
+
+
 async def run(
     dataset: str,
     tenant: str,
@@ -62,6 +115,7 @@ async def run(
     limit: int | None,
     calibrate: bool,
     no_rerank: bool = False,
+    loop: bool = False,
 ) -> int:
     settings = get_settings()
     if no_rerank:
@@ -154,6 +208,23 @@ async def run(
     print(f"L4 拒答率：{report['l4_refusal_rate']}（门槛 0.9）｜误拒率：{report['false_refusal_rate']}")
     print(f"失败案例：{len(report['failures'])} 条")
 
+    if loop and report["failures"]:
+        print(f"\n—— 回环修复（仅失败集 {len(report['failures'])} 条，plan/reflect 真调 LLM）——")
+        async with session_factory() as session:
+            by_id = {i.get("id"): i for i in items if i.get("difficulty") != "L4"}
+            failed_items = [by_id[f["id"]] for f in report["failures"] if f["id"] in by_id]
+            cases = await loop_repair(
+                session, failed_items, settings, tenant, embedding, reranker
+            )
+        repaired = sum(1 for c in cases if c["repaired"])
+        report["loop"] = {
+            "failures": len(cases),
+            "repaired": repaired,
+            "repair_rate": round(repaired / len(cases), 4) if cases else None,
+            "cases": cases,
+        }
+        print(f"回环修复：{repaired}/{len(cases)} = {report['loop']['repair_rate']}（SC-002 门槛 0.3）")
+
     if calibrate and l4 and settings.use_rerank:
         print("\n—— L4 拒答阈值扫描（threshold → 拒答率 / 误拒率）——")
         for th in [0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.60]:
@@ -180,7 +251,11 @@ if __name__ == "__main__":
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--calibrate", action="store_true")
     parser.add_argument("--no-rerank", action="store_true", help="跳过重排（rerank 配额受限时）")
+    parser.add_argument("--loop", action="store_true", help="对失败集开反思回环（真调 LLM，SC-002）")
     args = parser.parse_args()
     raise SystemExit(
-        asyncio.run(run(args.dataset, args.tenant, args.output, args.limit, args.calibrate, args.no_rerank))
+        asyncio.run(
+            run(args.dataset, args.tenant, args.output, args.limit, args.calibrate,
+                args.no_rerank, args.loop)
+        )
     )

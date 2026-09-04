@@ -28,6 +28,18 @@ SYSTEM_DIRECT = (
     "若问题需要具体产品/条款信息才能准确回答，提示用户提供险种名称或条款原文。"
 )
 
+SYSTEM_REFLECTOR = (
+    "你是检索充分性评估器。判断当前草稿是否充分回答了用户问题：\n"
+    "1. 证据是否覆盖问题的所有子任务；2. 是否还有明显应检索而未检索的方向。\n"
+    "- 充分 → sufficient=true，next_action=\"converge\"。\n"
+    "- 不充分 → 选择一个改进动作并给出 next_query：\n"
+    '  retrieve_more（补充检索）/ rewrite_query（改写检索式）/ switch_tool（换工具）。\n'
+    "严格输出 JSON："
+    '{"sufficient": true|false, "reason": "一句话", '
+    '"next_action": "converge|retrieve_more|rewrite_query|switch_tool", '
+    '"next_query": "改写后的检索式或 null"}'
+)
+
 REFUSAL_TEXT = (
     "未在当前条款库中找到与该问题直接相关的条款。为避免误导，不作推测。"
     "建议补充险种名称或条款术语——例如「等待期」「宽限期」「现金价值」——再试一次。"

@@ -65,9 +65,11 @@ class FakeLLM(LlmClient):
         deltas: list[str] | None = None,
         chat_responses: list[str] | None = None,
         usage_tokens: int | list[int] = 100,
+        stream_scripts: list[list[str]] | None = None,
     ):
         self.deltas = deltas if deltas is not None else ["等待期为 90 日", "，自合同生效日起算[1]。"]
         self.chat_responses = list(chat_responses) if chat_responses is not None else None
+        self.stream_scripts = [list(s) for s in stream_scripts] if stream_scripts else None
         self.usage_tokens = usage_tokens
         self.calls: list[list[dict]] = []  # stream_chat 收到的 messages
         self.chat_calls: list[list[dict]] = []
@@ -77,7 +79,11 @@ class FakeLLM(LlmClient):
 
     async def stream_chat(self, messages: list[dict]) -> AsyncIterator[str]:
         self.calls.append(messages)
-        for delta in self.deltas:  # noqa: ASYNC110 —— 脚本化假客户端，无需真实流
+        if self.stream_scripts:
+            deltas = self.stream_scripts.pop(0) if self.stream_scripts else self.deltas
+        else:
+            deltas = self.deltas
+        for delta in deltas:  # noqa: ASYNC110 —— 脚本化假客户端，无需真实流
             yield delta
 
     async def chat(

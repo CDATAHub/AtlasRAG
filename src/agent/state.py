@@ -37,6 +37,7 @@ class AgentState(TypedDict, total=False):
     # —— 生成与收敛 ——
     draft: str
     refused: bool
+    direct_answer: bool  # plan 判定常识直答（generate 设置，reflect 跳过反思）
     reflect_result: dict  # {"sufficient","reason","next_action","next_query"}
     final_answer: str
     citations: list[dict]

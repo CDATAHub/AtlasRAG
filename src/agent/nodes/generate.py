@@ -53,6 +53,7 @@ def make_generate_node(llm, settings: Settings):
             return {
                 "draft": draft,
                 "refused": False,
+                "direct_answer": True,  # reflect 据此跳过反思（US2）
                 "citations": [],  # 直答无条款依据，不带引用（区别于条款问答 FR-006）
                 "hit_count": 0,
                 "top_score": None,

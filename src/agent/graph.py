@@ -40,7 +40,7 @@ def build_graph(
     plan = make_plan_node(llm, registry)
     tool_node = make_tool_node(registry)
     generate = make_generate_node(llm, settings)
-    reflect = make_reflect_node(settings)
+    reflect = make_reflect_node(llm, settings)
 
     g = StateGraph(AgentState)
     g.add_node("plan", plan)

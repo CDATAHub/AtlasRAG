@@ -51,7 +51,7 @@ def test_parse_plan_empty_query_backfills_question():
 async def test_plan_retry_then_fallback_single_step():
     """spec Edge：两次解析失败 → 降级单步检索，检索式回退原问题。"""
     llm = FakeLLM(chat_responses=["不是 JSON", "{}"])
-    result, tokens = await _plan_with_retry(llm, "sys", "user", "等待期多久？")
+    result, tokens = await _plan_with_retry(llm, "sys", "user", "等待期多久？", "等待期多久？")
     assert result.route == "retrieve"
     assert len(result.plan) == 1
     assert result.plan[0].query == "等待期多久？"

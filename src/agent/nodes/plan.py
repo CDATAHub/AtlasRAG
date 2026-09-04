@@ -40,11 +40,31 @@ def make_plan_node(llm, registry: Registry):
         question = state["question"]
         history = _history_text(state.get("messages") or [], question)
 
+        # 重规划（FR-005）：保留已执行前缀，只替换未执行部分
+        prior_plan = state.get("plan") or []
+        executed = prior_plan[: state.get("current_step", 0)] if rounds > 1 else []
+        reflect = state.get("reflect_result") or {}
+
         system = SYSTEM_PLANNER.replace("{tools}", tools_desc)
         user = f"近期对话：\n{history}\n\n当前问题：{question}" if history else f"当前问题：{question}"
+        if rounds > 1:
+            user += (
+                f"\n\n这是第 {rounds} 轮规划。此前计划已执行但证据不足"
+                f"（反思结论：{reflect.get('reason') or '未覆盖'}；"
+                f"建议动作：{reflect.get('next_action') or 'rewrite_query'}）。\n"
+                f"已执行检索式：{[s.get('query') for s in executed]}\n"
+                "要求：保留已完成检索成果，只输出 1~2 个「后续」检索步骤"
+                "（改写检索式/换关键词/补充检索，不要重复已执行检索式）。"
+            )
+        fallback_query = reflect.get("next_query") or question
 
-        result, tokens = await _plan_with_retry(llm, system, user, question)
-        steps = [s.model_dump() for s in result.plan]
+        result, tokens = await _plan_with_retry(llm, system, user, fallback_query, question)
+        new_steps = [s.model_dump() for s in result.plan]
+        for offset, s in enumerate(new_steps, start=len(executed) + 1):
+            s["step"] = offset
+        steps = executed + new_steps
+        current = len(executed)
+
         writer(
             {
                 "type": "plan",
@@ -53,14 +73,15 @@ def make_plan_node(llm, registry: Registry):
                 "message_id": state.get("message_id"),
                 "steps": [
                     {k: s[k] for k in ("step", "action", "tool", "query", "rationale")}
-                    for s in steps
+                    for s in new_steps
                 ],
             }
         )
+        route = result.route if (rounds == 1 or not executed) else "retrieve"
         return {
             "plan": steps,
-            "route": result.route,
-            "current_step": 0,
+            "route": route,
+            "current_step": current,
             "plan_rounds": rounds,
             "tokens_used": state.get("tokens_used", 0) + tokens,
         }
@@ -68,7 +89,9 @@ def make_plan_node(llm, registry: Registry):
     return plan
 
 
-async def _plan_with_retry(llm, system: str, user: str, question: str) -> tuple[PlanResult, int]:
+async def _plan_with_retry(
+    llm, system: str, user: str, fallback_query: str, question: str
+) -> tuple[PlanResult, int]:
     """返回 (PlanResult, 本轮 usage tokens)；解析失败重试 1 次（spec Edge）。"""
     last_err: Exception | None = None
     total = 0
@@ -88,7 +111,7 @@ async def _plan_with_retry(llm, system: str, user: str, question: str) -> tuple[
         except (json.JSONDecodeError, ValidationError, ValueError) as exc:
             last_err = exc
     logger.warning("plan 解析失败，降级单步检索：%s", last_err)
-    fallback = PlanResult(route="retrieve", plan=[PlanStep(step=1, query=question)])
+    fallback = PlanResult(route="retrieve", plan=[PlanStep(step=1, query=fallback_query)])
     return fallback, total
 
 

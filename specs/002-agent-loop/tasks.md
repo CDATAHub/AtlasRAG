@@ -89,15 +89,15 @@
 
 ### Tests for User Story 2 (REQUIRED by Constitution VII - mock-based)
 
-- [ ] T020 [P] [US2] 单元测试 `tests/unit/test_reflect_loop.py`：ReflectResult 解析与 next_action 映射（continue_plan→route；retrieve_more/rewrite_query/switch_tool→plan）、硬规则优先（plan_rounds≥3 强制 converge）、重规划「只替换未执行步骤」不变式（已执行 plan 步骤与 tool_results 保留）
-- [ ] T021 [P] [US2] 契约测试 `tests/contract/test_chat_loop.py`：回环事件序（plan/evidence 重复出现、round 递增、≤3）、3 轮后 refused done（convergence_reason 正确）、续计划路径不触发新 plan 事件
+- [x] T020 [P] [US2] 单元测试 `tests/unit/test_reflect_loop.py`：ReflectResult 解析与 next_action 映射（continue_plan→route；retrieve_more/rewrite_query/switch_tool→plan）、硬规则优先（plan_rounds≥3 强制 converge）、重规划「只替换未执行步骤」不变式（已执行 plan 步骤与 tool_results 保留）
+- [x] T021 [P] [US2] 契约测试 `tests/contract/test_chat_loop.py`：回环事件序（plan/evidence 重复出现、round 递增、≤3）、3 轮后 refused done（convergence_reason 正确）、续计划路径不触发新 plan 事件
 
 ### Implementation for User Story 2
 
-- [ ] T022 [US2] 扩展 `src/agent/nodes/reflect.py`：LLM 充分性判据（结构化 ReflectResult：sufficient/reason/next_action/next_query）+ 硬规则先行（research D9）；改造 `src/agent/nodes/plan.py`：接收反思反馈重规划——保留 current_step 之前的步骤、只追加/替换未执行部分（FR-005）
-- [ ] T023 [US2] 扩展 `src/agent/graph.py`：reflect 条件边 {converge, continue_plan→route, 回环→plan} 接线 + plan_rounds 计数上限判定（FR-006）
-- [ ] T024 [P] [US2] 扩展 `scripts/run_retrieval_eval.py`：`--loop` 模式——首轮（无 LLM）统计失败集 → 仅失败集开回环真调 LLM 重跑 → 报告增 repair_rate（修复数÷同配置首轮失败数）与修复案例清单（clarify Q4，research D11）
-- [ ] T025 [US2] 集成测试 `tests/integration/test_loop_flow.py`：FakeRerank 低分→改写后高分脚本驱动回环修复；持续无命中 3 轮拒答；runtime_log.plan_rounds 与事件 round 一致
+- [x] T022 [US2] 扩展 `src/agent/nodes/reflect.py`：LLM 充分性判据（结构化 ReflectResult：sufficient/reason/next_action/next_query）+ 硬规则先行（research D9）；改造 `src/agent/nodes/plan.py`：接收反思反馈重规划——保留 current_step 之前的步骤、只追加/替换未执行部分（FR-005）
+- [x] T023 [US2] 扩展 `src/agent/graph.py`：reflect 条件边 {converge, continue_plan→route, 回环→plan} 接线 + plan_rounds 计数上限判定（FR-006）
+- [x] T024 [P] [US2] 扩展 `scripts/run_retrieval_eval.py`：`--loop` 模式——首轮（无 LLM）统计失败集 → 仅失败集开回环真调 LLM 重跑 → 报告增 repair_rate（修复数÷同配置首轮失败数）与修复案例清单（clarify Q4，research D11）
+- [x] T025 [US2] 集成测试 `tests/integration/test_loop_flow.py`：FakeRerank 低分→改写后高分脚本驱动回环修复；持续无命中 3 轮拒答；runtime_log.plan_rounds 与事件 round 一致
 
 **Checkpoint**: US1+US2 可用——回环修复路径与强制收敛全通，首轮评测指标不回退
 
