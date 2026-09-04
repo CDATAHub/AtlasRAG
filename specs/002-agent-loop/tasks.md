@@ -132,16 +132,16 @@
 
 ### Tests for User Story 4 (REQUIRED by Constitution VII - mock-based)
 
-- [ ] T031 [P] [US4] 契约测试 `tests/contract/test_sessions_api.py`：GET 历史（含 citations、时间有序）、DELETE 204→GET 404、跨租户/不存在 404、409 session_busy、幂等重放（replayed 流 + runtime_log 无新行）（contracts/api.md §2/§3）
-- [ ] T032 [P] [US4] 单元测试 `tests/unit/test_context_window.py`：滑窗保留最近 6 轮、>3000 token 触发摘要压缩、压缩后 citations 摘录保留（证据链不压缩）、token 近似（字符÷1.5）边界
+- [x] T031 [P] [US4] 契约测试 `tests/contract/test_sessions_api.py`：GET 历史（含 citations、时间有序）、DELETE 204→GET 404、跨租户/不存在 404、409 session_busy、幂等重放（replayed 流 + runtime_log 无新行）（contracts/api.md §2/§3）
+- [x] T032 [P] [US4] 单元测试 `tests/unit/test_context_window.py`：滑窗保留最近 6 轮、>3000 token 触发摘要压缩、压缩后 citations 摘录保留（证据链不压缩）、token 近似（字符÷1.5）边界
 
 ### Implementation for User Story 4
 
-- [ ] T033 [US4] 实现 `src/services/sessions.py`：会话生命周期（查询/软删/删除在有进行中请求时延迟生效）、按 session_id 的 asyncio.Lock 串行闸门（409 语义，research D6）、幂等判定（已完成→重放事件流；中断→标记续跑，供 US5）
-- [ ] T034 [US4] 实现 `src/services/context_window.py`：滑窗 + 一次 LLM 摘要压缩（压缩对话过程、citations 摘录随摘要保留，research D7）；接入 plan/generate 上下文组装（FR-011/014）
-- [ ] T035 [US4] 实现 `src/api/routes/sessions.py`（GET/DELETE + 404 语义）；改造 `src/api/routes/chat.py`：409/幂等重放接入（contracts/api.md §1 幂等语义）
-- [ ] T036 [P] [US4] 构造 50 条双轮用例 `tests/fixtures/multi_turn.jsonl`（首问→指代追问→期望命中条款）+ 批量断言脚本/测试（FakeLLM 脚本化指代消解路径），支撑 SC-006 的 mock 化回归（真实 90% 口径实测留 T045）
-- [ ] T037 [US4] 集成测试 `tests/integration/test_session_flow.py`：双轮指代消解（FakeLLM 断言 plan 收到历史）、软删后查询/续跑均 404、并发第二问 409、幂等重放一致性、压缩触发后引用仍可展开（SC-007 mock 化）
+- [x] T033 [US4] 实现 `src/services/sessions.py`：会话生命周期（查询/软删/删除在有进行中请求时延迟生效）、按 session_id 的 asyncio.Lock 串行闸门（409 语义，research D6）、幂等判定（已完成→重放事件流；中断→标记续跑，供 US5）
+- [x] T034 [US4] 实现 `src/services/context_window.py`：滑窗 + 一次 LLM 摘要压缩（压缩对话过程、citations 摘录随摘要保留，research D7）；接入 plan/generate 上下文组装（FR-011/014）
+- [x] T035 [US4] 实现 `src/api/routes/sessions.py`（GET/DELETE + 404 语义）；改造 `src/api/routes/chat.py`：409/幂等重放接入（contracts/api.md §1 幂等语义）
+- [x] T036 [P] [US4] 构造 50 条双轮用例 `tests/fixtures/multi_turn.jsonl`（首问→指代追问→期望命中条款）+ 批量断言脚本/测试（FakeLLM 脚本化指代消解路径），支撑 SC-006 的 mock 化回归（真实 90% 口径实测留 T045）
+- [x] T037 [US4] 集成测试 `tests/integration/test_session_flow.py`：双轮指代消解（FakeLLM 断言 plan 收到历史）、软删后查询/续跑均 404、并发第二问 409、幂等重放一致性、压缩触发后引用仍可展开（SC-007 mock 化）
 
 **Checkpoint**: US1~US4 可用——多轮会话全链路（串行/幂等/压缩/管理）就绪
 

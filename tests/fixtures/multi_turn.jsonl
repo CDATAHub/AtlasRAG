@@ -1,0 +1,50 @@
+{"id": "mt-001", "first_q": "康护一生重疾险的等待期是多久？", "first_a": "等待期为 90 日[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "2.3.1" }], "followup_q": "那它的宽限期呢？", "expect_keyword": "康护一生"}
+{"id": "mt-002", "first_q": "鑫享一生年金险的保单贷款能贷多少？", "first_a": "不超过现金价值净值的 80%[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "6.2" }], "followup_q": "它的贷款期限最长多久？", "expect_keyword": "鑫享一生"}
+{"id": "mt-003", "first_q": "康护一生的犹豫期有几天？", "first_a": "犹豫期为 15 日[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "3.1" }], "followup_q": "这段时间内退保怎么算？", "expect_keyword": "康护一生"}
+{"id": "mt-004", "first_q": "鑫享一生的生存金怎么领？", "first_a": "按合同约定每年给付[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "4.1" }], "followup_q": "没领会怎么处理？", "expect_keyword": "鑫享一生"}
+{"id": "mt-005", "first_q": "康护一生的轻症赔几次？", "first_a": "轻症最多赔付 3 次[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "2.5" }], "followup_q": "每次赔付比例一样吗？", "expect_keyword": "康护一生"}
+{"id": "mt-006", "first_q": "鑫享一生的投保年龄范围？", "first_a": "出生 28 天至 65 周岁[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "1.2" }], "followup_q": "超过年龄还能买吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-007", "first_q": "康护一生的保障期间是多久？", "first_a": "保障至被保险人 80 周岁[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "1.3" }], "followup_q": "期满后还有保障吗？", "expect_keyword": "康护一生"}
+{"id": "mt-008", "first_q": "鑫享一生的缴费方式有哪些？", "first_a": "支持趸交与期缴[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "5.1" }], "followup_q": "期缴最长可以交几年？", "expect_keyword": "鑫享一生"}
+{"id": "mt-009", "first_q": "康护一生的重疾保额是多少？", "first_a": "基本保额由合同约定[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "2.1" }], "followup_q": "理赔时按什么标准？", "expect_keyword": "康护一生"}
+{"id": "mt-010", "first_q": "鑫享一生的身故保险金怎么赔？", "first_a": "按身故时的现金价值与保额取大[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "7.2" }], "followup_q": "受益人需要什么手续？", "expect_keyword": "鑫享一生"}
+{"id": "mt-011", "first_q": "康护一生有豁免条款吗？", "first_a": "被保险人确诊轻症可豁免后期保费[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "8.1" }], "followup_q": "豁免后合同还有效吗？", "expect_keyword": "康护一生"}
+{"id": "mt-012", "first_q": "鑫享一生的年金开始领取时间？", "first_a": "自合同生效满 5 年后[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "4.2" }], "followup_q": "可以提前领取吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-013", "first_q": "康护一生的医院范围要求？", "first_a": "限二级及以上公立医院[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "9.3" }], "followup_q": "私立医院能赔吗？", "expect_keyword": "康护一生"}
+{"id": "mt-014", "first_q": "鑫享一生的失效条款怎么规定？", "first_a": "欠费逾 2 年合同效力中止[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "6.4" }], "followup_q": "中止后还能复效吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-015", "first_q": "康护一生的等待期内体检出问题怎么办？", "first_a": "等待期内确诊不承担给付责任[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "2.3.1" }], "followup_q": "那等待期后呢？", "expect_keyword": "康护一生"}
+{"id": "mt-016", "first_q": "鑫享一生的减保规则是什么？", "first_a": "可申请减少基本保额[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "5.4" }], "followup_q": "减保后保费怎么算？", "expect_keyword": "鑫享一生"}
+{"id": "mt-017", "first_q": "康护一生的免责条款有哪些？", "first_a": "见责任免除章节[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "2.4" }], "followup_q": "酒驾也在免责里吗？", "expect_keyword": "康护一生"}
+{"id": "mt-018", "first_q": "鑫享一生的现金价值怎么查询？", "first_a": "见现金价值表[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "附录" }], "followup_q": "第 5 年末是多少？", "expect_keyword": "鑫享一生"}
+{"id": "mt-019", "first_q": "康护一生可以指定受益人吗？", "first_a": "可指定一名或多名受益人[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "7.1" }], "followup_q": "之后能变更吗？", "expect_keyword": "康护一生"}
+{"id": "mt-020", "first_q": "鑫享一生的满期金是多少？", "first_a": "满期按基本保额给付[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "4.5" }], "followup_q": "什么时候算满期？", "expect_keyword": "鑫享一生"}
+{"id": "mt-021", "first_q": "康护一生的报案时限要求？", "first_a": "应在 10 日内通知本公司[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "10.1" }], "followup_q": "超时了还能赔吗？", "expect_keyword": "康护一生"}
+{"id": "mt-022", "first_q": "鑫享一生的诉讼时效是几年？", "first_a": "人寿保险 5 年[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "12.2" }], "followup_q": "从什么时候起算？", "expect_keyword": "鑫享一生"}
+{"id": "mt-023", "first_q": "康护一生的理赔材料有哪些？", "first_a": "见保险金给付申请材料清单[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "10.3" }], "followup_q": "病历丢失怎么办？", "expect_keyword": "康护一生"}
+{"id": "mt-024", "first_q": "鑫享一生可以追加保费吗？", "first_a": "本合同不支持追加保费[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "5.2" }], "followup_q": "那加保呢？", "expect_keyword": "鑫享一生"}
+{"id": "mt-025", "first_q": "康护一生的职业限制是什么？", "first_a": "限 1-4 类职业投保[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "1.4" }], "followup_q": "换职业了要告知吗？", "expect_keyword": "康护一生"}
+{"id": "mt-026", "first_q": "鑫享一生的分红来源是什么？", "first_a": "分红来自利差、死差与费差[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "8.2" }], "followup_q": "分红是保证的吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-027", "first_q": "康护一生重疾定义在哪里查？", "first_a": "见附录重大疾病定义[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "附录一" }], "followup_q": "癌症都包含吗？", "expect_keyword": "康护一生"}
+{"id": "mt-028", "first_q": "鑫享一生的生存金受益人是谁？", "first_a": "生存金受益人为被保险人本人[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "4.3" }], "followup_q": "小孩投保谁领？", "expect_keyword": "鑫享一生"}
+{"id": "mt-029", "first_q": "康护一生的轻症豁免要额外收费吗？", "first_a": "已含在保费内[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "8.1" }], "followup_q": "重疾也豁免吗？", "expect_keyword": "康护一生"}
+{"id": "mt-030", "first_q": "鑫享一生的万能账户利率是多少？", "first_a": "结算利率每月公布[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "8.4" }], "followup_q": "有保底利率吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-031", "first_q": "康护一生等待期出险退保费吗？", "first_a": "无息返还所交保费[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "2.3.1" }], "followup_q": "利息也不给吗？", "expect_keyword": "康护一生"}
+{"id": "mt-032", "first_q": "鑫享一生的年金领取方式有几种？", "first_a": "年领与月领两种[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "4.4" }], "followup_q": "可以改吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-033", "first_q": "康护一生的承保决定要多久？", "first_a": "资料齐全后 5 个工作日内[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "1.5" }], "followup_q": "被拒保退钱吗？", "expect_keyword": "康护一生"}
+{"id": "mt-034", "first_q": "鑫享一身的保单可以贷款吗？", "first_a": "可凭合同申请保单贷款[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "6.2" }], "followup_q": "利率怎么定？", "expect_keyword": "鑫享一生"}
+{"id": "mt-035", "first_q": "康护一身的意外伤残怎么赔？", "first_a": "按伤残等级比例给付[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "2.6" }], "followup_q": "最重赔多少？", "expect_keyword": "康护一生"}
+{"id": "mt-036", "first_q": "鑫享一身的自动垫交条款？", "first_a": "现金价值净额可垫交保费[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "6.3" }], "followup_q": "垫交要申请吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-037", "first_q": "康护一身的体检要求是什么？", "first_a": "保额超限需体检[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "1.6" }], "followup_q": "体检费谁出？", "expect_keyword": "康护一生"}
+{"id": "mt-038", "first_q": "鑫享一身的犹豫期起算日？", "first_a": "自签收保单次日起算[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "3.1" }], "followup_q": "周末算吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-039", "first_q": "康护一身的甲状腺结节能投吗？", "first_a": "需如实告知并经核保[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "1.7" }], "followup_q": "除外承保是什么意思？", "expect_keyword": "康护一生"}
+{"id": "mt-040", "first_q": "鑫享一身的领取年龄可以变更吗？", "first_a": "首次领取前可变更[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "4.2" }], "followup_q": "要什么材料？", "expect_keyword": "鑫享一生"}
+{"id": "mt-041", "first_q": "康护一身的保费宽限期几天？", "first_a": "宽限期为 60 日[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "6.1" }], "followup_q": "宽限期内出险赔吗？", "expect_keyword": "康护一生"}
+{"id": "mt-042", "first_q": "鑫享一身的投保人豁免有吗？", "first_a": "可附加投保人豁免[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "8.3" }], "followup_q": "豁免什么？", "expect_keyword": "鑫享一生"}
+{"id": "mt-043", "first_q": "康护一身的合同解除权规定？", "first_a": "见合同解除章节[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "11.1" }], "followup_q": "公司能解除吗？", "expect_keyword": "康护一生"}
+{"id": "mt-044", "first_q": "鑫享一身的地址变更怎么办理？", "first_a": "可申请变更联系方式[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "11.3" }], "followup_q": "线上能改吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-045", "first_q": "康护一身的理赔时效承诺？", "first_a": "资料齐全后 5 日内核定[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "10.4" }], "followup_q": "复杂案件呢？", "expect_keyword": "康护一生"}
+{"id": "mt-046", "first_q": "鑫享一身的保单遗失怎么补？", "first_a": "可申请补发保单[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "11.4" }], "followup_q": "要收费吗？", "expect_keyword": "鑫享一生"}
+{"id": "mt-047", "first_q": "康护一身的身故受益比例能改吗？", "first_a": "可按份额变更[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "7.1" }], "followup_q": "需要被保险人同意吗？", "expect_keyword": "康护一生"}
+{"id": "mt-048", "first_q": "鑫享一身的年金能领到多少岁？", "first_a": "领至被保险人身故[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "4.1" }], "followup_q": "保证领取多少年？", "expect_keyword": "鑫享一生"}
+{"id": "mt-049", "first_q": "康护一身的轻症包含哪些疾病？", "first_a": "见轻症疾病列表[1]。", "first_citations": [{ "n": 1, "title": "康护一生条款", "sec_no": "附录二" }], "followup_q": "原位癌在列表里吗？", "expect_keyword": "康护一生"}
+{"id": "mt-050", "first_q": "鑫享一身的效力恢复要在几年内申请？", "first_a": "效力中止后 2 年内可申请复效[1]。", "first_citations": [{ "n": 1, "title": "鑫享一生条款", "sec_no": "6.4" }], "followup_q": "要重新核保吗？", "expect_keyword": "鑫享一生"}

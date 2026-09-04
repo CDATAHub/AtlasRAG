@@ -22,6 +22,7 @@ class AgentState(TypedDict, total=False):
 
     # —— 消息与多轮 ——
     messages: Annotated[list, add_messages]  # 对话历史（增量合并）
+    history_text: str  # 编排层组装的多轮背景（滑窗/压缩后，FR-011/014）
 
     # —— 任务规划 ——
     plan: list[dict]  # [{"step","action","tool","query","rationale"}]

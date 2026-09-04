@@ -21,9 +21,11 @@ from src.agent.prompts import (  # noqa: F401 —— REFUSAL_TEXT/should_refuse/
     clip_on_sentence,
     should_refuse,
 )
+from src.agent.prompts import SYSTEM_SUMMARIZER
 from src.config import Settings
 from src.data import dao
 from src.data.models import Message
+from src.services import context_window
 from src.services.runtime_log import write_log
 
 logger = logging.getLogger(__name__)
@@ -61,32 +63,30 @@ async def chat_stream(
     *,
     ctx_tenant_id: str,
     question: str,
-    session_id: uuid.UUID | None,
+    session_id: uuid.UUID,
     client_msg_id: str | None,
     graph,
+    llm,
     settings: Settings,
 ) -> AsyncIterator[tuple[str, dict]]:
     trace_id = f"tr-{uuid.uuid4().hex[:8]}"
     started = time.monotonic()
 
-    if session_id is None:
-        row = await dao.create_session(session, ctx_tenant_id, title=question[:50])
-        session_id = row.id
-        await dao.set_session_status(session, ctx_tenant_id, session_id, "running")
-    else:
-        await dao.set_session_status(session, ctx_tenant_id, session_id, "running")
+    await dao.set_session_status(session, ctx_tenant_id, session_id, "running")
     message_id = uuid.uuid4()
     client_msg_id = client_msg_id or f"srv-{uuid.uuid4().hex[:12]}"
-    await dao.append_message(
-        session,
-        Message(
-            session_id=session_id,
-            tenant_id=ctx_tenant_id,
-            client_msg_id=client_msg_id,
-            role="user",
-            content=question,
-        ),
-    )
+    if await dao.find_message(session, ctx_tenant_id, session_id, client_msg_id) is None:
+        # 中断重跑（US5）时提问行已存在：跳过插入，避免违反幂等唯一约束
+        await dao.append_message(
+            session,
+            Message(
+                session_id=session_id,
+                tenant_id=ctx_tenant_id,
+                client_msg_id=client_msg_id,
+                role="user",
+                content=question,
+            ),
+        )
     await session.commit()
 
     if is_chitchat(question, settings):  # 寒暄：模板直答，零 LLM/检索（SC-005）
@@ -95,6 +95,18 @@ async def chat_stream(
             yield event
         return
 
+    # 多轮背景（FR-011/014）：滑窗保留近期对话，超阈值压缩旧对话（证据链保留）
+    history_rows = await dao.get_messages(session, ctx_tenant_id, session_id)
+    if history_rows and history_rows[-1].role == "user":
+        history_rows = history_rows[:-1]  # 排除当前提问
+    history = [
+        {"role": m.role, "content": m.content, "citations": m.citations or []}
+        for m in history_rows
+    ]
+    history_text, summary_tokens = await context_window.build_context(
+        history, settings, _summarizer(llm)
+    )
+
     graph_input = {
         "question": question,
         "tenant_id": ctx_tenant_id,
@@ -102,6 +114,8 @@ async def chat_stream(
         "session_id": str(session_id),
         "message_id": str(message_id),
         "client_msg_id": client_msg_id,
+        "history_text": history_text,
+        "tokens_used": summary_tokens,
         "messages": [{"role": "user", "content": question}],
     }
     config = {
@@ -244,6 +258,21 @@ async def _rollback(session) -> None:
         await session.rollback()
     except Exception:  # noqa: BLE001
         logger.debug("取消后会话复位失败", exc_info=True)
+
+
+def _summarizer(llm):
+    """旧对话压缩摘要器（FR-014）：一次非流式 LLM 调用。"""
+
+    async def summarize(text: str) -> str:
+        result = await llm.chat(
+            [
+                {"role": "system", "content": SYSTEM_SUMMARIZER},
+                {"role": "user", "content": text},
+            ]
+        )
+        return result.content
+
+    return summarize
 
 
 def _build_done(

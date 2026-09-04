@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from src.agent.graph import build_graph, build_tool_registry
-from src.api.routes import chat, documents
+from src.api.routes import chat, documents, sessions
 from src.api.schemas import error_body
 from src.config import Settings, get_settings
 from src.data.db import build_sessionmaker
@@ -44,6 +44,10 @@ def create_app(
             app.state.checkpointer = await saver_cm.__aenter__()
             await app.state.checkpointer.setup()
         app.state.graph = _build(app)
+        async with app.state.session_factory() as s:  # 中断复位（FR-018 / US5）
+            from src.services.sessions import reset_interrupted
+
+            await reset_interrupted(s)
         yield
         if saver_cm is not None:
             await saver_cm.__aexit__(None, None, None)
@@ -77,6 +81,7 @@ def create_app(
 
     app.include_router(chat.router)
     app.include_router(documents.router)
+    app.include_router(sessions.router)
 
     @app.get("/v1/health")
     async def health():

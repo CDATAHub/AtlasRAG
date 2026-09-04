@@ -82,9 +82,15 @@ def make_generate_node(llm, settings: Settings):
             f"[{n}] {hit['title']} {hit.get('sec_no') or ''}\n{clip_on_sentence(hit['parent_text'], 1600)}"
             for n, hit in hits[:3]
         )
+        background = (
+            f"近期对话：\n{state.get('history_text')}\n\n" if state.get("history_text") else ""
+        )
         messages = [
             {"role": "system", "content": SYSTEM_GENERATOR},
-            {"role": "user", "content": f"问题：{question}\n\n资料：\n{evidence_text}"},
+            {
+                "role": "user",
+                "content": f"{background}问题：{question}\n\n资料：\n{evidence_text}",
+            },
         ]
         parts: list[str] = []
         try:

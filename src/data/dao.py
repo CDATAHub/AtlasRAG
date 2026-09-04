@@ -104,11 +104,34 @@ async def set_session_status(session: AsyncSession, tenant_id: str, session_id: 
 async def find_message(
     session: AsyncSession, tenant_id: str, session_id: uuid.UUID, client_msg_id: str
 ) -> Message | None:
-    """幂等判定（FR-013）：同租户同会话同 client_msg_id 的既有消息。"""
+    """幂等判定（FR-013）：同租户同会话同 client_msg_id 的既有提问行。"""
     stmt = select(Message).where(
         Message.tenant_id == tenant_id,
         Message.session_id == session_id,
         Message.client_msg_id == client_msg_id,
+        Message.role == "user",
+    )
+    return (await session.scalars(stmt)).first()
+
+
+async def find_assistant_message(
+    session: AsyncSession, tenant_id: str, session_id: uuid.UUID, client_msg_id: str
+) -> Message | None:
+    """同键的回答行：存在则请求已完成（可幂等重放），缺失则上次执行中断。"""
+    stmt = select(Message).where(
+        Message.tenant_id == tenant_id,
+        Message.session_id == session_id,
+        Message.client_msg_id == client_msg_id,
+        Message.role == "assistant",
+    )
+    return (await session.scalars(stmt)).first()
+
+
+async def get_log_by_trace(
+    session: AsyncSession, tenant_id: str, trace_id: str
+) -> RuntimeLog | None:
+    stmt = select(RuntimeLog).where(
+        RuntimeLog.trace_id == trace_id, RuntimeLog.tenant_id == tenant_id
     )
     return (await session.scalars(stmt)).first()
 

@@ -40,7 +40,9 @@ def make_plan_node(llm, settings: Settings, registry: Registry):
         writer = get_stream_writer()
         rounds = state.get("plan_rounds", 0) + 1
         question = state["question"]
-        history = _history_text(state.get("messages") or [], question)
+        history = state.get("history_text") or _history_text(
+            state.get("messages") or [], question
+        )
 
         # 重规划（FR-005）：保留已执行前缀，只替换未执行部分
         prior_plan = state.get("plan") or []

@@ -1,4 +1,7 @@
-"""POST /v1/chat — 问答（SSE 流式，contracts/002 api.md §1）。"""
+"""POST /v1/chat — 问答（SSE 流式，contracts/002 api.md §1）。
+
+会话生命周期闸门（US4）：解析/创建 → 串行化（409）→ 幂等重放 → 持锁流式执行。
+"""
 
 import json
 import uuid
@@ -10,6 +13,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from src.api.schemas import ChatRequest, error_body
 from src.data import dao
 from src.security.jwt import TenantContext, parse_token
+from src.services import sessions
 from src.services.answer import chat_stream
 
 router = APIRouter()
@@ -42,6 +46,18 @@ async def _resolve_session(request: Request, ctx: TenantContext, raw: str | None
     return row.id
 
 
+def _sse_response(agen: AsyncIterator) -> StreamingResponse:
+    async def gen():
+        async for event in agen:
+            yield encode_sse(*event)
+
+    return StreamingResponse(
+        gen(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
+
+
 @router.post("/v1/chat")
 async def chat(payload: ChatRequest, request: Request):
     ctx = get_ctx(request)
@@ -52,39 +68,66 @@ async def chat(payload: ChatRequest, request: Request):
     settings = request.app.state.settings
     session_factory = request.app.state.session_factory
 
-    async with session_factory() as session:  # 空库预检 → 503（FR-010）
-        if await dao.count_children(session, ctx.tenant_id) == 0:
+    async with session_factory() as s:  # 空库预检 → 503（FR-010）
+        if await dao.count_children(s, ctx.tenant_id) == 0:
             return JSONResponse(
                 status_code=503,
                 content=error_body("service_unavailable", "条款库暂不可用，请稍后再试"),
             )
 
-    session_id = await _resolve_session(request, ctx, payload.session_id)
-
-    async def gen(first: tuple[str, dict], agen: AsyncIterator) -> AsyncIterator[str]:
-        yield encode_sse(*first)
-        async for event in agen:
-            yield encode_sse(*event)
-
-    async with session_factory() as session:
-        agen = chat_stream(
-            session,
-            session_factory,
-            ctx_tenant_id=ctx.tenant_id,
-            question=question,
-            session_id=session_id,
-            client_msg_id=payload.client_msg_id,
-            graph=request.app.state.graph,
-            settings=settings,
-        )
-        try:
-            first = await agen.__anext__()
-        except StopAsyncIteration:  # pragma: no cover —— chat_stream 必产出事件
+    # —— 会话解析 / 创建（FR-009） ——
+    if payload.session_id:
+        session_id = await _resolve_session(request, ctx, payload.session_id)
+        lock = sessions.lock_for(session_id)
+        if lock.locked():  # 串行化（FR-012）
             return JSONResponse(
-                status_code=503, content=error_body("service_unavailable", "无响应内容")
+                status_code=409,
+                content=error_body("session_busy", "上一条回答仍在进行中，请稍后再试"),
             )
-        return StreamingResponse(
-            gen(first, agen),
-            media_type="text/event-stream",
-            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
-        )
+    else:
+        async with session_factory() as s:
+            row = await dao.create_session(s, ctx.tenant_id, title=question[:50])
+            await s.commit()
+        session_id = row.id
+        lock = sessions.lock_for(session_id)
+
+    # —— 幂等重放（FR-013）：同键已完成请求重放既有事件流，不重复生成 ——
+    if payload.client_msg_id:
+        async with session_factory() as s:
+            assistant_row = await sessions.find_replayable(
+                s, ctx.tenant_id, session_id, payload.client_msg_id
+            )
+            if assistant_row and assistant_row.trace_id:
+                log = await dao.get_log_by_trace(s, ctx.tenant_id, assistant_row.trace_id)
+            else:
+                log = None
+        if assistant_row:
+            async def replay_stream():
+                for event in sessions.replay_events(assistant_row, log):
+                    yield encode_sse(*event)
+
+            return StreamingResponse(
+                replay_stream(),
+                media_type="text/event-stream",
+                headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+            )
+
+    # —— 持锁执行（锁的生命周期 = 响应流生命周期） ——
+    async def locked_stream():
+        async with lock:
+            async with session_factory() as session:
+                agen = chat_stream(
+                    session,
+                    session_factory,
+                    ctx_tenant_id=ctx.tenant_id,
+                    question=question,
+                    session_id=session_id,
+                    client_msg_id=payload.client_msg_id,
+                    graph=request.app.state.graph,
+                    llm=request.app.state.llm,
+                    settings=settings,
+                )
+                async for event in agen:
+                    yield event
+
+    return _sse_response(locked_stream())
