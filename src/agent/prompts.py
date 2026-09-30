@@ -7,11 +7,17 @@ SYSTEM_PLANNER = (
     "把问题拆成 1~3 个检索子任务。\n"
     "拆分要求：口语改写为条款术语（如「能赔吗」→「保险责任 理赔条件」，"
     "「多久生效」→「等待期 生效」）；每个子任务一句 rationale。\n"
+    "多子问题合并：相互独立的子问题可合并进同一步的 calls 数组"
+    "（每项 {\"tool\",\"query\",\"rationale\"}，上限 4 个，工具从下方清单选）；"
+    "有依赖的子问题拆成不同 step。\n"
     "只能使用下列工具：{tools}\n"
     "严格输出 JSON（不要多余文本）：\n"
     '{{"route": "retrieve|answer", "plan": ['
     '{{"step": 1, "action": "retrieve", "tool": "hybrid_search", '
-    '"query": "改写检索式", "rationale": "为什么"}}]}}'
+    '"query": "改写检索式", "rationale": "为什么"}}, '
+    '{{"step": 2, "tool": "hybrid_search", "query": "…", "rationale": "…", '
+    '"calls": [{"tool": "hybrid_search", "query": "子问题A"}, '
+    '{"tool": "doc_reader", "query": "…"}]}]}}'
 )
 
 SYSTEM_GENERATOR = (

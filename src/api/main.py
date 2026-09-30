@@ -43,12 +43,22 @@ def create_app(
             saver_cm = AsyncPostgresSaver.from_conn_string(conn)
             app.state.checkpointer = await saver_cm.__aenter__()
             await app.state.checkpointer.setup()
-        app.state.graph = _build(app)
+        registry = build_tool_registry(
+            app.state.embedding, app.state.rerank, app.state.settings
+        )
+        if settings.mcp_server_cmd:  # specs/003 US5：MCP 工具动态注册（FR-013/014）
+            from src.tools.mcp_client import McpSource
+
+            app.state.mcp_source = McpSource(registry, settings)
+            await app.state.mcp_source.connect()  # 不可达自动降级，不阻断启动
+        app.state.graph = _build(app, registry)
         async with app.state.session_factory() as s:  # 中断复位（FR-018 / US5）
             from src.services.sessions import reset_interrupted
 
             await reset_interrupted(s)
         yield
+        if getattr(app.state, "mcp_source", None) is not None:
+            await app.state.mcp_source.close()
         if saver_cm is not None:
             await saver_cm.__aexit__(None, None, None)
 
@@ -107,11 +117,12 @@ def create_app(
     return app
 
 
-def _build(app: FastAPI):
+def _build(app: FastAPI, registry=None):
     """构建 AgentLoop 图（app 级依赖闭包注入，per-run 依赖走 config）。"""
     return build_graph(
         llm=app.state.llm,
-        registry=build_tool_registry(app.state.embedding, app.state.rerank, app.state.settings),
+        registry=registry
+        or build_tool_registry(app.state.embedding, app.state.rerank, app.state.settings),
         settings=app.state.settings,
         checkpointer=app.state.checkpointer,
     )

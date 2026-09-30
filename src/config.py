@@ -32,6 +32,15 @@ class Settings(BaseSettings):
     chain_timeout_s: float = 20.0
     llm_max_tokens: int = 400  # 生成上限：控时延与成本（答案简洁是 NFR 的一部分）
 
+    # 工具执行策略缺省（specs/003 research D1；FR-001 保守默认）
+    tool_default_timeout_ms: int = 5000
+    tool_default_max_retries: int = 1
+    retry_backoff_base_s: float = 0.2
+
+    # MCP 接入（specs/003 research D7；FR-013/014）
+    mcp_server_cmd: str = ""  # 演示 Server 启动命令；空 = 不接入该来源
+    mcp_tool_scopes: list[str] = ["misc:calc"]
+
     # AgentLoop 收敛保险（章程 IV / research D9；docs/03 §3.5 默认值）
     max_steps: int = 6
     plan_rounds_max: int = 3  # 回环上限（含首轮）

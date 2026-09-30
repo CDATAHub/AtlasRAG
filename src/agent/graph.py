@@ -15,6 +15,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker
 from src.agent.state import AgentState
 from src.config import Settings
 from src.tools.base import Registry
+from src.tools.executor import ToolExecutor
 
 # config["configurable"] 中 per-run 注入的键
 DB_SESSION_KEY = "db"  # 当前请求的 AsyncSession（整个图执行共用一个事务域外会话）
@@ -38,7 +39,7 @@ def build_graph(
     from src.agent.nodes.tool_node import make_tool_node
 
     plan = make_plan_node(llm, settings, registry)
-    tool_node = make_tool_node(registry)
+    tool_node = make_tool_node(ToolExecutor(registry, settings))
     generate = make_generate_node(llm, settings)
     reflect = make_reflect_node(llm, settings)
 
@@ -77,7 +78,8 @@ def _reflect_fn(state: AgentState) -> str:
 
 
 def build_tool_registry(embedding, reranker, settings: Settings) -> Registry:
-    """应用级工具注册表：本阶段仅注册已实现的 hybrid_search（clarify Q1）。"""
+    """应用级工具注册表：hybrid_search + doc_reader（specs/003 US3；章程 I 工具面收敛）。"""
+    from src.tools.doc_reader import DocReaderTool
     from src.tools.hybrid_search import HybridSearchTool
 
     registry = Registry()
@@ -90,4 +92,5 @@ def build_tool_registry(embedding, reranker, settings: Settings) -> Registry:
             use_rerank=settings.use_rerank,
         )
     )
+    registry.register(DocReaderTool())
     return registry

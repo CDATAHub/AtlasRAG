@@ -26,6 +26,8 @@ class PlanStep(BaseModel):
     tool: str = "hybrid_search"
     query: str
     rationale: str = ""
+    # specs/003 US4（clarify Q1）：同一步的独立子问题多调用；缺省 None = 单调用（002 兼容）
+    calls: list[dict] | None = None
 
 
 class PlanResult(BaseModel):
@@ -34,8 +36,6 @@ class PlanResult(BaseModel):
 
 
 def make_plan_node(llm, settings: Settings, registry: Registry):
-    tools_desc = json.dumps(registry.visible_tools(["retrieval:read"]), ensure_ascii=False)
-
     async def plan(state, config):  # noqa: ARG001 —— config 为 LangGraph 节点签名
         writer = get_stream_writer()
         rounds = state.get("plan_rounds", 0) + 1
@@ -43,6 +43,18 @@ def make_plan_node(llm, settings: Settings, registry: Registry):
         history = state.get("history_text") or _history_text(
             state.get("messages") or [], question
         )
+        # 工具面由请求 scopes 驱动（specs/003 US2/FR-003）；未注入（直跑图）回退缺省，
+        # 显式空列表 = 空权限域（US2 场景 3），不与缺省混淆
+        scopes = state.get("scopes")
+        if scopes is None:
+            scopes = ["retrieval:read"]
+        visible = registry.visible_tools(scopes)
+        tools_desc = json.dumps(visible, ensure_ascii=False)
+        if len(registry) and not visible:
+            # 有工具但请求无权（US2 场景 3）→ 既有直答降级（SYSTEM_DIRECT 含
+            # 「需条款信息时提示用户提供」约束，不编造），不调规划 LLM；
+            # 注册表本身为空是测试/演示场景，维持 002 行为照常规划
+            return {"route": "answer", "plan_rounds": rounds}
 
         # 重规划（FR-005）：保留已执行前缀，只替换未执行部分
         prior_plan = state.get("plan") or []
@@ -79,7 +91,8 @@ def make_plan_node(llm, settings: Settings, registry: Registry):
                 "session_id": state.get("session_id"),
                 "message_id": state.get("message_id"),
                 "steps": [
-                    {k: s[k] for k in ("step", "action", "tool", "query", "rationale")}
+                    {k: s[k] for k in ("step", "action", "tool", "query", "rationale") if s.get(k) is not None}
+                    | ({"calls": s["calls"]} if s.get("calls") else {})
                     for s in new_steps
                 ],
             }
@@ -132,6 +145,14 @@ def _parse_plan(content: str, question: str) -> PlanResult:
             if not s.query:
                 s.query = question  # 空检索式回退原问题
             s.step = i
+            if s.calls:
+                calls = s.calls[:4]  # 上限 4（research D5）
+                for c in calls:
+                    if not c.get("tool"):
+                        c["tool"] = s.tool or "hybrid_search"
+                    if not c.get("query"):
+                        c["query"] = s.query or question
+                s.calls = calls
     return result
 
 

@@ -15,6 +15,7 @@ class AgentState(TypedDict, total=False):
     # —— 输入（首次调用注入） ——
     question: str
     tenant_id: str
+    scopes: list[str]  # 请求权限域（specs/003 US2；chat 层注入，驱动工具面与执行校验）
     trace_id: str
     session_id: str
     message_id: str

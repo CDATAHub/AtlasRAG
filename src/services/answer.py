@@ -62,6 +62,7 @@ async def chat_stream(
     session_factory,
     *,
     ctx_tenant_id: str,
+    ctx_scopes: list[str],
     question: str,
     session_id: uuid.UUID,
     client_msg_id: str | None,
@@ -112,6 +113,7 @@ async def chat_stream(
     graph_input: dict | None = {
         "question": question,
         "tenant_id": ctx_tenant_id,
+        "scopes": ctx_scopes,  # specs/003 US2：工具面与执行校验的权限域来源
         "trace_id": trace_id,
         "session_id": str(session_id),
         "message_id": str(message_id),

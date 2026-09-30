@@ -168,3 +168,18 @@ class ToolRegistry:
 ```
 
 > 设计要点：`get_llm_schemas(scopes)` 让**模型只能看到它有权调用的工具**，从源头实现「工具权限」的收敛。
+
+## 4.7 实现映射（specs/003，2026-09-11）
+
+设计与实现的落点差异（行为一致，形态取简）：
+
+| 本文档设计 | 实际实现 | 说明 |
+|---|---|---|
+| `ToolContract`（§4.2，独立 BaseModel） | `Tool.policy: ToolPolicy`（dataclass，挂在工具上） | 执行策略五字段一致；入出参契约沿用 002 的 Pydantic args_model/result_model，不设第二套 schema 对象 |
+| `ToolRegistry.execute`（§4.6） | `src/tools/executor.py: ToolExecutor.execute/execute_step` | 引擎独立于 Registry：Registry 只管注册与可见面，管道七阶段（权限→校验→幂等→执行→超时→重试→恢复）在 Executor |
+| `get_llm_schemas(scopes)` | `Registry.visible_tools(scopes)` | required_scopes ⊆ 请求 scopes 的覆盖判定；scopes 来自 JWT claims（chat 层注入） |
+| MCP 契约自动生成（§4.4） | `src/tools/mcp_client.py: McpSource` | inputSchema → 动态 args_model（pydantic.create_model）；`mcp.` 前缀隔离；来源故障降级不注册 |
+
+超时实现取节点内 `asyncio.wait_for`（executor 运行在图节点内，非 ASGI 任务组，
+无取消穿透问题）；非幂等工具零重发由 executor 幂等判断阶段强制（`max_retries=0`）。
+演示 Server：`scripts/mcp_demo_server.py`（stdio）；端到端演示：`scripts/demo_tool_engine.py`。

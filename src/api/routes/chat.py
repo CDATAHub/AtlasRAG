@@ -120,6 +120,7 @@ async def chat(payload: ChatRequest, request: Request):
                     session,
                     session_factory,
                     ctx_tenant_id=ctx.tenant_id,
+                    ctx_scopes=ctx.scopes or ["retrieval:read"],  # US2：缺省回退与阶段 2 行为一致
                     question=question,
                     session_id=session_id,
                     client_msg_id=payload.client_msg_id,
