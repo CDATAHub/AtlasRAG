@@ -4,13 +4,15 @@
 plan/route 经 Registry 调度，模型可见面收敛为「条款检索」（clarify Q1）。
 """
 
+from typing import ClassVar
+
 from pydantic import BaseModel, Field
 
 from src.rag.hybrid import hybrid_search as _hybrid_search
 from src.rag.rerank import rerank_hits as _rerank_hits
 from src.services.clients.embedding import EmbeddingClient
 from src.services.clients.rerank import RerankClient
-from src.tools.base import ToolContext, ToolError
+from src.tools.base import ToolContext, ToolError, ToolPolicy
 
 SCOPE = "retrieval:read"
 
@@ -34,11 +36,16 @@ class HybridSearchResult(BaseModel):
 
 
 class HybridSearchTool:
-    name = "hybrid_search"
-    description = "在租户条款库中混合检索（向量+关键词融合+重排），返回最相关条款父块"
-    scope = SCOPE
-    args_model = HybridSearchArgs
-    result_model = HybridSearchResult
+    name: ClassVar[str] = "hybrid_search"
+    description: ClassVar[str] = "在租户条款库中混合检索（向量+关键词融合+重排），返回最相关条款父块"
+    scope: ClassVar[str] = SCOPE
+    args_model: ClassVar[type[BaseModel]] = HybridSearchArgs
+    result_model: ClassVar[type[BaseModel]] = HybridSearchResult
+    # specs/003 T004（data-model.md 内置工具表）；invoke 逻辑零改动（SC-001 红线）
+    policy = ToolPolicy(
+        timeout_ms=8000, max_retries=1, idempotent=True, parallel_safe=True,
+        required_scopes=("retrieval:read",),
+    )
 
     def __init__(
         self,
@@ -56,6 +63,8 @@ class HybridSearchTool:
         self._use_rerank = use_rerank
 
     async def invoke(self, ctx: ToolContext, args: HybridSearchArgs) -> HybridSearchResult:
+        if ctx.session is None:  # DB 依赖工具必须运行在图路径（config 注入 db）
+            raise ToolError("hybrid_search requires a db session")
         try:
             query_vec = (await self._embedding.embed([args.query]))[0]
             hits = await _hybrid_search(

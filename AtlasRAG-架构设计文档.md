@@ -720,6 +720,21 @@ class ToolRegistry:
 
 > 设计要点：`get_llm_schemas(scopes)` 让**模型只能看到它有权调用的工具**，从源头实现「工具权限」的收敛。
 
+## 4.7 实现映射（specs/003，2026-09-11）
+
+设计与实现的落点差异（行为一致，形态取简）：
+
+| 本文档设计 | 实际实现 | 说明 |
+|---|---|---|
+| `ToolContract`（§4.2，独立 BaseModel） | `Tool.policy: ToolPolicy`（dataclass，挂在工具上） | 执行策略五字段一致；入出参契约沿用 002 的 Pydantic args_model/result_model，不设第二套 schema 对象 |
+| `ToolRegistry.execute`（§4.6） | `src/tools/executor.py: ToolExecutor.execute/execute_step` | 引擎独立于 Registry：Registry 只管注册与可见面，管道七阶段（权限→校验→幂等→执行→超时→重试→恢复）在 Executor |
+| `get_llm_schemas(scopes)` | `Registry.visible_tools(scopes)` | required_scopes ⊆ 请求 scopes 的覆盖判定；scopes 来自 JWT claims（chat 层注入） |
+| MCP 契约自动生成（§4.4） | `src/tools/mcp_client.py: McpSource` | inputSchema → 动态 args_model（pydantic.create_model）；`mcp.` 前缀隔离；来源故障降级不注册 |
+
+超时实现取节点内 `asyncio.wait_for`（executor 运行在图节点内，非 ASGI 任务组，
+无取消穿透问题）；非幂等工具零重发由 executor 幂等判断阶段强制（`max_retries=0`）。
+演示 Server：`scripts/mcp_demo_server.py`（stdio）；端到端演示：`scripts/demo_tool_engine.py`。
+
 # 05 · RAG 数据管道设计
 
 > 对应 JD 加分项「RAG、向量检索」，并落地文档解析、父子文档检索、混合检索、重排。
@@ -1398,12 +1413,14 @@ flowchart LR
 - [x] 检查点恢复（进程重启后带相同幂等键重发可续跑，AsyncPostgresSaver 落库）；
 - [ ] 待跑（依赖真实 API）：回环评测 repair_rate ≥ 0.3（SC-002）、延迟抽样（SC-004/005/009）、100 条对抗全量实测（SC-003）、50 条双轮真实跑（SC-006）——与阶段 1 遗留 T041/T044/T045 合并执行。
 
-### 阶段 3 — Tool 层生产化
+### 阶段 3 — Tool 层生产化（实现完成，验收进行中）
 
-- [ ] Tool Registry + Contract 抽象完成；
-- [ ] 执行引擎具备权限/校验/并行/超时/重试/幂等/异常恢复（非幂等工具不重试）；
-- [ ] 接入 ≥ 1 个 MCP Server 工具，与内置工具统一调度；
-- [ ] 模型只能看到其有权限调用的工具（scope 收敛：LLM 只见 hybrid_search/doc_reader 等，见 04.5）。
+- [x] Tool Registry + Contract 抽象完成（specs/003：Tool Protocol + ToolPolicy 契约 + Registry scopes 覆盖判定）；
+- [x] 执行引擎具备权限/校验/并行/超时/重试/幂等/异常恢复（非幂等工具不重试；src/tools/executor.py 固定管道）；
+- [x] 接入 ≥ 1 个 MCP Server 工具，与内置工具统一调度（mcp SDK stdio + in-memory 测试；mcp. 前缀命名空间，来源故障降级）；
+- [x] 模型只能看到其有权限调用的工具（scope 收敛：工具面由 JWT claims.scopes 驱动，执行前二次校验）；
+- [ ] 待跑（mock 层已全绿，90 passed）：本地 PG 起后补跑 doc_reader 集成 5 项 + demo --scenario doc_reader；
+      真实 API 端到端评测（检索层 bit 级对比）与 002-T045 合并执行（2026-09-11 clarify Q2）。
 
 ### 阶段 4 — 评测闭环
 

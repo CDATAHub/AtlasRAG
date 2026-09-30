@@ -7,11 +7,17 @@
 """
 
 import hashlib
+import asyncio
 from collections.abc import AsyncIterator
+from typing import ClassVar
+
+from pydantic import BaseModel, Field
 
 from src.services.clients.embedding import EmbeddingClient
 from src.services.clients.llm import LlmClient, LlmResult
 from src.services.clients.rerank import RerankClient
+from src.tools.base import ToolPolicy, ToolTimeoutError, ToolTransientError
+from src.tools.hybrid_search import HybridSearchResult
 
 
 class FakeEmbedding(EmbeddingClient):
@@ -100,3 +106,62 @@ class FakeLLM(LlmClient):
         else:
             tokens = self._usage_fixed
         return LlmResult(content=content, tokens=tokens)
+
+
+class FakeToolArgs(BaseModel):
+    query: str = Field(min_length=1, max_length=200)
+
+
+class FakeTool:
+    """可编程故障工具（specs/003 research D9）：驱动 executor 逐中间件断言。
+
+    - hang_s：invoke 挂起秒数（超时路径）
+    - fail_first_n：前 n 次抛 ToolTransientError（重试路径）
+    - exc：每次都抛的异常（unknown/permanent 路径）
+    - policy：覆写执行策略（非幂等/不可并行标注）
+    """
+
+    name: ClassVar[str] = "fake"
+    description: ClassVar[str] = "可编程故障测试工具"
+    scope: ClassVar[str] = "retrieval:read"
+    args_model: ClassVar[type[BaseModel]] = FakeToolArgs
+    result_model: ClassVar[type[BaseModel]] = HybridSearchResult
+    policy: ToolPolicy = ToolPolicy(timeout_ms=200, max_retries=1)  # 类级缺省，子类可覆写
+
+    def __init__(
+        self,
+        *,
+        hang_s: float = 0.0,
+        fail_first_n: int = 0,
+        exc: Exception | None = None,
+        policy: ToolPolicy | None = None,
+        result: HybridSearchResult | None = None,
+    ):
+        self.hang_s = hang_s
+        self.fail_first_n = fail_first_n
+        self.exc = exc
+        if policy is not None:  # 仅显式传入时实例覆写；否则保留子类类级声明
+            self.policy = policy
+        self.result = result or HybridSearchResult(hits=[], top_score=None)
+        self.invoke_count = 0
+
+    async def invoke(self, ctx, args):  # noqa: ARG002 —— ctx 由 executor 注入
+        self.invoke_count += 1
+        if self.fail_first_n and self.invoke_count <= self.fail_first_n:
+            raise ToolTransientError(f"transient #{self.invoke_count}")
+        if self.hang_s:
+            await asyncio.sleep(self.hang_s)
+        if self.exc is not None:
+            raise self.exc
+        return self.result
+
+
+__all__ = [
+    "FakeEmbedding",
+    "FakeRerank",
+    "FakeLLM",
+    "FakeTool",
+    "FakeToolArgs",
+    "ToolTimeoutError",
+    "ToolTransientError",
+]

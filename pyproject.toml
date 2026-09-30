@@ -17,6 +17,7 @@ dependencies = [
     "langgraph>=1.0",
     "langgraph-checkpoint-postgres>=2.0",
     "psycopg[binary]>=3.2",
+    "mcp>=1.0",
 ]
 
 [dependency-groups]
